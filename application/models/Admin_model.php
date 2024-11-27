@@ -48,6 +48,8 @@ class Admin_model extends CI_Model {
         $page_data['manage_parent']     = html_escape($this->input->post('manage_parent'));
         $page_data['manage_alumni']     = html_escape($this->input->post('manage_alumni'));
 
+        $page_data['manage_approve']     = html_escape($this->input->post('manage_approve'));
+
         $this->db->where('admin_id', $param2);
         $this->db->update('admin_role', $page_data);
 

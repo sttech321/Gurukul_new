@@ -110,8 +110,13 @@
                            
         </ul>
     </li>
-    <?php endif;?> <!---  Permission for Admin Manage Academics ends here ------>
-                   
+    <?php endif;?> 
+    
+
+
+
+
+
 
 
 
@@ -302,8 +307,33 @@
 
 
 
-   
+    <!-- Start gurukul approved unapproved page -->
+    <li> <a href="#" class="waves-effect"><i data-icon="&#xe006;" class="fa fa-download p-r-10"></i> <span class="hide-menu"><?php echo get_phrase('gurukul_registration');?><span class="fa arrow"></span></span></a>
+        
+       <ul class="nav nav-second-level<?php
+        if ($page_name == 'approved' ||
+            $page_name == 'unapproved')
+        echo 'opened active';
+        ?> ">
+            <li class="<?php if ($page_name == 'approved') echo 'active'; ?>">
+                <a href="<?php echo base_url(); ?>admin/gurukul_registration/approved">
+                    <i class="fa fa-angle-double-right p-r-10"></i>
+                    <span class="hide-menu"><?php echo get_phrase('Approved Page'); ?></span>
+                </a>
+            </li>
 
+            <li class="<?php if ($page_name == 'unapproved') echo 'active'; ?>">
+                <a href="<?php echo base_url(); ?>admin/gurukul_registration/unapproved">
+                    <i class="fa fa-angle-double-right p-r-10"></i>
+                    <span class="hide-menu"><?php echo get_phrase('Unapproved Page'); ?></span>
+                </a>
+            </li>
+
+
+        </ul>
+    </li>
+
+        <!-- End gurukul approved unapproved page -->
                 
         <li> <a href="#" class="waves-effect"><i data-icon="&#xe006;" class="fa fa-university p-r-10"></i> <span class="hide-menu"><?php echo get_phrase('class_information');?><span class="fa arrow"></span></span></a>
         
@@ -316,7 +346,7 @@
 
 
                         
-                         <li class="<?php if ($page_name == 'class') echo 'active'; ?> ">
+                <li class="<?php if ($page_name == 'class') echo 'active'; ?> ">
                         <a href="<?php echo base_url(); ?>admin/classes">
                         <i class="fa fa-angle-double-right p-r-10"></i>
                            <span class="hide-menu"><?php echo get_phrase('manage_classes'); ?></span>

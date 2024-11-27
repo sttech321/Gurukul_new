@@ -110,6 +110,71 @@ class Admin extends CI_Controller {
     }
 
 
+    public function gurukul_registration($param1 = null, $param2 = null)
+    {
+        $this->load->library('session');
+       
+        // Check if the user is logged in as admin
+        if ($this->session->userdata('admin_login') != 1) {
+            redirect(base_url(), 'refresh');
+        }
+       
+        // Handle POST request for student registration
+        if ($param1 == 'approved' && $_POST) {
+            redirect(base_url() . 'admin/gurukul/approved', 'refresh');
+        }
+        
+        // Check if the user wants to view the 'approved' or 'unapproved' page
+        if ($param2 == 'unapproved') {
+            $page_data['page_name'] = 'unapproved'; // Matches the sidebar for unapproved page
+            $page_data['page_title'] = "Unapproved Page";
+        } else {
+            $page_data['page_name'] = 'approved'; // Matches the sidebar for approved page
+            $page_data['page_title'] = "Approved Page";
+        }
+    
+        // Load the view for the respective page
+        $this->load->view('backend/index', $page_data);
+    }
+    
+
+    // function approved(){
+    
+    //         $page_data['page_name']     = 'approved';
+    //         $page_data['page_title']    = get_phrase('Approved');
+    //         // $page_data['enquiry_category']  = $this->db->get('enquiry_category')->result_array();
+    //         $this->load->view('admin/approved', $page_data);
+    
+    //     }
+    // function gurukul_registration($class_id = NULL, $section_id = NULL, $month = NULL, $year = NULL)
+    // {
+    //     $active_sms_gateway = $this->db->get_where('sms_settings', array('type' => 'active_sms_gateway'))->row()->info;
+ 
+    //     if ($_POST) {
+    //         redirect(base_url() . 'admin/gurukul_registration/' . $class_id . '/' . $section_id . '/' . $month . '/' . $year, 'refresh');
+    //     }
+ 
+    //     $classes = $this->db->get('class')->result_array();
+    //     foreach ($classes as $key => $class) {
+    //         if (isset($class_id) && $class_id == $class['class_id'])
+    //             $class_name = $class['name'];
+    //     }
+ 
+    //     $sections = $this->db->get('section')->result_array();
+    //     foreach ($sections as $key => $section) {
+    //         if (isset($section_id) && $section_id == $section['section_id'])
+    //             $section_name = $section['name'];
+    //     }
+ 
+    //     $page_data['month'] = $month;
+    //     $page_data['year'] = $year;
+    //     $page_data['class_id'] = $class_id;
+    //     $page_data['section_id'] = $section_id;
+    //     $page_data['page_name'] = 'gurukul_registration';
+    //     $page_data['page_title'] = "Gurukul Registration: " . $class_name . " : Section " . $section_name;
+    //     $this->load->view('backend/index', $page_data);
+    // }
+    
     function list_enquiry ($param1 = null, $param2 = null, $param3 = null){
 
 
@@ -1050,6 +1115,11 @@ class Admin extends CI_Controller {
         $this->admin_model->updateAllDetailsForAdminRole($param2);
         $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
         redirect(base_url(). 'admin/newAdministrator', 'refresh');
+    }
+
+
+    public function viewpage(){
+        $this->load->view('backend/admin/approved');
     }
 
 }
