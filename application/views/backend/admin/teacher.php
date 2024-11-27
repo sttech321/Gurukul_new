@@ -14,7 +14,7 @@
                     <div class="col-sm-6">
 	
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('name');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('teacher name');?></label>
                     <div class="col-sm-12">
 							<input type="text" class="form-control" name="name" required>
 							<input type="text" class="form-control" value="<?php echo substr(md5(uniqid(rand(), true)), 0, 7); ?>" name="teacher_number" readonly="true">
@@ -24,47 +24,12 @@
 					
 					
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('role');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('Date Of Birth');?></label>
                     <div class="col-sm-12">
-							<select name="role" class="form-control select2" style="width:100%" required>
-                              <option value=""><?php echo get_phrase('select');?></option>
-                              <option value="1"><?php echo get_phrase('class_teacher');?></option>
-                              <option value="2"><?php echo get_phrase('subject_teacher');?></option>
-                          </select>
+		            <input class="form-control m-r-10" name="birthday" type="date" value="2018-08-19" id="example-date-input" required>
 						</div> 
 					</div>
-					
-					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('birthday');?></label>
-                    <div class="col-sm-12">
-		<input class="form-control m-r-10" name="birthday" type="date" value="2018-08-19" id="example-date-input" required>
-						</div> 
-					</div>
-					
-						<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('gender');?></label>
-                    <div class="col-sm-12">
-							<select name="sex" class="form-control select2" style="width:100%" required>
-                              <option value=""><?php echo get_phrase('select');?></option>
-                              <option value="male"><?php echo get_phrase('male');?></option>
-                              <option value="female"><?php echo get_phrase('female');?></option>
-                          </select>
-						</div> 
-					</div>
-					
-						<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('religion');?></label>
-                    <div class="col-sm-12">
-							<input type="text" class="form-control" name="religion" value="" >
-						</div> 
-					</div>
-					
-					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('blood_group');?></label>
-                    <div class="col-sm-12">
-							<input type="text" class="form-control" name="blood_group" value="" >
-						</div> 
-					</div>
+
 					
 						<div class="form-group">
                  	<label class="col-md-12" for="example-text"><?php echo get_phrase('address');?></label>
@@ -88,70 +53,56 @@
 					
 					
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('qualification');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('ved_shakha');?></label>
                     <div class="col-sm-12">
-							<input type="text" class="form-control" name="qualification" value="">
+							<input type="text" class="form-control" name="ved_shakha" value="">
 						</div>
 					</div>
 					
 					<div class="form-group">
-                                    <label class="col-sm-12"><?php echo get_phrase('marital_status');?>*</label>
-                                    <div class="col-sm-12">
-                                       <select class=" form-control select2" name="marital_status" style="width:100%" required>
-                                         <option data-tokens=""><?php echo get_phrase('select_marital_status');?></option>
-										<option data-tokens="Married"><?php echo get_phrase('married');?></option>
-                                        <option data-tokens="Single"><?php echo get_phrase('single');?></option>
-                                        <option data-tokens="Divorced"><?php echo get_phrase('divorced');?></option>
-                                        <option data-tokens="Engaged"><?php echo get_phrase('engaged');?></option>
-                                    </select>
-                                    </div>
-                                </div>
+                        <label class="col-sm-12"><?php echo get_phrase('country');?>*</label>
+                        <div class="col-sm-12">
+                            <select class=" form-control select2" name="country" style="width:100%">
+                                <option data-tokens="">India</option>
+                        </select>
+                        </div>
+                    </div>
 					
+                    <div class="form-group">
+                        <label class="col-sm-12"><?php echo get_phrase('state'); ?></label>
+
+                        <div class="col-sm-12">
+                            <select name="state" class="form-control select2" >
+                                <option value="">Punjab</option>
+
+                            </select>
+                        </div> 
+                    </div>
+
 				<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('facebook');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('extra_ordinary_skills');?></label>
                     <div class="col-sm-12">
-							<input type="text" class="form-control" name="facebook" value="">
+							<input type="text" class="form-control" name="extra_ordinary_skills" value="">
 						</div>
 					</div>
 					
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('twitter');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('exceptional_abilities');?></label>
                     <div class="col-sm-12">
-							<input type="text" class="form-control" name="twitter" value="">
+							<input type="text" class="form-control" name="exceptional_abilities" value="">
 						</div>
 					</div>
 					
 						<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('googleplus');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('modern_education_qualifications');?></label>
                     <div class="col-sm-12">
-							<input type="text" class="form-control" name="googleplus" value="">
+							<input type="text" class="form-control" name="modern_education_qualifications" value="">
 						</div>
 					</div>
-					
-						<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('linkedin');?></label>
-                    <div class="col-sm-12">
-							<input type="text" class="form-control" name="linkedin" value="">
-						</div>
-					</div>
-					
-					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('documents');?>&nbsp;(Teacher CV and others)</label>
-                    <div class="col-sm-12">
-             	<input type="file" name="file_name" class="dropify" required>
-			 
-			  <p style="color:red">Accept zip, pdf, word, excel, rar and others</p>
-			  
-					</div>
-					</div>
-					
-				
 					</div>	
 					
 					 <div class="col-sm-6">
 					 
-					 
-					
 						<div class="form-group">
                  	<label class="col-md-12" for="example-text"><?php echo get_phrase('password');?></label>
                     <div class="col-sm-12">
@@ -167,101 +118,59 @@
 					 
 					</div>
 					</div>	
-					 
-					 
-		<hr>
-<div class="alert alert-primary">HUMAN RESOURCES INFORMATION</div>
-<hr>			 
-					
-<div class="form-group">
-    <label class="col-sm-12"><?php echo get_phrase('department'); ?></label>
-
-    <div class="col-sm-12">
-        <select name="department_id" class="form-control select2" onchange="get_designation_val(this.value)" required>
-            <option value=""><?php echo get_phrase('select_a_department'); ?></option>
-            <?php
-            $department = $this->db->get('department')->result_array();
-            foreach ($department as $row): ?>
-                <option value="<?php echo $row['department_id']; ?>">
-                    <?php echo $row['name']; ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </div> 
-</div>
-
-<div class="form-group">
-    <label class="col-sm-12"><?php echo get_phrase('designation'); ?></label>
-
-    <div class="col-sm-12">
-        <select name="designation_id" class="form-control select2" id="designation_holder">
-            <option value=""><?php echo get_phrase('select_a_department_first'); ?></option>
-        </select>
-    </div> 
-</div>
-
-<div class="form-group">
-    <label class="col-sm-12"><?php echo get_phrase('date_of_joining'); ?></label>
-
-    <div class="col-sm-12">
-        <input type="date" class="form-control datepicker" name="date_of_joining" value="<?php echo date('Y-d-m');?>" required>
-    </div> 
-</div>
-<div class="form-group">
-   <label class="col-sm-12"><?php echo get_phrase('joining_salary'); ?></label>
-
-    <div class="col-sm-12">
-        <input type="number" class="form-control" name="joining_salary" value="" required>
-    </div> 
-</div>
-<div class="form-group">
-    <label class="col-sm-12"><?php echo get_phrase('status'); ?></label>
-
-    <div class="col-sm-12">
-        <select name="status" class="form-control select2">
-            <option value="1"><?php echo get_phrase('active'); ?></option>
-            <option value="2"><?php echo get_phrase('inactive'); ?></option>
-        </select>
-    </div> 
-</div>
-<div class="form-group">
-    <label class="col-sm-12"><?php echo get_phrase('date_of_joining'); ?></label>
-
-    <div class="col-sm-12">
-        <input type="date" class="form-control datepicker" name="date_of_leaving" value="" required>
-    </div> 
-</div>
 
 <hr>
-<div class="alert alert-primary">BANK ACCOUNT DETAILS</div>
+<div class="alert alert-primary">Personal DETAILS</div>
 <hr>
 
 <div class="form-group">
-     <label class="col-sm-12"><?php echo get_phrase('account_holder_name'); ?></label>
+     <label class="col-sm-12"><?php echo get_phrase('father_name'); ?></label>
 
     <div class="col-sm-12">
-        <input type="text" class="form-control" name="account_holder_name" value="" required />
+        <input type="text" class="form-control" name="father_name" value="" required />
     </div>
 </div>
 <div class="form-group">
-     <label class="col-sm-12"><?php echo get_phrase('account_number'); ?></label>
+     <label class="col-sm-12"><?php echo get_phrase('mother_name'); ?></label>
 
     <div class="col-sm-12">
-        <input type="text" class="form-control" name="account_number" value="" required />
+        <input type="text" class="form-control" name="mother_name" value="" required />
     </div>
 </div>
 <div class="form-group">
-     <label class="col-sm-12"><?php echo get_phrase('bank_name'); ?></label>
+     <label class="col-sm-12"><?php echo get_phrase('surname'); ?></label>
 
     <div class="col-sm-12">
-        <input type="text" class="form-control" name="bank_name" value="" required>
+        <input type="text" class="form-control" name="surname" value="" required>
     </div> 
 </div>
 <div class="form-group">
-     <label class="col-sm-12"><?php echo get_phrase('branch'); ?></label>
+     <label class="col-sm-12"><?php echo get_phrase('gotra'); ?></label>
 
     <div class="col-sm-12">
-        <input type="text" class="form-control" name="branch" value="" >
+        <input type="text" class="form-control" name="gotra" value="" >
+    </div> 
+</div>
+
+<div class="form-group">
+     <label class="col-sm-12"><?php echo get_phrase('varna'); ?></label>
+
+    <div class="col-sm-12">
+        <input type="text" class="form-control" name="varna" value="" required />
+    </div>
+</div>
+<div class="form-group">
+     <label class="col-sm-12"><?php echo get_phrase('aadhaar'); ?></label>
+
+    <div class="col-sm-12">
+        <input type="text" class="form-control" name="aadhaar" value="" required>
+    </div> 
+</div>
+<div class="form-group">
+     <label class="col-sm-12"><?php echo get_phrase('guru_name'); ?></label>
+
+    <div class="col-sm-12">
+        <input type="text" class="form-control" name="guru_name" value="" >
     </div> 
 </div>
 

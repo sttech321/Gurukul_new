@@ -11,12 +11,30 @@ class Parents extends CI_Controller {
     }
 
      /*parent dashboard code to redirect to parent page if successfull login** */
-     function dashboard() {
-        if ($this->session->userdata('parent_login') != 1) redirect(base_url(), 'refresh');
-       	$page_data['page_name'] = 'dashboard';
-        $page_data['page_title'] = get_phrase('parent Dashboard');
+    //  function dashboard() {
+    //     if ($this->session->userdata('parent_login') != 1) redirect(base_url(), 'refresh');
+    //    	$page_data['page_name'] = 'dashboard';
+    //     $page_data['page_title'] = get_phrase('parent Dashboard');
+    //     $this->load->view('backend/index', $page_data);
+    // }
+
+    function dashboard() {
+        // Check for both parent and gurukul login sessions
+        if ($this->session->userdata('parent_login') != 1 && $this->session->userdata('gurukul_login') != 1) {
+            redirect(base_url(), 'refresh');
+        }
+    
+        // Set page data
+        $page_data['page_name'] = 'dashboard';
+        $page_data['page_title'] = $this->session->userdata('gurukul_login') == 1 
+            ? get_phrase('Gurukul Dashboard') 
+            : get_phrase('Parent Dashboard');
+    
+        // Load the dashboard view
         $this->load->view('backend/index', $page_data);
     }
+    
+
 	/******************* / parent dashboard code to redirect to parent page if successfull login** */
 
     function manage_profile($param1 = null, $param2 = null, $param3 = null){

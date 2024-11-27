@@ -42,10 +42,8 @@
 
     <li> <a href="<?php echo base_url();?>teacher/dashboard" class="waves-effect"><i class="ti-dashboard p-r-10"></i> <span class="hide-menu"><?php echo get_phrase('Dashboard') ;?></span></a> </li>
 
-    
 
     <li> <a href="#" class="waves-effect"><i data-icon="&#xe006;" class="fa fa-download p-r-10"></i> <span class="hide-menu"><?php echo get_phrase('download_page');?><span class="fa arrow"></span></span></a>
-        
                         <ul class=" nav nav-second-level<?php
             if ($page_name == 'assignment' ||
                     $page_name == 'study_material')
