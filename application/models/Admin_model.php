@@ -53,8 +53,6 @@ class Admin_model extends CI_Model {
         $this->db->where('admin_id', $param2);
         $this->db->update('admin_role', $page_data);
 
-
     }
-
     
 }

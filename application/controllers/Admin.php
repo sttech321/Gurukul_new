@@ -14,6 +14,7 @@ class Admin extends CI_Controller {
                 $this->load->model('event_model');                      // Load Apllication Model Here
                 $this->load->model('language_model');                      // Load Apllication Model Here
                 $this->load->model('admin_model');                      // Load Apllication Model Here
+                $this->load->model('LocationModel');
     }
 
     /**default functin, redirects to login page if no admin logged in yet***/
@@ -110,15 +111,17 @@ class Admin extends CI_Controller {
     }
 
 
+
     public function gurukul_registration($param1 = null, $param2 = null)
     {
         $this->load->library('session');
-       
+        $this->load->model('LocationModel');
+        
         // Check if the user is logged in as admin
         if ($this->session->userdata('admin_login') != 1) {
             redirect(base_url(), 'refresh');
         }
-       
+        
         // Handle POST request for student registration
         if ($param1 == 'approved' && $_POST) {
             redirect(base_url() . 'admin/gurukul/approved', 'refresh');
@@ -126,13 +129,17 @@ class Admin extends CI_Controller {
         
         // Check if the user wants to view the 'approved' or 'unapproved' page
         if ($param2 == 'unapproved') {
-            $page_data['page_name'] = 'unapproved'; // Matches the sidebar for unapproved page
+            $page_data['page_name'] = 'unapproved';
             $page_data['page_title'] = "Unapproved Page";
         } else {
-            $page_data['page_name'] = 'approved'; // Matches the sidebar for approved page
+            $page_data['page_name'] = 'approved';
             $page_data['page_title'] = "Approved Page";
         }
-    
+        
+        // Get countries once
+        $page_data['countries'] = $this->LocationModel->getCountries();
+        // $page_data['select_student'] = $this->db->get()->result_array();
+        
         // Load the view for the respective page
         $this->load->view('backend/index', $page_data);
     }
@@ -1118,8 +1125,61 @@ class Admin extends CI_Controller {
     }
 
 
-    public function viewpage(){
-        $this->load->view('backend/admin/approved');
+
+   public function getCountries() {
+        $this->load->model('LocationModel');
+        $countries = $this->LocationModel->getCountries();
+        echo json_encode(['countries' => $countries]);
     }
+
+
+    public function get_states($countryId) {
+        // Call the model method to get states based on countryId
+        $states = $this->LocationModel->getStates($countryId);
+
+        // Prepare the response
+        $response = array('states' => array());
+
+        // If there are states, format them into an array
+        if ($states) {
+            foreach ($states as $state) {
+                $response['states'][] = array(
+                    'id' => $state->id,
+                    'name' => $state->name
+                );
+            }
+        }
+
+        // Send the response as JSON
+        echo json_encode($response);
+    }
+
+        public function add_new_school($param1 = null, $param2 = null) {
+        // Check if $param1 is 'insert'
+        if ($param1 == 'insert') {
+            // Debug to check if data is being received
+            // echo '<pre>';
+            // print_r($this->input->post());
+            // echo '</pre>';
+            // die;
+    
+            // Load the Gurukul_Registration model
+            $this->load->model('Gurukul_Registration'); // Make sure this is the correct model name
+    
+            $this->Gurukul_Registration->insert_gurukul($this->input->post());
+    
+            // Set flash data or a success message
+            $this->session->set_flashdata('success_message', 'Gurukul Registration Successful');
+    
+            // Redirect to a page after successful insertion
+            redirect(base_url() . 'admin/gurukul_registration', 'refresh');
+        }
+    
+        // Default case to load the page
+        $page_data['page_name'] = 'gurukul_registration';
+        $page_data['page_title'] = "Gurukul Registration";
+    
+        $this->load->view('backend/index', $page_data);
+    } 
 
 }

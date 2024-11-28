@@ -117,10 +117,6 @@
 
 
 
-
-
-
-
     <!---  Permission for Admin Manage Employee starts here ------>
     <?php $check_admin_permission = $this->db->get_where('admin_role', array('admin_id' => $this->session->userdata('login_user_id')))->row()->manage_employee;?>
     <?php if($check_admin_permission == '1'):?> 
@@ -268,24 +264,19 @@
                 echo 'opened active';
             ?> ">
                                      
-
             <li class="<?php if ($page_name == 'assignment') echo 'active'; ?>">
                 <a href="<?php echo base_url(); ?>assignment/assignment">
                 <i class="fa fa-angle-double-right p-r-10"></i>
                     <span class="hide-menu"><?php echo get_phrase('assignments'); ?></span>
                 </a>
             </li>
-
    
-
-                <li class="<?php if ($page_name == 'study_material') echo 'active'; ?> ">
+            <li class="<?php if ($page_name == 'study_material') echo 'active'; ?> ">
                 <a href="<?php echo base_url(); ?>studymaterial/study_material">
                 <i class="fa fa-angle-double-right p-r-10"></i>
                       <span class="hide-menu"><?php echo get_phrase('study_materials'); ?></span>
                 </a>
             </li>
-
-     
                  </ul>
         </li>
 

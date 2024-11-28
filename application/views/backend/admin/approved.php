@@ -3,14 +3,16 @@
 		<div class="panel panel-info">
             <div class="panel-heading"> <?php echo get_phrase('Approved List');?>
             
-            <button onclick="showAjaxModal('<?php echo base_url();?>modal/popup/add_new_school');" 
+
+            <button onclick="showAjaxModal('<?php echo base_url();?>modal/popup/add_new_school?countries=<?php echo urlencode(json_encode($countries)); ?>');" 
     class="btn btn-info btn-xs pull-right">
-        <i class="fa fa-plus"></i><?php echo get_phrase('add_new_school'); ?>
+    <i class="fa fa-plus"></i>
+    <?php echo get_phrase('add_new_school'); ?>
 </button>
+
             
             </div>
                 <div class="panel-body table-responsive">
-
 
          <table id="example23" class="display nowrap" cellspacing="0" width="100%">
             <thead>
@@ -25,8 +27,8 @@
 
                 </tr>
              </thead>
-
              <tbody>
+                
     <?php foreach ($enquiry_category as $key => $row):?>
              <tr>
                     <td><?php echo $row['enquiry_category_id'];?></td>
