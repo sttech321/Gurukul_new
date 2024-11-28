@@ -53,5 +53,6 @@ $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['sendbioEmail'] = 'Email/sendbioEmail';
+$route['principal/get-states/(:num)'] = 'principal/get_states/$1';
 
 

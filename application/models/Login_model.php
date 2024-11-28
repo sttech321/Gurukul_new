@@ -29,8 +29,22 @@ class Login_model extends CI_Model {
                     ->update('admin');
         }
 
-        $query = $this->db->get_where('parent', $credential);
+        $query = $this->db->get_where('principal', $credential);
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+  
+            $this->session->set_userdata('login_type', 'principal');
+            $this->session->set_userdata('principal_login', '1');
+            $this->session->set_userdata('principal_id', $row->principal_id);
+            $this->session->set_userdata('login_user_id', $row->principal_id);
+            $this->session->set_userdata('name', $row->name);
 
+            return  $this->db->set('login_status', ('1'))
+                    ->where('principal_id', $this->session->userdata('principal_id'))
+                    ->update('principal');
+        }
+
+        $query = $this->db->get_where('parent', $credential);
         if ($query->num_rows() > 0) {
             $row = $query->row();
   
@@ -43,24 +57,6 @@ class Login_model extends CI_Model {
             return  $this->db->set('login_status', ('1'))
                     ->where('parent_id', $this->session->userdata('parent_id'))
                     ->update('parent');
-        }
-
-        
-        $query = $this->db->get_where('gurukul_registrations', $credential);
-
-        if ($query->num_rows() > 0) {
-            $row = $query->row();
-            // print_r($row);
-            // die;
-            $this->session->set_userdata('login_type', 'gurukul');
-            $this->session->set_userdata('gurukul_login', '1');
-            $this->session->set_userdata('gurukul_id', $row->gurukul_id);
-            $this->session->set_userdata('login_user_id', $row->gurukul_id);
-            $this->session->set_userdata('name', $row->name);
-
-            return  $this->db->set('login_status', ('1'))
-                    ->where('gurukul_id', $this->session->userdata('gurukul_id'))
-                    ->update('gurukul_registrations');
         }
 
         $query = $this->db->get_where('student', $credential);
@@ -101,13 +97,12 @@ class Login_model extends CI_Model {
                     ->where('admin_id', $this->session->userdata('admin_id'))
                     ->update('admin');
     }
-    
-    function logout_model_for_gurukul(){
-        return  $this->db->set('login_status', ('0'))
-                    ->where('gurukul_id', $this->session->userdata('gurukul_id'))
-                    ->update('gurukul_registrations');
-    }
 
+    function logout_model_for_principal(){
+        return  $this->db->set('login_status', ('0'))
+                    ->where('principal_id', $this->session->userdata('principal_id'))
+                    ->update('principal');
+    }
 
     function logout_model_for_hrm(){
         return  $this->db->set('login_status', ('0'))
@@ -150,11 +145,6 @@ class Login_model extends CI_Model {
                     ->where('student_id', $this->session->userdata('student_id'))
                     ->update('student');
     }
-	
-	
-	
-
-
 	
 	
 }

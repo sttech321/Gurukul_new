@@ -116,7 +116,7 @@
                             $key = $this->session->userdata('login_type') . '_id';
                             $face_file = 'uploads/' . $this->session->userdata('login_type') . '_image/' . $this->session->userdata($key) . '.jpg';
                             if (!file_exists($face_file)) {
-                                $face_file = 'uploads/default.jpg';                                 
+                                $face_file = 'uploads/principal_image/user.jpg';                                 
                             }
                             ?>
 

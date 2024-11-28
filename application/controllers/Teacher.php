@@ -276,8 +276,4 @@ class Teacher extends CI_Controller {
     }
     /***********  The function that manages school marks ends here ***********************/    
 
-
-
-
-
 }

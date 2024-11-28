@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-
 class Teacher_model extends CI_Model { 
 	
 	function __construct()
@@ -8,25 +7,14 @@ class Teacher_model extends CI_Model {
         parent::__construct();
     }
 
-
 /**************************** The function below insert into bank and teacher tables   **************************** */
     function insetTeacherFunction (){
-
-        // $bank_data['account_holder_name'] = $this->input->post('account_holder_name');
-        // $bank_data['account_number'] = $this->input->post('account_number');
-        // $bank_data['bank_name'] = $this->input->post('bank_name');
-        // $bank_data['branch'] = $this->input->post('branch');
-
-        // $this->db->insert('bank', $bank_data);
-        // $bank_id = $this->db->insert_id();
-
-
+        $principal_id = $this->session->userdata('principal_id');
         $teacher_array = array(
             'name'                  => $this->input->post('name'),
             'role'                  => $this->input->post('role'),
 			'teacher_number'        => $this->input->post('teacher_number'),
 			'birthday'              => $this->input->post('birthday'),
-        	'sex'                   => $this->input->post('sex'),
             'religion'              => $this->input->post('religion'),
             'blood_group'           => $this->input->post('blood_group'),
             'address'               => $this->input->post('address'),
@@ -52,7 +40,8 @@ class Teacher_model extends CI_Model {
             'aadhaar'       => $this->input->post('aadhaar'),
             'guru_name'       => $this->input->post('guru_name'),
             );
-        
+
+            $teacher_array['gurukul_id'] = $principal_id;
             $teacher_array['file_name'] = $_FILES["file_name"]["name"];
             $teacher_array['email'] = $this->input->post('email');
             // $teacher_array['bank_id'] = $bank_id;
@@ -60,7 +49,7 @@ class Teacher_model extends CI_Model {
             if($check_email != null) 
             {
             $this->session->set_flashdata('error_message', get_phrase('email_already_exist'));
-            redirect(base_url() . 'admin/teacher/', 'refresh');
+            redirect(base_url() . 'principal/teacher/', 'refresh');
             }
             else
             {
@@ -73,15 +62,13 @@ class Teacher_model extends CI_Model {
 
     }
 
-
     function updateTeacherFunction($param2){
-
+        $teacher_data['gurukul_id'] = $principal_id;
         $teacher_data = array(
             'name'                  => $this->input->post('name'),
             'role'                  => $this->input->post('role'),
 			'teacher_number'        => $this->input->post('teacher_number'),
 			'birthday'              => $this->input->post('birthday'),
-        	'sex'                   => $this->input->post('sex'),
             'religion'              => $this->input->post('religion'),
             'blood_group'           => $this->input->post('blood_group'),
             'address'               => $this->input->post('address'),
@@ -107,12 +94,11 @@ class Teacher_model extends CI_Model {
             'aadhaar'       => $this->input->post('aadhaar'),
             'guru_name'       => $this->input->post('guru_name'),
             );
-
+            $teacher_data['gurukul_id'] = $principal_id;
             $this->db->where('teacher_id', $param2);
             $this->db->update('teacher', $teacher_data);
             move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/teacher_image/' . $param2 . '.jpg'); 			// image with user ID
     }
-
 
     function deleteTeacherFunction($param2){
 
@@ -121,7 +107,4 @@ class Teacher_model extends CI_Model {
     }
 	
 
-
-	
-	
 }

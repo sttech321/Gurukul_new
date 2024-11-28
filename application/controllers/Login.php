@@ -21,7 +21,7 @@ class Login extends CI_Controller {
         if ($this->session->userdata('teacher_login')== 1) redirect (base_url(). 'teacher/dashboard');   
         if ($this->session->userdata('parent_login')== 1) redirect (base_url(). 'parent/dashboard'); 
         if ($this->session->userdata('student_login')== 1) redirect (base_url(). 'student/dashboard'); 
-        if ($this->session->userdata('gurukul_login') == 1) redirect(base_url() . 'parent/dashboard');
+        if ($this->session->userdata('principal_login')== 1) redirect (base_url(). 'principal/dashboard'); 
         $this->load->view('backend/login');
     }
   //***************** / The function below redirects to logged in user area
@@ -41,10 +41,10 @@ class Login extends CI_Controller {
           redirect(base_url() . 'admin/dashboard', 'refresh');
         }
 
-        if ($login_user == 'gurukul') {
+        if($login_user == 'principal') {
           $this->session->set_flashdata('flash_message', get_phrase('Successfully Login'));
-          redirect(base_url() . 'parents/dashboard', 'refresh'); // Redirect to the common dashboard function
-      }      
+          redirect(base_url() . 'principal/dashboard', 'refresh');
+        }
 
         if($login_user == 'hrm') {
           $this->session->set_flashdata('flash_message', get_phrase('Successfully Login'));
@@ -84,9 +84,12 @@ class Login extends CI_Controller {
       if($login_user == 'admin'){
           $this->login_model->logout_model_for_admin();
       }
-      if($login_user == 'gurukul'){
-        $this->login_model->logout_model_for_gurukul();
-    }
+
+      if($login_user == 'principal'){
+        // print_r($login_user);
+          $this->login_model->logout_model_for_principal();
+      }
+
       if($login_user == 'hrm'){
         $this->login_model->logout_model_for_hrm();
       }

@@ -228,15 +228,6 @@ class Admin extends CI_Controller {
     }
 
 
- 
-
-
-
-
-
-  
-
-
     function teacher ($param1 = null, $param2 = null, $param3 = null){
 
         if($param1 == 'insert'){
