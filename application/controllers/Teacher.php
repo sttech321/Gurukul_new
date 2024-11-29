@@ -306,8 +306,7 @@ class Teacher extends CI_Controller {
         $this->db->from('student'); // Main table
         $this->db->join('teacher', 'student.teacher_id = teacher.teacher_id'); // Join condition
         $this->db->where('teacher.teacher_id', $teacher_id); // Filter condition
-        $page_data['select_student'] = $this->db->get()->result_array(); // Fetch data as an array
-        
+        $page_data['select_student'] = $this->db->get()->result_array(); // Fetch data as an array        
         $page_data['countries'] = $countries;
         $this->load->view('backend/index', $page_data);
     }

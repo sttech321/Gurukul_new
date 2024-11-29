@@ -35,7 +35,7 @@
                                 <select name="country" id="countrys" class="form-control">
                                     <option value="">Select Country</option>
                                     <?php foreach ($countries as $country): ?>
-                                        <option value="<?php echo $country['id']; ?>" <?php echo ($students[0]['country'] == $country['id']) ? 'selected' : ''; ?>>
+                                        <option value="<?php echo $country['id']; ?>" <?php echo ($country[0]['country'] == $country['id']) ? 'selected' : ''; ?>>
                                             <?php echo $country['name']; ?>
                                         </option>
                                     <?php endforeach; ?>

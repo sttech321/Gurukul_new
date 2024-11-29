@@ -112,8 +112,31 @@
     </li>
     <?php endif;?> <!---  Permission for Admin Manage Academics ends here ------>
                    
-
-
+<!-- approved gurukul and unapproved_gurukul -->
+    <li> <a href="#" class="waves-effect"><i data-icon="&#xe006;" class="fa fa-download p-r-10"></i> <span class="hide-menu"><?php echo get_phrase('gurukul_registration');?><span class="fa arrow"></span></span></a>
+        
+        <ul class="nav nav-second-level<?php
+         if ($page_name == 'approved_gurukul' ||
+             $page_name == 'unapproved_gurukul')
+         echo 'opened active';
+         ?> ">
+             <li class="<?php if ($page_name == 'approved_gurukul') echo 'active'; ?>">
+                 <a href="<?php echo base_url(); ?>admin/gurukul_registration/approved">
+                     <i class="fa fa-angle-double-right p-r-10"></i>
+                     <span class="hide-menu"><?php echo get_phrase('Approved Page'); ?></span>
+                 </a>
+             </li>
+ 
+             <!-- <li class="<?php// if ($page_name == 'unapproved_gurukul') echo 'active'; ?>">
+                 <a href="<?php// echo base_url(); ?>admin/gurukul_registration/unapproved">
+                     <i class="fa fa-angle-double-right p-r-10"></i>
+                     <span class="hide-menu"><?php// echo get_phrase('Unapproved Page'); ?></span>
+                 </a>
+             </li> -->
+ 
+ 
+         </ul>
+     </li>
 
 
     <!---  Permission for Admin Manage Employee starts here ------>

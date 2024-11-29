@@ -29,9 +29,26 @@
 		            <input class="form-control m-r-10" name="birthday" type="date" value="2018-08-19" id="example-date-input" required>
 						</div> 
 					</div>
-
+                    <div class="form-group row">
+                            <label for="country" class="col-md-12"><?php echo get_phrase('Country'); ?></label>
+                            <div class="col-md-6">
+                                <select name="country" id="countrys" class="form-control">
+                                    <option value="">Select Country</option>
+                                    <?php foreach ($countries as $country): ?>
+                                        <option value="<?php echo $country['id']; ?>" <?php echo ($country[0]['country'] == $country['id']) ? 'selected' : ''; ?>>
+                                            <?php echo $country['name']; ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                                <div class="col-md-6">
+                                    <select name="state" id="states" class="form-control" disabled>
+                                        <option value="">Select State</option>
+                                    </select>
+                                </div>
+                            </div>
 					
-						<div class="form-group">
+					<div class="form-group">
                  	<label class="col-md-12" for="example-text"><?php echo get_phrase('address');?></label>
                     <div class="col-sm-12">
 							<input type="text" class="form-control" name="address" value="" required>
@@ -208,7 +225,7 @@
                             <th><div><?php echo get_phrase('name');?></div></th>
                             <th><div><?php echo get_phrase('role');?></div></th>
                             <th><div><?php echo get_phrase('email');?></div></th>
-                            <th><div><?php echo get_phrase('sex');?></div></th>
+                            <th><div><?php echo get_phrase('gurukul id');?></div></th>
                             <th><div><?php echo get_phrase('address');?></div></th>
                             <th><div><?php echo get_phrase('options');?></div></th>
                         </tr>
@@ -225,7 +242,7 @@
                         
                             </td>
                             <td><?php echo $teacher['email'];?></td>
-                            <td><?php echo $teacher['sex'];?></td>
+                            <td><?php echo $teacher['gurukul_id'];?></td>
                             <td><?php echo $teacher['address'];?></td>
 
                             <td>
@@ -270,4 +287,33 @@
             jQuery('#designation_holder').html('<option value=""><?php echo get_phrase("select_a_department_first"); ?></option>');
     }
     
+</script>
+<script type="text/javascript">
+document.getElementById('countrys').addEventListener('change', function () {
+    const countryId = this.value;
+    const stateDropdown = document.getElementById('states');
+ 
+    stateDropdown.innerHTML = '<option value="">Select State</option>'; // Clear current options
+    stateDropdown.disabled = true;
+ 
+    if (countryId) {
+        fetch(`/principal/get-states/${countryId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.states && data.states.length > 0) {
+                    data.states.forEach(state => {
+                        const option = document.createElement('option');
+                        option.value = state.id;
+                        option.textContent = state.name;
+                        stateDropdown.appendChild(option);
+                    });
+                    stateDropdown.disabled = false;
+                } else {
+                    stateDropdown.innerHTML = '<option value="">No states available</option>';
+                    stateDropdown.disabled = true;
+                }
+            })
+            .catch(error => console.error('Error fetching states:', error));
+    }
+});
 </script>

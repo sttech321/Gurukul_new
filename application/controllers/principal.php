@@ -104,7 +104,6 @@ class Principal extends CI_Controller {
             redirect(base_url(). 'principal/teacher', 'refresh');
         }
 
-
         if($param1 == 'delete'){
             $this->teacher_model->deleteTeacherFunction($param2);
             $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
@@ -121,7 +120,6 @@ class Principal extends CI_Controller {
         $page_data['page_title']    = get_phrase('Principal Teacher');
         $page_data['countries'] = $countries;
         $this->load->view('backend/index', $page_data);
-
     }
 
     function student ($param1 = null, $param2 = null, $param3 = null)

@@ -1,10 +1,10 @@
 <?php 
-$edit_teacher		=	$this->db->get_where('teacher' , array('teacher_id' => $param2) )->result_array();
+$states = $this->db->get('states')->result_array(); 
+$countries = $this->db->get('countries')->result_array(); 
+$edit_teacher=	$this->db->get_where('teacher' , array('teacher_id' => $param2) )->result_array();
 foreach ( $edit_teacher as $key => $row):
 ?>
-	
-            
-            
+
             <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
@@ -28,7 +28,29 @@ foreach ( $edit_teacher as $key => $row):
                                     <input type="text" class="datepicker form-control" name="birthday" value="<?php echo $row['birthday'];?>"/>
                                 </div>
                             </div>					
-					
+                        <div class="form-group row">
+                        <label for="country" class="col-md-12"><?php echo get_phrase('Country'); ?></label>
+                        <div class="col-md-6">
+                            <select name="country" id="country" class="form-control">
+                                <option value="">Select Country</option>
+                                <?php foreach ($countries as $country): ?>
+                                    <option value="<?php echo $country['id']; ?>" <?php echo ($row['country'] == $country['id']) ? 'selected' : ''; ?>>
+                                        <?php echo $country['name']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select name="state" id="state" class="form-control" <?php echo ($row['country']) ? '' : 'disabled'; ?>>
+                                <option value="">Select State</option>
+                                <?php foreach ($states as $state): ?>
+                                    <option value="<?php echo $state['id']; ?>" <?php echo ($row['state'] == $state['id']) ? 'selected' : ''; ?>>
+                                        <?php echo $state['name']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
 					<div class="form-group">
                  	<label class="col-md-12" for="example-text"><?php echo get_phrase('email');?></label>
                     <div class="col-sm-12">
@@ -181,3 +203,32 @@ foreach ( $edit_teacher as $key => $row):
 </div>
 
 <?php endforeach;?>
+<script type="text/javascript">
+document.getElementById('country').addEventListener('change', function () {
+    const countryId = this.value;
+    const stateDropdown = document.getElementById('state');
+ 
+    stateDropdown.innerHTML = '<option value="">Select State</option>'; // Clear current options
+    stateDropdown.disabled = true;
+ 
+    if (countryId) {
+        fetch(`/principal/get-states/${countryId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.states && data.states.length > 0) {
+                    data.states.forEach(state => {
+                        const option = document.createElement('option');
+                        option.value = state.id;
+                        option.textContent = state.name;
+                        stateDropdown.appendChild(option);
+                    });
+                    stateDropdown.disabled = false;
+                } else {
+                    stateDropdown.innerHTML = '<option value="">No states available</option>';
+                    stateDropdown.disabled = true;
+                }
+            })
+            .catch(error => console.error('Error fetching states:', error));
+    }
+});
+</script>
