@@ -117,22 +117,22 @@
         
         <ul class="nav nav-second-level<?php
          if ($page_name == 'approved_gurukul' ||
-             $page_name == 'unapproved_gurukul')
+             $page_name == 'edit_unapproved_gurukul_data')
          echo 'opened active';
          ?> ">
              <li class="<?php if ($page_name == 'approved_gurukul') echo 'active'; ?>">
-                 <a href="<?php echo base_url(); ?>admin/gurukul_registration/approved">
+                 <a href="<?php echo base_url(); ?>admin/gurukul_registration/approved_gurukul">
                      <i class="fa fa-angle-double-right p-r-10"></i>
                      <span class="hide-menu"><?php echo get_phrase('Approved Page'); ?></span>
                  </a>
              </li>
  
-             <!-- <li class="<?php// if ($page_name == 'unapproved_gurukul') echo 'active'; ?>">
-                 <a href="<?php// echo base_url(); ?>admin/gurukul_registration/unapproved">
+             <li class="<?php if ($page_name == 'edit_unapproved_gurukul_data') echo 'active'; ?>">
+                 <a href="<?php echo base_url(); ?>admin/unapproved_gurukul/unapproved">
                      <i class="fa fa-angle-double-right p-r-10"></i>
-                     <span class="hide-menu"><?php// echo get_phrase('Unapproved Page'); ?></span>
+                     <span class="hide-menu"><?php echo get_phrase('Unapproved Page'); ?></span>
                  </a>
-             </li> -->
+             </li>
  
  
          </ul>

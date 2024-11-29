@@ -1,7 +1,7 @@
 <?php 
 $states = $this->db->get('states')->result_array(); 
 $countries = $this->db->get('countries')->result_array(); 
-$edit_principal = $this->db->get_where('principal' , array('principal_id' => $param2) )->result_array();
+$edit_principal = $this->db->get_where('gurukul_form' , array('principal_id' => $param2) )->result_array();
 $focus_area = json_decode($edit_principal[0]['focus_area']);
 $selected_facilities = json_decode($edit_principal[0]['facilities']);
 $focus_options = ['Ved', 'Shastra Gurukul', 'Kala', 'Krishi', 'Yog-Darshan', 'Tantra', 'Yudh Kala', 'Bhasha'];
@@ -20,7 +20,7 @@ foreach ( $edit_principal as $key => $principal):
 						
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body">
-                    <?php echo form_open(base_url() . 'admin/gurukul_registration/update/'. $principal['principal_id'] , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top', 'enctype' => 'multipart/form-data'));?>
+                    <?php echo form_open(base_url() . 'admin/unapproved_gurukul/update/'. $principal['principal_id'] , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top', 'enctype' => 'multipart/form-data'));?>
                         		
                                 
                     <div class="col-12 col-md-6">
@@ -215,7 +215,6 @@ foreach ( $edit_principal as $key => $principal):
                                 name="education_board_name">
                         </div>
                     </div>
- 
                 </div>
                 
 <div class="form-group">
