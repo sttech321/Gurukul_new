@@ -1,14 +1,22 @@
 <?php 
 $states = $this->db->get('states')->result_array(); 
 $countries = $this->db->get('countries')->result_array(); 
-$edit_principal=	$this->db->get_where('principal' , array('principal_id' => $param2) )->result_array();
+$edit_principal = $this->db->get_where('principal' , array('principal_id' => $param2) )->result_array();
+$focus_area = json_decode($edit_principal[0]['focus_area']);
+$selected_facilities = json_decode($edit_principal[0]['facilities']);
+$focus_options = ['Ved', 'Shastra Gurukul', 'Kala', 'Krishi', 'Yog-Darshan', 'Tantra', 'Yudh Kala', 'Bhasha'];
+$facilities = ["School Building", "Classrooms", "Library", "Computer Room", "Kala Room", "Vyam Kasha", "Farms", "Kitchen", "Ashwashala", "Workshop", "Yagna Shala", "Gaushala"];
+$selected_fund_resource = $edit_principal[0]['fund_resource'] ?? '';
+$setup_types = ["Pathshala", "Gurukul", "Tapovan", "Gruh Gurukul", "Adhunik Gurukul"];
+$selected_setup_type = $edit_principal[0]['setup_type'] ?? '';
+$page_data['focus_area'] = $focus_area;
 foreach ( $edit_principal as $key => $principal):
 ?>
 
             <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <?php echo get_phrase('edit_student');?></div>
+                            <div class="panel-heading"> <?php echo get_phrase('edit_school');?></div>
 						
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body">
@@ -74,11 +82,10 @@ foreach ( $edit_principal as $key => $principal):
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
                         <label class="form-label required">Address</label>
-                        <textarea id="address" class="form-control" name="address" value="<?php echo $principal['address'];?>" placeholder="Address" rows="3" required></textarea>
+                        <input id="address" class="form-control" name="address" value="<?php echo $principal['address'];?>" placeholder="Address" rows="3" required>
                         <span class="text-danger" id="address_error"></span>
                     </div>
                 </div>
-
                 <div class="text-line-box-content">
                     <h5 class="my-3">Trust Information</h5>
                     <div class="line"></div>
@@ -116,24 +123,34 @@ foreach ( $edit_principal as $key => $principal):
                 <div class="col-12 col-md-6">
                     <h5 class="my-3">Fund Resources</h5>
                     <div class="mb-3">
-                        <select id="fund_resource" class="form-control" name="fund_resource">
-                            <option value="education_board_support">Education Board Support</option>
-                            <option value="government_support">Government Support</option>
-                            <option value="private_donations">Private Donations</option>
-                            <option value="donations_from_temples_and_mathas">Donations from Temples and Mathas</option>
-                        </select>
+                    <select id="fund_resource" class="form-control" name="fund_resource">
+                        <?php
+                        $fund_resources = [
+                            "education_board_support" => "Education Board Support",
+                            "government_support" => "Government Support",
+                            "private_donations" => "Private Donations",
+                            "donations_from_temples_and_mathas" => "Donations from Temples and Mathas"
+                        ];
+                        foreach ($fund_resources as $value => $label) {
+                            $selected = ($value === $selected_fund_resource) ? 'selected' : '';
+                            echo '<option value="' . $value . '" ' . $selected . '>' . $label . '</option>';
+                        }
+                        ?>
+                    </select>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <h5 class="my-3">Type of Setup</h5>
                     <div class="mb-3">
-                        <select id="type_of_setup" class="form-control" name="setup_type">
-                            <option value="Pathshala">Pathshala</option>
-                            <option value="Gurukul">Gurukul</option>
-                            <option value="Tapovan">Tapovan</option>
-                            <option value="Gruh Gurukul">Gruh Gurukul</option>
-                            <option value="Adhunik Gurukul">Adhunik Gurukul</option>
-                        </select>
+                    <select id="type_of_setup" class="form-control" name="setup_type">
+                        <?php
+                        
+                        foreach ($setup_types as $setup_type) {
+                            $selected = ($setup_type === $selected_setup_type) ? 'selected' : '';
+                            echo '<option value="' . $setup_type . '" ' . $selected . '>' . $setup_type . '</option>';
+                        }
+                        ?>
+                    </select>
                     </div>
                 </div>
                 <!-- Continue for other sections -->
@@ -144,86 +161,64 @@ foreach ( $edit_principal as $key => $principal):
                 </div>
                 <div class="col-12 col-md-12">
                     <div class="mb-3">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Ved" name="focus_area[]" value="Ved">
-                            <label class="form-check-label" for="Ved">Ved</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Shastra_Gurukul" name="focus_area[]" value="Shastra Gurukul">
-                            <label class="form-check-label" for="Shastra_Gurukul">Shastra Gurukul</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Kala" name="focus_area[]" value="Kala">
-                            <label class="form-check-label" for="Kala">Kala</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Krishi" name="focus_area[]" value="Krishi">
-                            <label class="form-check-label" for="Krishi">Krishi</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Yog_Darshan" name="focus_area[]" value="Yog-Darshan">
-                            <label class="form-check-label" for="Yog_Darshan">Yog-Darshan</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Tantra" name="focus_area[]" value="Tantra">
-                            <label class="form-check-label" for="Tantra">Tantra</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Yudh_Kala" name="focus_area[]" value="Yudh Kala">
-                            <label class="form-check-label" for="Yudh_Kala">Yudh Kala</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Bhasha" name="focus_area[]" value="Bhasha">
-                            <label class="form-check-label" for="Bhasha">Bhasha</label>
-                        </div>
+                        <?php 
+                        foreach ($focus_options as $focus) {
+                            $checked = (is_array($focus_area) && in_array($focus, $focus_area)) ? 'checked' : '';
+
+                            echo '
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="' . $focus . '" name="focus_area[]" value="' . $focus . '" ' . $checked . '>
+                                    <label class="form-check-label" for="' . $focus . '">' . $focus . '</label>
+                                </div>
+                            ';
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <h5 class="my-3">Facilities Available</h5>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="School_Building" name="facilities[]" value="School Building">
-                        <label class="form-check-label" for="School_Building">School Building</label><br>
-                        <input class="form-check-input" type="checkbox" id="Classrooms" name="facilities[]" value="Classrooms">
-                        <label class="form-check-label" for="Classrooms">Classrooms</label><br>
-                        <input class="form-check-input" type="checkbox" id="Library" name="facilities[]" value="Library">
-                        <label class="form-check-label" for="Library">Library</label><br>
-                        <input class="form-check-input" type="checkbox" id="ComputerRoom" name="facilities[]" value="Computer Room">
-                        <label class="form-check-label" for="ComputerRoom">Computer Room</label><br>
-                        <input class="form-check-input" type="checkbox" id="Kala_Room" name="facilities[]" value="Kala Room">
-                        <label class="form-check-label" for="Kala_Room">Kala Room</label><br>
-                        <input class="form-check-input" type="checkbox" id="Vyam_Kasha" name="facilities[]" value="Vyam Kasha">
-                        <label class="form-check-label" for="Vyam_Kasha">Vyam Kasha</label><br>
-                        <input class="form-check-input" type="checkbox" id="Farms" name="facilities[]" value="Farms">
-                        <label class="form-check-label" for="Farms">Farms</label><br>
-                        <input class="form-check-input" type="checkbox" id="Kitchen" name="facilities[]" value="Kitchen">
-                        <label class="form-check-label" for="Kitchen">Kitchen</label><br>
-                        <input class="form-check-input" type="checkbox" id="Ashwashala" name="facilities[]" value="Ashwashala">
-                        <label class="form-check-label" for="Ashwashala">Ashwashala</label><br>
-                        <input class="form-check-input" type="checkbox" id="Workshop" name="facilities[]" value="Workshop">
-                        <label class="form-check-label" for="Workshop">Workshop</label><br>
-                        <input class="form-check-input" type="checkbox" id="Yagna_Shala" name="facilities[]" value="Yagna Shala">
-                        <label class="form-check-label" for="Yagna_Shala">Yagna Shala</label><br>
-                        <input class="form-check-input" type="checkbox" id="Gaushala" name="facilities[]" value="Gaushala">
-                        <label class="form-check-label" for="Gaushala">Gaushala</label><br>
-                    </div>
+                    <?php
+                    foreach ($facilities as $facility) {
+                        $checked = in_array($facility, $selected_facilities) ? 'checked' : '';
+                        echo '
+                            <input class="form-check-input" type="checkbox" id="' . str_replace(' ', '_', $facility) . '" 
+                                name="facilities[]" value="' . $facility . '" ' . $checked . '>
+                            <label class="form-check-label" for="' . str_replace(' ', '_', $facility) . '">' . $facility . '</label><br>
+                        ';
+                    }
+                    ?>
                 </div>
                 <div class="col-12 col-md-6">
                     <h5 class="my-3">Registered with Education Board</h5>
                     <div class="mb-3 radioBtnWrap">
-                        <input type="radio" id="registered_yes" name="registered_with_education_board" value="Yes" required>
-                        <label for="registered_yes">Yes</label><br>
-                        <input type="radio" id="registered_no" name="registered_with_education_board" value="No" required>
-                        <label for="registered_no">No</label>
-                        <div class="mb-3 mt-3">
-                            <label for="education_board_name" class="form-label">If Yes, Name of Education Board</label>
-                            <br>
-                            <input type="text" class="form-control" id="education_board_name" name="education_board_name">
-                        </div>
+                    <?php 
+                        // Example data
+                        $registered_with_education_board = $principal['registered_with_education_board'] ?? 'No'; // Default to 'No'
+                        $education_board_name = $principal['education_board_name'] ?? '';
+                    ?>
+                    
+                    <input type="radio" id="registered_yes" name="registered_with_education_board" value="Yes" 
+                        <?php echo ($registered_with_education_board === 'Yes') ? 'checked' : ''; ?> required>
+                    <label for="registered_yes">Yes</label><br>
+
+                    <input type="radio" id="registered_no" name="registered_with_education_board" value="No" 
+                        <?php echo ($registered_with_education_board === 'No') ? 'checked' : ''; ?> required>
+                    <label for="registered_no">No</label>
+                    
+                    <!-- Conditionally display the text input -->
+                    <div class="mb-3 mt-3" id="education_board_name_wrap" 
+                        style="display: <?php echo ($registered_with_education_board === 'Yes') ? 'block' : 'none'; ?>;">
+                        <label for="education_board_name" class="form-label">If Yes, Name of Education Board</label>
+                        <br>
+                        <input type="text" class="form-control" id="education_board_name" 
+                            value="<?php echo htmlspecialchars($education_board_name); ?>" 
+                            name="education_board_name">
                     </div>
+                </div>
                 </div>
                 
 <div class="form-group">
-<button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;<?php echo get_phrase('update_teacher');?></button>
+<button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;<?php echo get_phrase('update_school');?></button>
 </div>
                 <?php echo form_close();?>
 </div>

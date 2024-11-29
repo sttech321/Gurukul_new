@@ -240,7 +240,14 @@
             <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('list_students');?></div>
+                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('list_students');?>
+
+                          <button onclick="showAjaxModal('<?php echo base_url();?>modal/popup/gurukul_invite_link');" 
+                            class="btn btn-info btn-xs pull-right">
+                                <i class="fa fa-plus"></i><?php echo get_phrase('gurukul_invite_link'); ?>
+                        </button>
+                        </div>
+
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body table-responsive">
 			
@@ -249,15 +256,15 @@
                         <tr>
                             <th width="80"><div><?php echo get_phrase('photo');?></div></th>
                             <th><div><?php echo get_phrase('name');?></div></th>
-                            <th><div><?php echo get_phrase('role');?></div></th>
+                            <th><div><?php echo get_phrase('phone');?></div></th>
                             <th><div><?php echo get_phrase('email');?></div></th>
                             <th><div><?php echo get_phrase('gurukul id');?></div></th>
                             <th><div><?php echo get_phrase('address');?></div></th>
-                            <th><div><?php echo get_phrase('options');?></div></th>
+                            <th><div><?php echo get_phrase('Action');?></div></th>
                         </tr>
                     </thead>
                     <tbody>
-        <?php foreach($principal_student as $key => $principal){ ?>
+                 <?php foreach($principal_student as $key => $principal){ ?>
                         <tr>
                             <td><img src="<?php echo $this->crud_model->get_image_url('student', $principal['principal_id']);?>" class="img-circle" width="30px"></td>
                             <td><?php echo $principal['name'];?></td>
@@ -272,10 +279,10 @@
 														
                             <a onclick="showAjaxModal('<?php echo base_url();?>modal/popup/edit_approved_gurukul/<?php echo $principal['principal_id'];?>')" class="btn btn-info btn-circle btn-xs"><i class="fa fa-edit"></i></a>
 							
-<a href="#" onclick="confirm_modal('<?php echo base_url();?>admin/student/delete/<?php echo $principal['principal_id'];?>');"><button type="button" class="btn btn-danger btn-circle btn-xs"><i class="fa fa-times"></i></button></a>
+                            <a href="#" onclick="confirm_modal('<?php echo base_url();?>admin/student/delete/<?php echo $principal['principal_id'];?>');"><button type="button" class="btn btn-danger btn-circle btn-xs"><i class="fa fa-times"></i></button></a>
 
 
-<a href="<?php echo base_url().'uploads/student_image/'.  $principal['file_name'];?>"><button type="button" class="btn btn-warning btn-circle btn-xs"><i class="fa fa-download"></i></button></a>
+                            <a href="<?php echo base_url().'uploads/student_image/'.  $principal['file_name'];?>"><button type="button" class="btn btn-warning btn-circle btn-xs"><i class="fa fa-download"></i></button></a>
 
                             </td>
                         </tr>

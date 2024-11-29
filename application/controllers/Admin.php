@@ -1065,4 +1065,48 @@ class Admin extends CI_Controller {
         $this->load->view('backend/index', $page_data);
     }
 
+    public function sendbioEmail()
+    {
+        // Load email library
+        $this->load->library('email');
+
+        // Fetch the email address from POST data
+        $email = $this->input->post('email_invite', true); // Sanitize input
+
+        // Check if email is provided
+        if (empty($email)) {
+            echo "Email address is required.";
+            return;
+        }
+
+        // Email configuration
+        $config = array(
+            'protocol'    => 'smtp',
+            'smtp_host'   => 'smtp.gmail.com',
+            'smtp_port'   => 587,
+            'smtp_user'   => 'st.manishkatoch01@gmail.com', // Your email
+            'smtp_pass'   => 'fofsmohhuqeyxebb',           // Your app password
+            'mailtype'    => 'html',
+            'charset'     => 'utf-8',
+            'newline'     => "\r\n",
+            'smtp_crypto' => 'tls',
+        );
+        $this->email->initialize($config);
+
+        // Prepare email
+        $this->email->from('st.manishkatoch01@gmail.com', 'summitRA');
+        $this->email->to($email); // Email from form input
+        $this->email->subject('Invitation');
+        $this->email->message('<p>Hello,</p><p>This is an invitation email.</p>');
+
+        // Send email
+        if (!$this->email->send()) {
+            echo "Failed to send email. Debug info:";
+            echo $this->email->print_debugger(['headers', 'subject', 'body']);
+        } else {
+            echo "Email sent successfully to: " . htmlspecialchars($email);
+        }
+    }
+
+
 }
