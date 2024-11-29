@@ -64,35 +64,35 @@
                 </li>
 
 
-                <li class="<?php if ($page_name == 'teacher') echo 'active'; ?> ">
-                    <a href="<?php echo base_url(); ?>student/teacher">
+                <!-- <li class="<?php //if ($page_name == 'teacher') echo 'active'; ?> ">
+                    <a href="<?php //echo base_url(); ?>student/teacher">
                         <i class="fa fa-angle-double-right p-r-10"></i>
-                        <span class="hide-menu"><?php echo get_phrase('Teacher'); ?></span>
+                        <span class="hide-menu"><?php// echo get_phrase('Teacher'); ?></span>
                     </a>
-                </li>
+                </li> -->
 
                     
-                <li class="<?php if ($page_name == 'class_mate') echo 'active'; ?> ">
-                    <a href="<?php echo base_url(); ?>student/class_mate">
+                <!-- <li class="<?php //if ($page_name == 'class_mate') echo 'active'; ?> ">
+                    <a href="<?php// echo base_url(); ?>student/class_mate">
                         <i class="fa fa-angle-double-right p-r-10"></i>
-                            <span class="hide-menu"><?php echo get_phrase('Class Mate'); ?></span>
+                            <span class="hide-menu"><?php// echo get_phrase('Class Mate'); ?></span>
                     </a>
-                </li>
+                </li> -->
 
                     
-                <li class="<?php if ($page_name == 'assignment') echo 'active'; ?> ">
-                    <a href="<?php echo base_url(); ?>assignment/assignment">
+                <!-- <li class="<?php// if ($page_name == 'assignment') echo 'active'; ?> ">
+                    <a href="<?php //echo base_url(); ?>assignment/assignment">
                         <i class="fa fa-angle-double-right p-r-10"></i>
-                            <span class="hide-menu"><?php echo get_phrase('Assignment'); ?></span>
+                            <span class="hide-menu"><?php //echo get_phrase('Assignment'); ?></span>
                     </a>
                 </li>
 
-                <li class="<?php if ($page_name == 'study_material') echo 'active'; ?> ">
-                    <a href="<?php echo base_url(); ?>studymaterial/study_material">
+                <li class="<?php //if ($page_name == 'study_material') echo 'active'; ?> ">
+                    <a href="<?php //echo base_url(); ?>studymaterial/study_material">
                         <i class="fa fa-angle-double-right p-r-10"></i>
-                            <span class="hide-menu"><?php echo get_phrase('Study Material'); ?></span>
+                            <span class="hide-menu"><?php //echo get_phrase('Study Material'); ?></span>
                     </a>
-                </li>
+                </li> -->
 
 
  
@@ -100,19 +100,19 @@
          </ul>
     </li>
 
-            <li class="<?php if ($page_name == 'invoice') echo 'active'; ?> ">
-                <a href="<?php echo base_url(); ?>student/invoice">
+            <!-- <li class="<?php// if ($page_name == 'invoice') echo 'active'; ?> ">
+                <a href="<?php// echo base_url(); ?>student/invoice">
                     <i class="fa fa-paypal p-r-10"></i>
-                        <span class="hide-menu"><?php echo get_phrase('Invoice'); ?></span>
+                        <span class="hide-menu"><?php //echo get_phrase('Invoice'); ?></span>
                 </a>
             </li> 
 
-        <li class="<?php if ($page_name == 'payment_history') echo 'active'; ?> ">
-                <a href="<?php echo base_url(); ?>student/payment_history">
+        <li class="<?php //if ($page_name == 'payment_history') echo 'active'; ?> ">
+                <a href="<?php// echo base_url(); ?>student/payment_history">
                     <i class="fa fa-credit-card p-r-10"></i>
-                        <span class="hide-menu"><?php echo get_phrase('Payment History'); ?></span>
+                        <span class="hide-menu"><?php// echo get_phrase('Payment History'); ?></span>
                 </a>
-        </li>               
+        </li>                -->
                                 
             <li class="<?php if ($page_name == 'manage_profile') echo 'active'; ?> ">
                 <a href="<?php echo base_url(); ?>student/manage_profile">

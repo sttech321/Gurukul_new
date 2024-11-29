@@ -98,6 +98,14 @@
 
         </ul>
     </li>
+    
+    <li class="<?php if ($page_name == 'student') echo 'active'; ?> ">
+            <a href="<?php echo base_url(); ?>teacher/student">
+                <i class="fa fa-paypal p-r-10"></i>
+                    <span class="hide-menu"><?php echo get_phrase('student'); ?></span>
+            </a>
+        </li> 
+    
 
     <li> <a href="#" class="waves-effect"><i data-icon="&#xe006;" class="fa fa-bar-chart-o p-r-10"></i> <span class="hide-menu"><?php echo get_phrase('student_scores');?><span class="fa arrow"></span></span></a>
         

@@ -7,8 +7,8 @@ class Teacher extends CI_Controller {
         parent::__construct();
         		$this->load->database();                                //Load Databse Class
                 $this->load->library('session');					    //Load library for session
-               // $this->load->model('vacancy_model');
-
+               $this->load->model('student_model');
+               $this->load->model('teacher_model');
     }
 
      /*teacher dashboard code to redirect to teacher page if successfull login** */
@@ -227,7 +227,6 @@ class Teacher extends CI_Controller {
     /***********  The function that manages school marks ends here ***********************/
 
 
-
     /***********  The function below manages school marks ***********************/
     function student_marksheet_subject ($exam_id = null, $class_id = null, $subject_id = null){
 
@@ -275,5 +274,69 @@ class Teacher extends CI_Controller {
     $this->load->view('backend/index', $page_data);
     }
     /***********  The function that manages school marks ends here ***********************/    
+
+
+    function student ($param1 = null, $param2 = null, $param3 = null)
+    {
+        $countries = $this->db->get('countries')->result_array(); // Returns all countries as an array
+
+        if ($this->session->userdata('teacher_login') != 1) redirect(base_url(), 'refresh');
+        if($param1 == 'insert'){
+            $data = $this->student_model->createNewStudent();
+            $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
+            redirect(base_url(). 'teacher/student', 'refresh');
+        }
+
+        if($param1 == 'update'){
+            $this->student_model->updateNewStudent($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
+            redirect(base_url(). 'teacher/student', 'refresh');
+        }
+
+        if($param1 == 'delete'){
+            $this->student_model->deleteNewStudent($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
+            redirect(base_url(). 'teacher/student', 'refresh');
+        }
+
+        $page_data['page_name']     = 'student';
+        $page_data['page_title']    = get_phrase('student Student');
+        $teacher_id = $this->session->userdata('teacher_id'); // Fetch teacher_id from the session
+        $this->db->select('student.*'); // Select all student data
+        $this->db->from('student'); // Main table
+        $this->db->join('teacher', 'student.teacher_id = teacher.teacher_id'); // Join condition
+        $this->db->where('teacher.teacher_id', $teacher_id); // Filter condition
+        $page_data['select_student'] = $this->db->get()->result_array(); // Fetch data as an array
+        
+        $page_data['countries'] = $countries;
+        $this->load->view('backend/index', $page_data);
+    }
+
+    public function get_states_by_country($country_id)
+    {
+        // Query the states table to fetch states based on country ID
+        $this->db->select('id, name');
+        $this->db->from('states');
+        $this->db->where('country_id', $country_id);
+        $query = $this->db->get();
+ 
+        // Return results as an associative array
+        return $query->result_array();
+    }
+
+    public function get_states($country_id) {
+        $this->db->select('id, name');
+        $this->db->from('states');
+        $this->db->where('country_id', $country_id);
+        $query = $this->db->get();
+    
+        // Check if data exists
+        if ($query->num_rows() > 0) {
+            $states = $query->result_array();
+            echo json_encode(['states' => $states]);
+        } else {
+            echo json_encode(['states' => []]);
+        }
+    }
 
 }

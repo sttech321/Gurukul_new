@@ -186,7 +186,5 @@ class Principal extends CI_Controller {
             echo json_encode(['states' => []]);
         }
     }
-    
-    
 
 }

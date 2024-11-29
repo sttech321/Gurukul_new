@@ -38,8 +38,6 @@ class Student_model extends CI_Model {
         $this->db->delete('house');
     }
 
-
-
     // The function below insert into student category //
     function createstudentCategory(){
 
@@ -70,6 +68,7 @@ class Student_model extends CI_Model {
     //  the function below insert into student table
     function createNewStudent(){
         $principal_id = $this->session->userdata('principal_id');
+        $teacher_id = $this->session->userdata('teacher_id');
         $page_data = array(
             'name'          => html_escape($this->input->post('name')),
             'birthday'      => html_escape($this->input->post('dob')),
@@ -99,12 +98,12 @@ class Student_model extends CI_Model {
             'mother_varna'             => html_escape($this->input->post('mother_varna'))
         );
         $page_data['gurukul_id'] = $principal_id;
+        $page_data['teacher_id'] = $teacher_id;
         $this->db->insert('student', $page_data);
         $student_id = $this->db->insert_id();
         move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $student_id . '.jpg');			// image with user ID
 
     }
-
 
     // the function below update student
     function updateNewStudent($param2) {
