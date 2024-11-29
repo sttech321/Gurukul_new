@@ -1046,14 +1046,14 @@ class Admin extends CI_Controller {
             redirect(base_url(). 'admin/gurukul_registration', 'refresh');
         }
 
-        if($param1 == 'update'){
-            $this->Principal_model->update_gurukul($param2);
+        if($param2 == 'update'){
+            $this->Principal_model->update_gurukul();
             $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
             redirect(base_url(). 'admin/gurukul_registration', 'refresh');
         }
 
-        if($param1 == 'delete'){
-            $this->Principal_model->delete_gurukul($param2);
+        if($param3 == 'delete'){
+            $this->Principal_model->delete_gurukul();
             $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
             redirect(base_url(). 'admin/gurukul_registration', 'refresh');
         }
@@ -1064,6 +1064,45 @@ class Admin extends CI_Controller {
         $page_data['countries'] = $countries;
         $this->load->view('backend/index', $page_data);
     }
+
+
+    function gurukul_invite($param1 = null){
+        $countries = $this->db->get('countries')->result_array(); 
+        if($param1 == 'create'){
+            $this->Principal_model->insert_invite_gurukul();
+            $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
+            redirect(base_url() . 'admin/thankyou_gurukul', 'refresh'); 
+        }
+
+        $page_data['countries'] = $countries;
+        $this->load->view('backend/admin/gurukul_invite', $page_data);
+    }
+
+    function unapproved_gurukul($param1 = null,$param2 = null){
+        $countries = $this->db->get('countries')->result_array(); 
+        if($param1 == 'update'){
+            $this->Principal_model->update_invite_gurukul();
+            $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
+            redirect(base_url(). 'admin/unapproved_gurukul', 'refresh');
+        }
+
+        if($param2 == 'delete'){
+            $this->Principal_model->delete_invite_gurukul($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
+            redirect(base_url(). 'admin/unapproved_gurukul', 'refresh');
+        }
+
+        $page_data['page_name']     = 'edit_unapproved_gurukul_data';
+        $page_data['page_title']    = get_phrase('Manage Gurukul');
+        $page_data['principal_student']  = $this->db->get('gurukul_form')->result_array();
+        $page_data['countries'] = $countries;
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function thankyou_gurukul() {
+        $this->load->view('backend/thankyou_gurukul');
+    }
+    
 
     public function sendbioEmail()
     {
@@ -1076,6 +1115,13 @@ class Admin extends CI_Controller {
         // Check if email is provided
         if (empty($email)) {
             echo "Email address is required.";
+            return;
+        }
+
+        // Load the email template
+        $template = file_get_contents(APPPATH . 'views/backend/email/invite.php');
+        if (!$template) {
+            echo "Failed to load email template.";
             return;
         }
 
@@ -1097,14 +1143,14 @@ class Admin extends CI_Controller {
         $this->email->from('st.manishkatoch01@gmail.com', 'summitRA');
         $this->email->to($email); // Email from form input
         $this->email->subject('Invitation');
-        $this->email->message('<p>Hello,</p><p>This is an invitation email.</p>');
+        $this->email->message($template);
 
         // Send email
         if (!$this->email->send()) {
             echo "Failed to send email. Debug info:";
             echo $this->email->print_debugger(['headers', 'subject', 'body']);
         } else {
-            echo "Email sent successfully to: " . htmlspecialchars($email);
+            redirect(base_url(). 'admin/gurukul_registration', 'refresh');
         }
     }
 

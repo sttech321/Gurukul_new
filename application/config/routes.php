@@ -52,7 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['sendbioEmail'] = 'Email/sendbioEmail';
+$route['sendbioEmail'] = 'admin/sendbioEmail';
 $route['principal/get-states/(:num)'] = 'principal/get_states/$1';
-
+$route['admin/gurukul_invite/'] = 'admin/gurukul_invite';
+$route['thankyou'] = 'admin/thankyou_gurukul';
 

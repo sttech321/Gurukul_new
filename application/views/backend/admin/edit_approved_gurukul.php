@@ -191,30 +191,31 @@ foreach ( $edit_principal as $key => $principal):
                 <div class="col-12 col-md-6">
                     <h5 class="my-3">Registered with Education Board</h5>
                     <div class="mb-3 radioBtnWrap">
-                    <?php 
-                        // Example data
-                        $registered_with_education_board = $principal['registered_with_education_board'] ?? 'No'; // Default to 'No'
-                        $education_board_name = $principal['education_board_name'] ?? '';
-                    ?>
-                    
-                    <input type="radio" id="registered_yes" name="registered_with_education_board" value="Yes" 
-                        <?php echo ($registered_with_education_board === 'Yes') ? 'checked' : ''; ?> required>
-                    <label for="registered_yes">Yes</label><br>
-
-                    <input type="radio" id="registered_no" name="registered_with_education_board" value="No" 
-                        <?php echo ($registered_with_education_board === 'No') ? 'checked' : ''; ?> required>
-                    <label for="registered_no">No</label>
-                    
-                    <!-- Conditionally display the text input -->
-                    <div class="mb-3 mt-3" id="education_board_name_wrap" 
-                        style="display: <?php echo ($registered_with_education_board === 'Yes') ? 'block' : 'none'; ?>;">
-                        <label for="education_board_name" class="form-label">If Yes, Name of Education Board</label>
-                        <br>
-                        <input type="text" class="form-control" id="education_board_name" 
-                            value="<?php echo htmlspecialchars($education_board_name); ?>" 
-                            name="education_board_name">
+                        <?php
+                            // Example data
+                            $registered_with_education_board = $principal['registered_with_education_board'] ?? 'No'; // Default to 'No'
+                            $education_board_name = $principal['education_board_name'] ?? '';
+                        ?>
+                       
+                        <input type="radio" id="registered_yes" name="registered_with_education_board" value="Yes"
+                            <?php echo ($registered_with_education_board === 'Yes') ? 'checked' : ''; ?> required>
+                        <label for="registered_yes">Yes</label><br>
+ 
+                        <input type="radio" id="registered_no" name="registered_with_education_board" value="No"
+                            <?php echo ($registered_with_education_board === 'No') ? 'checked' : ''; ?> required>
+                        <label for="registered_no">No</label>
+                       
+                        <!-- Conditionally display the text input -->
+                        <div class="mb-3 mt-3" id="education_board_name_wrap"
+                            style="display: <?php echo ($registered_with_education_board === 'Yes') ? 'block' : 'none'; ?>;">
+                            <label for="education_board_name" class="form-label">If Yes, Name of Education Board</label>
+                            <br>
+                            <input type="text" class="form-control" id="education_board_name"
+                                value="<?php echo htmlspecialchars($education_board_name); ?>"
+                                name="education_board_name">
+                        </div>
                     </div>
-                </div>
+ 
                 </div>
                 
 <div class="form-group">

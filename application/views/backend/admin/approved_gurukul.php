@@ -70,8 +70,6 @@
 					    <label class="col-sm-12"><?php echo get_phrase('browse_image');?>*</label>        
                         <div class="col-sm-12">
                         <input type='file' class="form-control" name="userfile"/>
-                        <img id="blah" src="<?php echo $this->crud_model->get_image_url('teacher',$row['teacher_id']);?>" alt="" height="200" width="200"/>
-
                         </div>
 					</div>	
                 <div class="col-12 col-md-6">
@@ -266,7 +264,7 @@
                     <tbody>
                  <?php foreach($principal_student as $key => $principal){ ?>
                         <tr>
-                            <td><img src="<?php echo $this->crud_model->get_image_url('student', $principal['principal_id']);?>" class="img-circle" width="30px"></td>
+                            <td><img src="<?php echo $this->crud_model->get_image_url('principal', $principal['principal_id']);?>" class="img-circle" width="30px"></td>
                             <td><?php echo $principal['name'];?></td>
                             <td>
                             <?php echo $principal['phone'];?>
