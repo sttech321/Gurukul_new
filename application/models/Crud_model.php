@@ -17,13 +17,11 @@ class Crud_model extends CI_Model {
         return $row[$field];
     }
 
-
-
      function get_image_url($type = '', $id = '') {
         if (file_exists('uploads/' . $type . '_image/' . $id . '.jpg'))
             $image_url = base_url() . 'uploads/' . $type . '_image/' . $id . '.jpg';
         else
-            $image_url = base_url() . 'uploads/user.jpg';
+            $image_url = base_url() . 'uploads/principal_image/user.jpg';
 
         return $image_url;
 

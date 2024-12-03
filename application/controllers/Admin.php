@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Admin extends CI_Controller { 
+class Admin extends MY_Controller { 
 
     function __construct() {
         parent::__construct();
@@ -13,7 +13,8 @@ class Admin extends CI_Controller {
                 $this->load->model('student_payment_model');            // Load Apllication Model Here
                 $this->load->model('event_model');                      // Load Apllication Model Here
                 $this->load->model('language_model');                      // Load Apllication Model Here
-                $this->load->model('admin_model');                      // Load Apllication Model Here
+                $this->load->model('admin_model');       
+                $this->load->model('Principal_model');
     }
 
     /**default functin, redirects to login page if no admin logged in yet***/
@@ -228,17 +229,8 @@ class Admin extends CI_Controller {
     }
 
 
- 
-
-
-
-
-
-  
-
-
     function teacher ($param1 = null, $param2 = null, $param3 = null){
-
+        $countries = $this->db->get('countries')->result_array(); 
         if($param1 == 'insert'){
             $this->teacher_model->insetTeacherFunction();
             $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
@@ -262,8 +254,36 @@ class Admin extends CI_Controller {
         $page_data['page_name']     = 'teacher';
         $page_data['page_title']    = get_phrase('Manage Teacher');
         $page_data['select_teacher']  = $this->db->get('teacher')->result_array();
+        $page_data['countries'] = $countries;
         $this->load->view('backend/index', $page_data);
 
+    }
+
+    public function get_states_by_country($country_id)
+    {
+        // Query the states table to fetch states based on country ID
+        $this->db->select('id, name');
+        $this->db->from('states');
+        $this->db->where('country_id', $country_id);
+        $query = $this->db->get();
+ 
+        // Return results as an associative array
+        return $query->result_array();
+    }
+
+    public function get_states($country_id) {
+        $this->db->select('id, name');
+        $this->db->from('states');
+        $this->db->where('country_id', $country_id);
+        $query = $this->db->get();
+    
+        // Check if data exists
+        if ($query->num_rows() > 0) {
+            $states = $query->result_array();
+            echo json_encode(['states' => $states]);
+        } else {
+            echo json_encode(['states' => []]);
+        }
     }
 
     function get_designation($department_id = null){
@@ -273,18 +293,12 @@ class Admin extends CI_Controller {
         echo '<option value="'.$row['designation_id'].'">' . $row['name'] . '</option>';
     }
 
- 
-
-
     function get_employees($department_id = null)
     {
         $employees = $this->db->get_where('teacher', array('department_id' => $department_id))->result_array();
         foreach($employees as $key => $employees)
             echo '<option value="' . $employees['teacher_id'] . '">' . $employees['name'] . '</option>';
     }
-
- 
-
 
     /***********  The function manages Class Information  ***********************/
       function classes ($param1 = null, $param2 = null, $param3 = null){
@@ -315,7 +329,6 @@ class Admin extends CI_Controller {
 
     }
 
-
     /***********  The function manages Section  ***********************/
     function section ($param1 = null, $param2 = null, $param3 = null){
 
@@ -342,127 +355,111 @@ class Admin extends CI_Controller {
         $this->load->view('backend/index', $page_data);
     }
 
-        function sections ($class_id = null){
+    function sections ($class_id = null){
 
-            if($class_id == '')
-            $class_id = $this->db->get('class')->first_row()->class_id;
-            
-            $page_data['page_name']     = 'section';
-            $page_data['class_id']      = $class_id;
-            $page_data['page_title']    = get_phrase('Manage Section');
-            $this->load->view('backend/index', $page_data);
+        if($class_id == '')
+        $class_id = $this->db->get('class')->first_row()->class_id;
+        
+        $page_data['page_name']     = 'section';
+        $page_data['class_id']      = $class_id;
+        $page_data['page_title']    = get_phrase('Manage Section');
+        $this->load->view('backend/index', $page_data);
 
-        }
+    }
     
-
-
-
     function get_class_section_subject($class_id){
         $page_data['class_id']  =   $class_id;
         $this->load->view('backend/admin/class_routine_section_subject_selector', $page_data);
 
     }
 
-
-
     function section_subject_edit($class_id, $class_routine_id){
-
-    $page_data['class_id']          =   $class_id;
-    $page_data['class_routine_id']  =   $class_routine_id;
-    $this->load->view('backend/admin/class_routine_section_subject_edit', $page_data);
-
+        $page_data['class_id']          =   $class_id;
+        $page_data['class_routine_id']  =   $class_routine_id;
+        $this->load->view('backend/admin/class_routine_section_subject_edit', $page_data);
     }
-
 
     /***********  The function manages school dormitory  ***********************/
     function dormitory ($param1 = null, $param2 = null, $param3 = null){
+        if($param1 == 'create'){
+            $this->dormitory_model->createDormitoryFunction();
+            $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
+            redirect(base_url(). 'admin/dormitory', 'refresh');
+        }
 
-    if($param1 == 'create'){
-        $this->dormitory_model->createDormitoryFunction();
-        $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
-        redirect(base_url(). 'admin/dormitory', 'refresh');
-    }
+        if($param1 == 'update'){
+            $this->dormitory_model->updateDormitoryFunction($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
+            redirect(base_url(). 'admin/dormitory', 'refresh');
+        }
 
-    if($param1 == 'update'){
-        $this->dormitory_model->updateDormitoryFunction($param2);
-        $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
-        redirect(base_url(). 'admin/dormitory', 'refresh');
-    }
+        if($param1 == 'delete'){
+            $this->dormitory_model->deleteDormitoryFunction($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
+            redirect(base_url(). 'admin/dormitory', 'refresh');
+        }
 
-
-    if($param1 == 'delete'){
-        $this->dormitory_model->deleteDormitoryFunction($param2);
-        $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
-        redirect(base_url(). 'admin/dormitory', 'refresh');
-
-    }
-
-    $page_data['page_name']     = 'dormitory';
-    $page_data['page_title']    = get_phrase('Manage Dormitory');
-    $this->load->view('backend/index', $page_data);
+        $page_data['page_name']     = 'dormitory';
+        $page_data['page_title']    = get_phrase('Manage Dormitory');
+        $this->load->view('backend/index', $page_data);
 
     }
-
-
     /***********  The function manages hostel room  ***********************/
     function hostel_room ($param1 = null, $param2 = null, $param3 = null){
 
-    if($param1 == 'create'){
-        $this->dormitory_model->createHostelRoomFunction();
-        $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
-        redirect(base_url(). 'admin/hostel_room', 'refresh');
+        if($param1 == 'create'){
+            $this->dormitory_model->createHostelRoomFunction();
+            $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
+            redirect(base_url(). 'admin/hostel_room', 'refresh');
+        }
+
+        if($param1 == 'update'){
+            $this->dormitory_model->updateHostelRoomFunction($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
+            redirect(base_url(). 'admin/hostel_room', 'refresh');
+        }
+
+
+        if($param1 == 'delete'){
+            $this->dormitory_model->deleteHostelRoomFunction($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
+            redirect(base_url(). 'admin/hostel_room', 'refresh');
+
+        }
+
+        $page_data['page_name']     = 'hostel_room';
+        $page_data['page_title']    = get_phrase('Hostel Room');
+        $this->load->view('backend/index', $page_data);
+
     }
-
-    if($param1 == 'update'){
-        $this->dormitory_model->updateHostelRoomFunction($param2);
-        $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
-        redirect(base_url(). 'admin/hostel_room', 'refresh');
-    }
-
-
-    if($param1 == 'delete'){
-        $this->dormitory_model->deleteHostelRoomFunction($param2);
-        $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
-        redirect(base_url(). 'admin/hostel_room', 'refresh');
-
-    }
-
-    $page_data['page_name']     = 'hostel_room';
-    $page_data['page_title']    = get_phrase('Hostel Room');
-    $this->load->view('backend/index', $page_data);
-
-    }
-
 
     /***********  The function manages hostel category  ***********************/
     function hostel_category ($param1 = null, $param2 = null, $param3 = null){
 
-    if($param1 == 'create'){
-        $this->dormitory_model->createHostelCategoryFunction();
-        $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
-        redirect(base_url(). 'admin/hostel_category', 'refresh');
+        if($param1 == 'create'){
+            $this->dormitory_model->createHostelCategoryFunction();
+            $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
+            redirect(base_url(). 'admin/hostel_category', 'refresh');
+        }
+
+        if($param1 == 'update'){
+            $this->dormitory_model->updateHostelCategoryFunction($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
+            redirect(base_url(). 'admin/hostel_category', 'refresh');
+        }
+
+
+        if($param1 == 'delete'){
+            $this->dormitory_model->deleteHostelCategoryFunction($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
+            redirect(base_url(). 'admin/hostel_category', 'refresh');
+
+        }
+
+        $page_data['page_name']     = 'hostel_category';
+        $page_data['page_title']    = get_phrase('Hostel Category');
+        $this->load->view('backend/index', $page_data);
     }
-
-    if($param1 == 'update'){
-        $this->dormitory_model->updateHostelCategoryFunction($param2);
-        $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
-        redirect(base_url(). 'admin/hostel_category', 'refresh');
-    }
-
-
-    if($param1 == 'delete'){
-        $this->dormitory_model->deleteHostelCategoryFunction($param2);
-        $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
-        redirect(base_url(). 'admin/hostel_category', 'refresh');
-
-    }
-
-    $page_data['page_name']     = 'hostel_category';
-    $page_data['page_title']    = get_phrase('Hostel Category');
-    $this->load->view('backend/index', $page_data);
-    }
-
-
 
     /***********  The function manages academic syllabus ***********************/
     function academic_syllabus ($param1 = null, $param2 = null, $param3 = null){
@@ -471,24 +468,24 @@ class Admin extends CI_Controller {
         $this->academic_model->createAcademicSyllabus();
         $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
         redirect(base_url(). 'admin/academic_syllabus', 'refresh');
-    }
-
-    if($param1 == 'update'){
-        $this->academic_model->updateAcademicSyllabus($param2);
-        $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
-        redirect(base_url(). 'admin/academic_syllabus', 'refresh');
-    }
-
-
-    if($param1 == 'delete'){
-        $this->academic_model->deleteAcademicSyllabus($param2);
-        $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
-        redirect(base_url(). 'admin/academic_syllabus', 'refresh');
-
         }
 
-        $page_data['page_name']     = 'academic_syllabus';
-        $page_data['page_title']    = get_phrase('Academic Syllabus');
+        if($param1 == 'update'){
+            $this->academic_model->updateAcademicSyllabus($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
+            redirect(base_url(). 'admin/academic_syllabus', 'refresh');
+        }
+
+
+        if($param1 == 'delete'){
+            $this->academic_model->deleteAcademicSyllabus($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
+            redirect(base_url(). 'admin/academic_syllabus', 'refresh');
+
+            }
+
+            $page_data['page_name']     = 'academic_syllabus';
+            $page_data['page_title']    = get_phrase('Academic Syllabus');
         $this->load->view('backend/index', $page_data);
 
     }
@@ -533,7 +530,7 @@ class Admin extends CI_Controller {
 
     /***********  The function below add, update and delete student from students' table ***********************/
     function new_student ($param1 = null, $param2 = null, $param3 = null){
-
+        $countries = $this->db->get('countries')->result_array(); 
         if($param1 == 'create'){
             $this->student_model->createNewStudent();
             $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
@@ -555,13 +552,14 @@ class Admin extends CI_Controller {
 
         $page_data['page_name']     = 'new_student';
         $page_data['page_title']    = get_phrase('Manage Student');
+        $page_data['select_student']  = $this->db->get('student')->result_array();
+        $page_data['countries'] = $countries;
         $this->load->view('backend/index', $page_data);
 
     }
 
 
     function student_information(){
-
         $page_data['page_name']     = 'student_information';
         $page_data['page_title']    = get_phrase('List Student');
         $this->load->view('backend/index', $page_data);
@@ -570,7 +568,6 @@ class Admin extends CI_Controller {
 
     /**************************  search student function with ajax starts here   ***********************************/
     function getStudentClasswise($class_id){
-
         $page_data['class_id'] = $class_id;
         $this->load->view('backend/admin/showStudentClasswise', $page_data);
     }
@@ -578,7 +575,6 @@ class Admin extends CI_Controller {
 
 
     function edit_student($student_id){
-
         $page_data['student_id']      = $student_id;
         $page_data['page_name']     = 'edit_student';
         $page_data['page_title']    = get_phrase('Edit Student');
@@ -661,10 +657,7 @@ class Admin extends CI_Controller {
 
 
     function attendance_report($class_id = NULL, $section_id = NULL, $month = NULL, $year = NULL) {
-        
         $active_sms_gateway = $this->db->get_where('sms_settings', array('type' => 'active_sms_gateway'))->row()->info;
-        
-        
         if ($_POST) {
         redirect(base_url() . 'admin/attendance_report/' . $class_id . '/' . $section_id . '/' . $month . '/' . $year, 'refresh');
         }
@@ -690,7 +683,6 @@ class Admin extends CI_Controller {
         $this->load->view('backend/index', $page_data);
     }
 
-
     /******************** Load attendance with ajax code starts from here **********************/
 	function loadAttendanceReport($class_id, $section_id, $month, $year)
     {
@@ -702,7 +694,6 @@ class Admin extends CI_Controller {
         $this->load->view('backend/admin/loadAttendanceReport' , $page_data);
     }
     /******************** Load attendance with ajax code ends from here **********************/
-    
 
     /******************** print attendance report **********************/
 	function printAttendanceReport($class_id=NULL, $section_id=NULL, $month=NULL, $year=NULL)
@@ -717,8 +708,6 @@ class Admin extends CI_Controller {
         $this->load->view('backend/index', $page_data);
     }
     /******************** /Ends here **********************/
-    
-
 
      /***********  The function below add, update and delete exam question table ***********************/
     function examQuestion ($param1 = null, $param2 = null, $param3 = null){
@@ -746,7 +735,6 @@ class Admin extends CI_Controller {
         $this->load->view('backend/index', $page_data);
     }
      /***********  The function below add, update and delete exam question table ends here ***********************/
-
 
     /***********  The function below add, update and delete examination table ***********************/
     function createExamination ($param1 = null, $param2 = null, $param3 = null){
@@ -823,7 +811,6 @@ class Admin extends CI_Controller {
             }
     }
 
-
     function get_class_mass_student($class_id){
 
         $students = $this->db->get_where('student', array('class_id' => $class_id))->result_array();
@@ -844,8 +831,6 @@ class Admin extends CI_Controller {
         $this->load->view('backend/index', $page_data);
 
     }
-
-
 
     /***********  The function below manages school event ***********************/
     function noticeboard ($param1 = null, $param2 = null, $param3 = null){
@@ -1016,9 +1001,6 @@ class Admin extends CI_Controller {
     }
     /***********  The function that manages school marks ends here ***********************/
 
-
-
-    
     /***********  The function below manages new admin ***********************/
     function newAdministrator ($param1 = null, $param2 = null, $param3 = null){
 
@@ -1050,6 +1032,225 @@ class Admin extends CI_Controller {
         $this->admin_model->updateAllDetailsForAdminRole($param2);
         $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
         redirect(base_url(). 'admin/newAdministrator', 'refresh');
+    }
+
+    function gurukul_registration($param1 = null, $param2 = null, $param3 = null) {
+        $countries = $this->db->get('countries')->result_array();
+        if ($param1 == 'create') {
+            $this->Principal_model->insert_gurukul();
+            $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
+            redirect(base_url() . 'admin/gurukul_registration', 'refresh');
+        }
+        if ($param1 == 'update') {
+            $this->Principal_model->update_gurukul($param2); // Pass the ID as a parameter
+            $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
+            redirect(base_url() . 'admin/gurukul_registration', 'refresh');
+        }
+        if ($param1 == 'delete') {
+            $this->Principal_model->delete_gurukul($param2); // Pass the ID for deletion
+            $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
+            redirect(base_url() . 'admin/gurukul_registration', 'refresh');
+        }        
+    
+        $page_data['page_name'] = 'approved_gurukul';
+        $page_data['page_title'] = get_phrase('Manage Gurukul');
+        $page_data['principal_student'] = $this->db->get('principal')->result_array();
+        $page_data['countries'] = $countries;
+        $this->load->view('backend/index', $page_data);
+    } 
+
+    function gurukul_invite($param1 = null){
+        $countries = $this->db->get('countries')->result_array(); 
+        if($param1 == 'create'){
+            $this->Principal_model->insert_invite_gurukul();
+            $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
+            redirect(base_url() . 'admin/thankyou_gurukul', 'refresh'); 
+        }
+
+        $page_data['countries'] = $countries;
+        $this->load->view('backend/admin/gurukul_invite', $page_data);
+    }
+
+    public function gurukul_confirmation($data)
+    {
+        // Load email library
+        $this->load->library('email');
+
+        // Check if email is provided
+        if (empty($data['email'])) {
+            log_message('error', 'Email address is required but not provided.');
+            return;
+        }
+
+        // Load the email template
+        $template = $this->load->view('backend/email/gurukul_confirmation', ['data' => $data], true);
+        if (!$template) {
+            echo "Failed to load email template.";
+            return;
+        }
+
+        // Email configuration
+        $config = array(
+            'protocol'    => 'smtp',
+            'smtp_host'   => 'smtp.gmail.com',
+            'smtp_port'   => 587,
+            'smtp_user'   => 'st.manishkatoch01@gmail.com', // Your email
+            'smtp_pass'   => 'fofsmohhuqeyxebb',           // Your app password
+            'mailtype'    => 'html',
+            'charset'     => 'utf-8',
+            'newline'     => "\r\n",
+            'smtp_crypto' => 'tls',
+        );
+        $this->email->initialize($config);
+
+        // Prepare email
+        $this->email->from('st.manishkatoch01@gmail.com', 'GURUKUL');
+        $this->email->to($data['email']); // Email from form input
+        $this->email->subject('Gurukul Form Submission Confirmation');
+        $this->email->message($template);
+
+        // Send email and log any errors
+        if (!$this->email->send()) {
+            log_message('error', 'Failed to send email: ' . $this->email->print_debugger(['headers', 'subject', 'body']));
+        }
+    }
+
+    function delete_invite_gurukul($param2)
+    {
+        // Fetch the record from the `gurukul_form` table
+        $record = $this->db->get_where('gurukul_form', ['principal_id' => $param2])->row_array();
+    
+        if ($record) {
+            // Start the transaction
+            $this->db->trans_start();
+    
+            // Change the status in `gurukul_form`
+            $this->db->where('principal_id', $param2);
+            $this->db->update('gurukul_form', ['status' => 'deleted']);
+    
+            // Prepare the form data for the `principal` table
+            $principal_data = [
+                'name'                        => $record['name'],
+                'address'                     => $record['address'],
+                'phone'                       => $record['phone'],
+                'email'                       => $record['email'],
+                'password'                    => $record['password'],
+                'role'                        => $record['role'] ?? 'principal',
+                'fund_resource'               => $record['fund_resource'],
+                'trust_name'                  => $record['trust_name'],
+                'trust_registration_date'     => $record['trust_registration_date'],
+                'trust_president_name'        => $record['trust_president_name'],
+                'secretary_name'              => $record['secretary_name'],
+                'treasurer_name'              => $record['treasurer_name'],
+                'principal_name'              => $record['principal_name'],
+                'setup_type'                  => $record['setup_type'],
+                'focus_area'                  => $record['focus_area'],
+                'facilities'                  => $record['facilities'],
+                'registered_with_education_board' => $record['registered_with_education_board'],
+                'education_board_name'        => $record['education_board_name'],
+                'state'                       => $record['state'],
+                'country'                     => $record['country'],
+            ];
+    
+            // Insert data into the `principal` table
+            $this->db->insert('principal', $principal_data);
+    
+            // Complete the transaction
+            $this->db->trans_complete();
+    
+            if ($this->db->trans_status()) {
+                // Call the email confirmation function
+                $this->gurukul_confirmation($principal_data);
+    
+                // Flash success message
+                $this->session->set_flashdata('flash_message', get_phrase('Data moved to principal table successfully and confirmation email sent.'));
+            } else {
+                $this->session->set_flashdata('error_message', get_phrase('Failed to move data to principal table'));
+            }
+        } else {
+            $this->session->set_flashdata('error_message', get_phrase('Record not found'));
+        }
+    }
+
+    function unapproved_gurukul($param1 = null,$param2 = null){
+        $countries = $this->db->get('countries')->result_array(); 
+        if($param1 == 'update'){
+            $this->Principal_model->update_invite_gurukul($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
+            redirect(base_url(). 'admin/unapproved_gurukul', 'refresh');
+        }
+
+        if($param1 == 'delete'){
+            $this->delete_invite_gurukul($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
+            redirect(base_url(). 'admin/unapproved_gurukul', 'refresh');
+        }
+
+        $page_data['page_name']     = 'edit_unapproved_gurukul_data';
+        $page_data['page_title']    = get_phrase('Manage Gurukul');
+
+        if ($this->db->where('status', 'active')) {
+            $page_data['principal_student'] = $this->db->get('gurukul_form')->result_array();
+        } else {
+            $page_data['principal_student'] = [];
+        } 
+
+        $page_data['countries'] = $countries;
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function thankyou_gurukul() {
+        $this->load->view('backend/thankyou_gurukul');
+    }
+    
+    public function sendbioEmail()
+    {
+        // Load email library
+        $this->load->library('email');
+
+        // Fetch the email address from POST data
+        $email = $this->input->post('email_invite', true); // Sanitize input
+
+        // Check if email is provided
+        if (empty($email)) {
+            echo "Email address is required.";
+            return;
+        }
+
+        // Load the email template
+        $template = file_get_contents(APPPATH . 'views/backend/email/invite.php');
+        if (!$template) {
+            echo "Failed to load email template.";
+            return;
+        }
+
+        // Email configuration
+        $config = array(
+            'protocol'    => 'smtp',
+            'smtp_host'   => 'smtp.gmail.com',
+            'smtp_port'   => 587,
+            'smtp_user'   => 'st.manishkatoch01@gmail.com', // Your email
+            'smtp_pass'   => 'fofsmohhuqeyxebb',           // Your app password
+            'mailtype'    => 'html',
+            'charset'     => 'utf-8',
+            'newline'     => "\r\n",
+            'smtp_crypto' => 'tls',
+        );
+        $this->email->initialize($config);
+
+        // Prepare email
+        $this->email->from('st.manishkatoch01@gmail.com', 'GURUKUL');
+        $this->email->to($email); // Email from form input
+        $this->email->subject('Invitation');
+        $this->email->message($template);
+
+        // Send email
+        if (!$this->email->send()) {
+            echo "Failed to send email. Debug info:";
+            echo $this->email->print_debugger(['headers', 'subject', 'body']);
+        } else {
+            redirect(base_url(). 'admin/gurukul_registration', 'refresh');
+        }
     }
 
 }

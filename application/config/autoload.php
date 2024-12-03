@@ -141,3 +141,4 @@ $autoload['model'] = array('email_model' , 'crud_model' ,
 'sms_model', 'login_model', 'expense_model', 
 'department_model', 'teacher_model', 'payroll_model', 'class_model', 
 'section_model', 'subject_model', 'dormitory_model', 'exam_model');
+

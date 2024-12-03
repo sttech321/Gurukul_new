@@ -29,6 +29,21 @@ class Login_model extends CI_Model {
                     ->update('admin');
         }
 
+        $query = $this->db->get_where('principal', $credential);
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+  
+            $this->session->set_userdata('login_type', 'principal');
+            $this->session->set_userdata('principal_login', '1');
+            $this->session->set_userdata('principal_id', $row->principal_id);
+            $this->session->set_userdata('login_user_id', $row->principal_id);
+            $this->session->set_userdata('name', $row->name);
+
+            return  $this->db->set('login_status', ('1'))
+                    ->where('principal_id', $this->session->userdata('principal_id'))
+                    ->update('principal');
+        }
+
         $query = $this->db->get_where('parent', $credential);
         if ($query->num_rows() > 0) {
             $row = $query->row();
@@ -83,6 +98,12 @@ class Login_model extends CI_Model {
                     ->update('admin');
     }
 
+    function logout_model_for_principal(){
+        return  $this->db->set('login_status', ('0'))
+                    ->where('principal_id', $this->session->userdata('principal_id'))
+                    ->update('principal');
+    }
+
     function logout_model_for_hrm(){
         return  $this->db->set('login_status', ('0'))
                     ->where('hrm_id', $this->session->userdata('hrm_id'))
@@ -124,11 +145,6 @@ class Login_model extends CI_Model {
                     ->where('student_id', $this->session->userdata('student_id'))
                     ->update('student');
     }
-	
-	
-	
-
-
 	
 	
 }
