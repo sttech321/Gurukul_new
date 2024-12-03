@@ -1,5 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-class Principal extends CI_Controller {
+class Principal extends MY_Controller {
     function __construct() {
         parent::__construct();
         $this->load->database();

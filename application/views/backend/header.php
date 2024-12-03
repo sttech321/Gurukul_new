@@ -9,7 +9,12 @@
                             <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
                         </li>
                     </ul>
-            <ul class="nav navbar-top-links navbar-right pull-right">
+                    <ul>
+                    <?php $current_lang = $this->session->userdata('site_lang') ?? 'english';?>
+                    <a href="<?php echo site_url('language/switch_language?lang=english'); ?>">English</a> | 
+                    <a href="<?php echo site_url('language/switch_language?lang=hindi'); ?>">हिंदी</a>
+                    </ul>   
+                    <ul class="nav navbar-top-links navbar-right pull-right">
                 <!--<li class="dropdown"> 
                     <a class="dropdown-toggle " data-toggle="dropdown" href="#"><i class="icon-envelope"></i>
                         <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
@@ -109,6 +114,7 @@
 
                     
                     <!-- /.dropdown -->
+
                     <li class="dropdown">
 
 
@@ -135,15 +141,15 @@
                         <ul class="dropdown-menu dropdown-user animated flipInY">
                             <li>
                             <?php if($account_type == 'parent'):?>
-                            <a href="<?php echo base_url();?>parents/manage_profile"><i class="ti-user"></i> Edit Profile</a>
+                            <a href="<?php echo base_url();?>parents/manage_profile"><i class="ti-user"></i><?php echo $this->lang->line('edit_profile'); ?></a>
                             <?php endif;?>
                             <?php if($account_type != 'parent'):?>
-                            <a href="<?php echo base_url();?><?php echo $this->session->userdata('login_type'); ?>/manage_profile"><i class="ti-user"></i> Edit Profile</a>
+                            <a href="<?php echo base_url();?><?php echo $this->session->userdata('login_type'); ?>/manage_profile"><i class="ti-user"></i> <?php echo $this->lang->line('edit_profile'); ?></a>
                             <?php endif;?>
                             </li>
-                            <li><a href="javascript:void(0)"><i class="ti-email"></i>  Inbox</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-settings"></i>  Account Setting</a></li>
-                            <li><a href="<?php echo base_url();?>login/logout"><i class="fa fa-power-off"></i>  Logout</a></li>
+                            <li><a href="javascript:void(0)"><i class="ti-email"></i>  <?php echo $this->lang->line('inbox'); ?></a></li>
+                            <li><a href="javascript:void(0)"><i class="ti-settings"></i>  <?php echo $this->lang->line('account_setting'); ?></a></li>
+                            <li><a href="<?php echo base_url();?>login/logout"><i class="fa fa-power-off"></i>  <?php echo $this->lang->line('logout'); ?></a></li>
                         </ul>
                         <!-- /.dropdown-user -->
                     </li>

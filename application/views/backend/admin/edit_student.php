@@ -12,7 +12,7 @@ foreach ( $edit_teacher as $key => $student):
 						
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body">
-                    <?php echo form_open(base_url() . 'admin/student/update/'. $student['student_id'] , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top', 'enctype' => 'multipart/form-data'));?>
+                    <?php echo form_open(base_url() . 'admin/new_student/update/'. $student['student_id'] , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top', 'enctype' => 'multipart/form-data'));?>
                         		
                                 
                             <div class="form-group">
