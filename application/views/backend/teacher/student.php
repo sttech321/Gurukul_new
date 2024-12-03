@@ -1,8 +1,8 @@
-  <div class="row">
+<div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-info">
-                            <div class="panel-heading"><?php echo get_phrase('new_student');?>
-                                <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="fa fa-plus"></i>&nbsp;&nbsp;ADD NEW STUDENT HERE<i class="btn btn-info btn-xs"></i></a> <a href="#" data-perform="panel-dismiss"></a> </div>
+                            <div class="panel-heading"><?php echo $this->lang->line('new_student'); ?>
+                                <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo $this->lang->line('add_new_student_here'); ?><i class="btn btn-info btn-xs"></i></a> <a href="#" data-perform="panel-dismiss"></a> </div>
                             </div>
                             <div class="panel-wrapper collapse out" aria-expanded="true">
                                 <div class="panel-body">
@@ -13,10 +13,10 @@
                                  
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="alert alert-primary"><?php echo get_phrase('Personal information');?></div>
+                            <div class="alert alert-primary"><?php echo $this->lang->line('personal_information'); ?></div>
                             <hr>
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('student name');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('student_name'); ?></label>
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control" id="name" name="name" required>
                                     <input type="text" class="form-control" value="<?php echo substr(md5(uniqid(rand(), true)), 0, 7); ?>" name="student_number" readonly="true">
@@ -25,7 +25,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('Date Of Birth(DOB)');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('date_of_birth'); ?></label>
                                 <div class="col-sm-12">
                                 <input class="form-control m-r-10" id="dob" name="dob" type="date" value="2018-08-19" id="example-date-input" required>
                                 <span class="text-danger" id="dob_error"></span>
@@ -33,7 +33,7 @@
                             </div>
 
                             <div class="form-group row">
-                            <label for="country" class="col-md-12"><?php echo get_phrase('Country'); ?></label>
+                            <label for="country" class="col-md-12"><?php echo $this->lang->line('country'); ?></label>
                             <div class="col-md-6">
                                 <select name="country" id="countrys" class="form-control">
                                     <option value="">Select Country</option>
@@ -52,7 +52,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('home address');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('address'); ?></label>
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control" id="address" name="address" value="" required>
                                     <span class="text-danger" id="address_error"></span>
@@ -60,7 +60,7 @@
                             </div>
                             
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('phone');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('phone'); ?></label>
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control" id="phone" name="phone" value="" required >
                                     <span class="text-danger" id="phone_error"></span>
@@ -68,14 +68,14 @@
                             </div>
 
                             <div class="form-group"> 
-                                <label class="col-sm-12"><?php echo get_phrase('browse_image');?>*</label>        
+                                <label class="col-sm-12"><?php echo $this->lang->line('browse_image'); ?>*</label>        
                                 <div class="col-sm-12">
                                 <input type='file' name="userfile" class="dropify" onChange="readURL(this);" / required>
                                 </div>
                             </div>	
                             
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('email');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('email'); ?></label>
                                 <div class="col-sm-12">
                                     <input type="email" class="form-control" id="email" name="email" value="">
                                     <span class="text-danger" id="email_error"></span>
@@ -83,7 +83,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('password');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('password'); ?></label>
                                 <div class="col-sm-12">
                                     <input type="passowrd" class="form-control" id="password" name="password" value="" required >
                                     <span class="text-danger" id="password_error"></span>
@@ -92,7 +92,7 @@
                             
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('aadhaar Card/National ID');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('aadhaar_card'); ?></label>
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control" id="aadhaar" name="aadhaar" value="" required>
                                     <span class="text-danger" id="aadhaar_error"></span>
@@ -100,25 +100,25 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('add class');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('add_class'); ?></label>
                                 <div class="col-sm-12">
                                         <input type="text" class="form-control" name="class" value="" required >
                                     </div> 
                             </div>
 
                             <hr>
-                            <div class="alert alert-primary"><?php echo get_phrase('father information');?></div>
+                            <div class="alert alert-primary"><?php echo $this->lang->line('father_information'); ?></div>
                             <hr>
                             
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('father_name');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('father_name'); ?></label>
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control" name="father_name" value="">
                                 </div>
                             </div>
                             
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('Father Date Of Birth(DOB)');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('father_date_of_birth'); ?></label>
                                 <div class="col-sm-12">
                                 <input class="form-control m-r-10" name="father_dob" id="father_dob" type="date" value="2018-08-19" id="example-date-input" required>
                                 <span class="text-danger" id="father_dob_error"></span>
@@ -128,7 +128,7 @@
 
                         <div class="col-sm-6">
                                 <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('father aadhaar Card/National ID');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('father_aadhaar'); ?></label>
                                 <div class="col-sm-12">
                                     <input type="number" class="form-control" id="father_aadhaar" name="father_aadhaar" value="" required>
                                     <span class="text-danger" id="father_aadhaar_error"></span>
@@ -136,14 +136,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('father address');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('father_aaddress'); ?></label>
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control" name="father_aaddress" value="" required>
                                 </div> 
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('father mobile number');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('father_mobile_number'); ?></label>
                                 <div class="col-sm-12">
                                     <input type="number" class="form-control" id="father_mobile_number" name="father_mobile_number" value="" required>
                                     <span class="text-danger" id="father_mobile_number_error"></span>
@@ -151,39 +151,39 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('father profession');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('father_profession'); ?></label>
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control" name="father_profession" value="" required>
                                 </div> 
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('father gotra');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('father_gotra'); ?></label>
                                 <div class="col-sm-12">
                                         <input type="text" class="form-control" name="father_gotra" value="" required>
                                 </div> 
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('father varna');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('father_varna'); ?></label>
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control" name="father_varna" value="" required>
                                 </div> 
                             </div>
 
                             <hr>
-                            <div class="alert alert-primary"><?php echo get_phrase('mother information');?></div>
+                            <div class="alert alert-primary"><?php echo $this->lang->line('mother_information'); ?></div>
                             <hr>
                             
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother_name');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('mother_name'); ?></label>
                                 <div class="col-sm-12">
                                         <input type="text" class="form-control" name="mother_name" value="">
                                 </div>
                             </div>
                             
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother Date Of Birth(DOB)');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('mother_date_of_birth'); ?></label>
                                 <div class="col-sm-12">
                                 <input class="form-control m-r-10" name="mother_dob" id="mother_dob" type="date" value="2018-08-19" id="example-date-input" required>
                                 <span class="text-danger" id="mother_dob_error"></span>
@@ -191,7 +191,7 @@
                             </div>
                             
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother aadhaar Card/National ID');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('mother_aadhaar'); ?></label>
                                 <div class="col-sm-12">
                                         <input type="number" class="form-control" id="mother_aadhaar" name="mother_aadhaar" value="" required>
                                         <span class="text-danger" id="mother_aadhaar_error"></span>
@@ -199,14 +199,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother address');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('mother_aaddress'); ?></label>
                                 <div class="col-sm-12">
                                         <input type="text" class="form-control" name="mother_aaddress" value="" required>
                                 </div> 
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother mobile number');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('mother_mobile_number'); ?></label>
                                 <div class="col-sm-12">
                                         <input type="number" class="form-control" id="mother_mobile_number" name="mother_mobile_number" value="" required>
                                         <span class="text-danger" id="mother_mobile_number_error"></span>
@@ -214,21 +214,21 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother profession');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('mother_profession'); ?></label>
                                 <div class="col-sm-12">
                                         <input type="text" class="form-control" name="mother_profession" value="" required>
                                 </div> 
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother gotra');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('mother_gotra'); ?></label>
                                 <div class="col-sm-12">
                                         <input type="text" class="form-control" name="mother_gotra" value="" required>
                                     </div> 
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother varna');?></label>
+                                <label class="col-md-12" for="example-text"><?php echo $this->lang->line('mother_varna'); ?></label>
                                 <div class="col-sm-12">
                                         <input type="text" class="form-control" name="mother_varna" value="" required>
                                 </div> 
@@ -237,7 +237,7 @@
                     </div>
 
 <div class="form-group">			
-<button type="submit" class="btn btn-primary btn-rounded btn-block btn-sm"> <i class="fa fa-plus"></i>&nbsp;<?php echo get_phrase('add_student');?></button>
+<button type="submit" class="btn btn-primary btn-rounded btn-block btn-sm"> <i class="fa fa-plus"></i>&nbsp;<?php echo $this->lang->line('add_student'); ?></button>
 <img id="install_progress" src="<?php echo base_url() ?>assets/images/loader-2.gif" style="margin-left: 20px; display: none"/>					
 </div>			
                     
@@ -251,20 +251,20 @@
             <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('list_students');?></div>
+                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo $this->lang->line('list_students'); ?></div>
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body table-responsive">
 			
                                 <table id="example23" class="display nowrap" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th width="80"><div><?php echo get_phrase('photo');?></div></th>
-                            <th><div><?php echo get_phrase('name');?></div></th>
-                            <th><div><?php echo get_phrase('role');?></div></th>
-                            <th><div><?php echo get_phrase('email');?></div></th>
-                            <th><div><?php echo get_phrase('gurukul id');?></div></th>
-                            <th><div><?php echo get_phrase('address');?></div></th>
-                            <th><div><?php echo get_phrase('options');?></div></th>
+                            <th width="80"><div><?php echo $this->lang->line('photo'); ?></div></th>
+                            <th><div><?php echo $this->lang->line('name'); ?></div></th>
+                            <th><div><?php echo $this->lang->line('role'); ?></div></th>
+                            <th><div><?php echo $this->lang->line('email'); ?></div></th>
+                            <th><div><?php echo $this->lang->line('gurukul_id'); ?></div></th>
+                            <th><div><?php echo $this->lang->line('address'); ?></div></th>
+                            <th><div><?php echo $this->lang->line('option'); ?></div></th>
                         </tr>
                     </thead>
                     <tbody>

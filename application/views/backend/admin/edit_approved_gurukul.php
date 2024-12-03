@@ -16,7 +16,7 @@ foreach ( $edit_principal as $key => $principal):
             <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <?php echo get_phrase('edit_school');?></div>
+                            <div class="panel-heading"> <?php echo $this->lang->line('edit_school'); ?></div>
 						
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body">
@@ -25,29 +25,29 @@ foreach ( $edit_principal as $key => $principal):
                                 
                     <div class="col-12 col-md-6">
                     <div class="mb-3">
-                        <label class="form-label required">Gurukul Name</label>
-                        <input type="text" class="form-control" id="gurukul_name" name="gurukul_name" placeholder="Gurukul Name" value="<?php echo $principal['name'];?>"  required>
+                        <label class="form-label required"><?php echo $this->lang->line('gurukul_name');?></label>
+                        <input type="text" class="form-control" id="gurukul_name" name="gurukul_name" placeholder="<?php echo $this->lang->line('gurukul_name');?>" value="<?php echo $principal['name'];?>"  required>
                         <span class="text-danger" id="gurukul_name_error"></span>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
-                        <label class="form-label required">Mobile Number</label>
-                        <input type="text" class="form-control" id="mobile_number" name="mobile_number" value="<?php echo $principal['phone'];?>"  placeholder="Mobile Number" required>
+                        <label class="form-label required"><?php echo $this->lang->line('mobile_number');?></label>
+                        <input type="text" class="form-control" id="mobile_number" name="mobile_number" value="<?php echo $principal['phone'];?>"  placeholder="<?php echo $this->lang->line('mobile_number');?>" required>
                         <span class="text-danger" id="mobile_number_error"></span>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
-                        <label class="form-label required">Email</label>
-                        <input type="email" class="form-control" id="emailid" name="email" value="<?php echo $principal['email'];?>" placeholder="Email" required>
+                        <label class="form-label required"><?php echo $this->lang->line('email');?></label>
+                        <input type="email" class="form-control" id="emailid" name="email" value="<?php echo $principal['email'];?>" placeholder="<?php echo $this->lang->line('email');?>" required>
                         <span class="text-danger" id="email_error"></span>
                         <span class="" id="emailMessage"></span>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                        <label for="country" class="col-md-12"><?php echo get_phrase('Country'); ?></label>
+                        <label for="country" class="col-md-12"><?php echo  $this->lang->line('country'); ?></label>
                         <div class="col-md-6">
                             <select name="country" id="country" class="form-control">
                                 <option value="">Select Country</option>
@@ -71,7 +71,7 @@ foreach ( $edit_principal as $key => $principal):
                     </div>
 
                     <div class="form-group"> 
-					    <label class="col-sm-12"><?php echo get_phrase('browse_image');?>*</label>        
+					    <label class="col-sm-12"><?php echo  $this->lang->line('browse_image'); ?>*</label>        
                         <div class="col-sm-12">
                         <input type='file' class="form-control" name="userfile"/>
                         <img id="blah" src="<?php echo $this->crud_model->get_image_url('principal',$principal['principal_id']);?>" alt="" height="200" width="200"/>
@@ -81,18 +81,18 @@ foreach ( $edit_principal as $key => $principal):
                 
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
-                        <label class="form-label required">Address</label>
-                        <input id="address" class="form-control" name="address" value="<?php echo $principal['address'];?>" placeholder="Address" rows="3" required>
+                        <label class="form-label required"><?php echo  $this->lang->line('address'); ?></label>
+                        <input id="address" class="form-control" name="address" value="<?php echo $principal['address'];?>" placeholder="<?php echo  $this->lang->line('address'); ?>" rows="3" required>
                         <span class="text-danger" id="address_error"></span>
                     </div>
                 </div>
                 <div class="text-line-box-content">
-                    <h5 class="my-3">Trust Information</h5>
+                    <h5 class="my-3"><?php echo $this->lang->line('trust_information'); ?></h5>
                     <div class="line"></div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
-                        <input type="text" id="trust_name" class="form-control" name="trust_name" value="<?php echo $principal['trust_name'];?>" placeholder="Trust Name" required>
+                        <input type="text" id="trust_name" class="form-control" name="trust_name" value="<?php echo $principal['trust_name'];?>" placeholder="<?php echo  $this->lang->line('trust_name'); ?>" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -102,26 +102,26 @@ foreach ( $edit_principal as $key => $principal):
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="trust_president_name" value="<?php echo $principal['trust_president_name'];?>" name="trust_president_name" placeholder="Trust President Name" required>
+                        <input type="text" class="form-control" id="trust_president_name" value="<?php echo $principal['trust_president_name'];?>" name="trust_president_name" placeholder="<?php echo  $this->lang->line('trust_president_name'); ?>" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="secretary_name" name="secretary_name" value="<?php echo $principal['secretary_name'];?>" placeholder="Secretary Name" required>
+                        <input type="text" class="form-control" id="secretary_name" name="secretary_name" value="<?php echo $principal['secretary_name'];?>" placeholder="<?php echo  $this->lang->line('secretary_name'); ?>" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="treasurer_name" name="treasurer_name" value="<?php echo $principal['treasurer_name'];?>" placeholder="Treasurer Name" required>
+                        <input type="text" class="form-control" id="treasurer_name" name="treasurer_name" value="<?php echo $principal['treasurer_name'];?>" placeholder="<?php echo  $this->lang->line('treasurer_name'); ?>" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div>
-                        <input type="text" class="form-control" id="principal_name" name="principal_name" value="<?php echo $principal['principal_name'];?>" placeholder="Principal Name" required>
+                        <input type="text" class="form-control" id="principal_name" name="principal_name" value="<?php echo $principal['principal_name'];?>" placeholder="<?php echo  $this->lang->line('principal_name'); ?>" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <h5 class="my-3">Fund Resources</h5>
+                    <h5 class="my-3"><?php echo  $this->lang->line('fund_resource'); ?></h5>
                     <div class="mb-3">
                     <select id="fund_resource" class="form-control" name="fund_resource">
                         <?php
@@ -140,7 +140,7 @@ foreach ( $edit_principal as $key => $principal):
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <h5 class="my-3">Type of Setup</h5>
+                    <h5 class="my-3"><?php echo  $this->lang->line('type_of_setup'); ?></h5>
                     <div class="mb-3">
                     <select id="type_of_setup" class="form-control" name="setup_type">
                         <?php
@@ -155,7 +155,7 @@ foreach ( $edit_principal as $key => $principal):
                 <!-- Continue for other sections -->
 
                 <div class="text-line-box-content">
-                    <h5 class="my-3">Focus Area</h5>
+                    <h5 class="my-3"><?php echo  $this->lang->line('focus_area'); ?></h5>
                     <div class="line"></div>
                 </div>
                 <div class="col-12 col-md-12">
@@ -174,7 +174,7 @@ foreach ( $edit_principal as $key => $principal):
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                <h5 class="my-3">Facilities Available</h5>
+                <h5 class="my-3"><?php echo  $this->lang->line('facilities_available'); ?></h5>
                 <?php
                     foreach ($facilities as $facility) {
                         $checked = (is_array($selected_facilities) && in_array($facility, $selected_facilities)) ? 'checked' : '';
@@ -188,7 +188,7 @@ foreach ( $edit_principal as $key => $principal):
                 </div>
 
                 <div class="col-12 col-md-6">
-                    <h5 class="my-3">Registered with Education Board</h5>
+                    <h5 class="my-3"><?php echo  $this->lang->line('registered_with_education_board'); ?></h5>
                     <div class="mb-3 radioBtnWrap">
                         <?php
                             // Example data
@@ -207,7 +207,7 @@ foreach ( $edit_principal as $key => $principal):
                         <!-- Conditionally display the text input -->
                         <div class="mb-3 mt-3" id="education_board_name_wrap"
                             style="display: <?php echo ($registered_with_education_board === 'Yes') ? 'block' : 'none'; ?>;">
-                            <label for="education_board_name" class="form-label">If Yes, Name of Education Board</label>
+                            <label for="education_board_name" class="form-label"><?php echo  $this->lang->line('if_yes_education_board'); ?></label>
                             <br>
                             <input type="text" class="form-control" id="education_board_name"
                                 value="<?php echo htmlspecialchars($education_board_name); ?>"
@@ -218,7 +218,7 @@ foreach ( $edit_principal as $key => $principal):
                 </div>
                 
 <div class="form-group">
-<button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;<?php echo get_phrase('update_school');?></button>
+<button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;<?php echo $this->lang->line('update_school'); ?></button>
 </div>
                 <?php echo form_close();?>
 </div>
@@ -228,7 +228,6 @@ foreach ( $edit_principal as $key => $principal):
 </div>
 
 <?php endforeach;?>
-
 <script type="text/javascript">
 document.getElementById('country').addEventListener('change', function () {
     const countryId = this.value;
@@ -257,5 +256,4 @@ document.getElementById('country').addEventListener('change', function () {
             .catch(error => console.error('Error fetching states:', error));
     }
 });
-
 </script>

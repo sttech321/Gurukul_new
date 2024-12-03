@@ -47,7 +47,29 @@ foreach ( $edit_teacher as $key => $row):
                                     <input type="text" class="datepicker form-control" name="birthday" value="<?php echo $row['birthday'];?>"/>
                                 </div>
                             </div>					
-   
+                        <div class="form-group row">
+                        <label for="country" class="col-md-12"><?php echo get_phrase('Country'); ?></label>
+                        <div class="col-md-6">
+                            <select name="country" id="country" class="form-control">
+                                <option value="">Select Country</option>
+                                <?php foreach ($countries as $country): ?>
+                                    <option value="<?php echo $country['id']; ?>" <?php echo ($row['country'] == $country['id']) ? 'selected' : ''; ?>>
+                                        <?php echo $country['name']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select name="state" id="state" class="form-control" <?php echo ($row['country']) ? '' : 'disabled'; ?>>
+                                <option value="">Select State</option>
+                                <?php foreach ($states as $state): ?>
+                                    <option value="<?php echo $state['id']; ?>" <?php echo ($row['state'] == $state['id']) ? 'selected' : ''; ?>>
+                                        <?php echo $state['name']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
 					<div class="form-group">
                  	<label class="col-md-12" for="example-text"><?php echo get_phrase('email');?></label>
                     <div class="col-sm-12">
@@ -103,27 +125,27 @@ foreach ( $edit_teacher as $key => $row):
 						</div>
 					</div>
 					
-                    <div class="form-group row">
-                        <label for="country" class="col-md-12"><?php echo get_phrase('Country'); ?></label>
-                        <div class="col-md-6">
-                            <select name="country" id="country" class="form-control">
-                                <option value="">Select Country</option>
-                                <?php foreach ($countries as $country): ?>
-                                    <option value="<?php echo $country['id']; ?>" <?php echo ($row['country'] == $country['id']) ? 'selected' : ''; ?>>
-                                        <?php echo $country['name']; ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
+					<div class="form-group">
+                        <label class="col-sm-12"><?php echo get_phrase('modern_education_qualifications');?>*</label>
+                        <div class="col-sm-12">
+                                            
+                        <input type="text" class="form-control" name="modern_education_qualifications" value="<?php echo $row['modern_education_qualifications'];?>">
                         </div>
-                        <div class="col-md-6">
-                            <select name="state" id="state" class="form-control" <?php echo ($row['country']) ? '' : 'disabled'; ?>>
-                                <option value="">Select State</option>
-                                <?php foreach ($states as $state): ?>
-                                    <option value="<?php echo $state['id']; ?>" <?php echo ($row['state'] == $state['id']) ? 'selected' : ''; ?>>
-                                        <?php echo $state['name']; ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-12"><?php echo get_phrase('state');?>*</label>
+                        <div class="col-sm-12">
+                                            
+                        <input type="text" class="form-control" name="state" value="<?php echo $row['state'];?>">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-12"><?php echo get_phrase('country');?>*</label>
+                        <div class="col-sm-12">
+                                            
+                        <input type="text" class="form-control" name="country" value="<?php echo $row['country'];?>">
                         </div>
                     </div>
 					
@@ -228,5 +250,4 @@ document.getElementById('country').addEventListener('change', function () {
             .catch(error => console.error('Error fetching states:', error));
     }
 });
-
 </script>

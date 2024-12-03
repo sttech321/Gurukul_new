@@ -2,7 +2,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Studymaterial extends CI_Controller { 
+class Studymaterial extends MY_Controller { 
 
     function __construct() {
         parent::__construct();

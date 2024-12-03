@@ -31,20 +31,20 @@
                         <span class="fa arrow"></span></span>
                     </a>
                         <ul class="nav nav-second-level">
-                            <li><a href="javascript:void(0)"><i class="ti-user"></i> My Profile</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-email"></i> Inbox</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-settings"></i> Account Setting</a></li>
-                            <li><a href="<?php echo base_url();?>login/logout"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <li><a href="javascript:void(0)"><i class="ti-user"></i><?php echo $this->lang->line('my_profile'); ?></a></li>
+                            <li><a href="javascript:void(0)"><i class="ti-email"></i> <?php echo $this->lang->line('inbox'); ?></a></li>
+                            <li><a href="javascript:void(0)"><i class="ti-settings"></i> <?php echo $this->lang->line('account_setting'); ?></a></li>
+                            <li><a href="<?php echo base_url();?>login/logout"><i class="fa fa-power-off"></i> <?php echo $this->lang->line('logout'); ?></a></li>
                         </ul>
                 </li>
 
 
 
-    <li> <a href="<?php echo base_url();?>student/dashboard" class="waves-effect"><i class="ti-dashboard p-r-10"></i> <span class="hide-menu"><?php echo get_phrase('Dashboard') ;?></span></a> </li>
+    <li> <a href="<?php echo base_url();?>student/dashboard" class="waves-effect"><i class="ti-dashboard p-r-10"></i> <span class="hide-menu"><?php echo $this->lang->line('Dashboard'); ?></span></a> </li>
 
     
 
-    <li> <a href="#" class="waves-effect"><i data-icon="&#xe006;" class="fa fa-book p-r-10"></i> <span class="hide-menu"><?php echo get_phrase('Academics');?><span class="fa arrow"></span></span></a>
+    <li> <a href="#" class="waves-effect"><i data-icon="&#xe006;" class="fa fa-book p-r-10"></i> <span class="hide-menu"><?php echo $this->lang->line('academics'); ?><span class="fa arrow"></span></span></a>
         
         <ul class=" nav nav-second-level<?php
             if ($page_name == 'subject' ||
@@ -59,7 +59,7 @@
                 <li class="<?php if ($page_name == 'subject') echo 'active'; ?> ">
                     <a href="<?php echo base_url(); ?>student/subject">
                         <i class="fa fa-angle-double-right p-r-10"></i>
-                        <span class="hide-menu"><?php echo get_phrase('Subject'); ?></span>
+                        <span class="hide-menu"><?php echo $this->lang->line('subject'); ?></span>
                     </a>
                 </li>
 
@@ -67,20 +67,20 @@
                 <!-- <li class="<?php //if ($page_name == 'teacher') echo 'active'; ?> ">
                     <a href="<?php //echo base_url(); ?>student/teacher">
                         <i class="fa fa-angle-double-right p-r-10"></i>
-                        <span class="hide-menu"><?php// echo get_phrase('Teacher'); ?></span>
+                        <span class="hide-menu"><?php // echo get_phrase('Teacher'); ?></span>
                     </a>
                 </li> -->
 
                     
                 <!-- <li class="<?php //if ($page_name == 'class_mate') echo 'active'; ?> ">
-                    <a href="<?php// echo base_url(); ?>student/class_mate">
+                    <a href="<?php // echo base_url(); ?>student/class_mate">
                         <i class="fa fa-angle-double-right p-r-10"></i>
-                            <span class="hide-menu"><?php// echo get_phrase('Class Mate'); ?></span>
+                            <span class="hide-menu"><?php // echo get_phrase('Class Mate'); ?></span>
                     </a>
                 </li> -->
 
                     
-                <!-- <li class="<?php// if ($page_name == 'assignment') echo 'active'; ?> ">
+                <!-- <li class="<?php // if ($page_name == 'assignment') echo 'active'; ?> ">
                     <a href="<?php //echo base_url(); ?>assignment/assignment">
                         <i class="fa fa-angle-double-right p-r-10"></i>
                             <span class="hide-menu"><?php //echo get_phrase('Assignment'); ?></span>
@@ -100,31 +100,31 @@
          </ul>
     </li>
 
-            <!-- <li class="<?php// if ($page_name == 'invoice') echo 'active'; ?> ">
-                <a href="<?php// echo base_url(); ?>student/invoice">
+            <!-- <li class="<?php // if ($page_name == 'invoice') echo 'active'; ?> ">
+                <a href="<?php // echo base_url(); ?>student/invoice">
                     <i class="fa fa-paypal p-r-10"></i>
                         <span class="hide-menu"><?php //echo get_phrase('Invoice'); ?></span>
                 </a>
             </li> 
 
         <li class="<?php //if ($page_name == 'payment_history') echo 'active'; ?> ">
-                <a href="<?php// echo base_url(); ?>student/payment_history">
+                <a href="<?php // echo base_url(); ?>student/payment_history">
                     <i class="fa fa-credit-card p-r-10"></i>
-                        <span class="hide-menu"><?php// echo get_phrase('Payment History'); ?></span>
+                        <span class="hide-menu"><?php // echo get_phrase('Payment History'); ?></span>
                 </a>
         </li>                -->
                                 
             <li class="<?php if ($page_name == 'manage_profile') echo 'active'; ?> ">
                 <a href="<?php echo base_url(); ?>student/manage_profile">
                     <i class="fa fa-gears p-r-10"></i>
-                        <span class="hide-menu"><?php echo get_phrase('manage_profile'); ?></span>
+                        <span class="hide-menu"><?php echo $this->lang->line('manage_profile'); ?></span>
                 </a>
             </li>
 
             <li class="">
                 <a href="<?php echo base_url(); ?>login/logout">
                     <i class="fa fa-sign-out p-r-10"></i>
-                        <span class="hide-menu"><?php echo get_phrase('Logout'); ?></span>
+                        <span class="hide-menu"><?php echo $this->lang->line('logout'); ?></span>
                 </a>
             </li>
                   

@@ -8,7 +8,7 @@ foreach ( $edit_teacher as $key => $student):
             <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <?php echo get_phrase('edit_student');?></div>
+                            <div class="panel-heading"> <?php echo $this->lang->line('edit_student'); ?></div>
 						
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body">
@@ -16,41 +16,41 @@ foreach ( $edit_teacher as $key => $student):
                         		
                                 
                             <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('name');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('name'); ?></label>
                     <div class="col-sm-12">
                                     <input type="text" class="form-control" name="name" value="<?php echo $student['name'];?>"/>
                                 </div>
                             </div>
 										
 					  <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('date of birth');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('date_of_birth'); ?></label>
                     <div class="col-sm-12">
                                     <input type="date" class="datepicker form-control" name="birthday" value="<?php echo $student['birthday'];?>"/>
                                 </div>
                             </div>					
 					
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('email');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('email'); ?></label>
                     <div class="col-sm-12">
 							<input type="text" class="form-control" name="email" value="<?php echo $student['email']; ?>" >
 						</div> 
 					</div>
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('address');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('address'); ?></label>
                     <div class="col-sm-12">
                                     <input type="text" class="form-control" name="address" value="<?php echo $student['address'];?>"/>
                                 </div>
                             </div>
 												
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('phone');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('phone'); ?></label>
                     <div class="col-sm-12">
 							<input type="text" class="form-control" name="phone" value="<?php echo $student['phone']; ?>" >
 						</div> 
 					</div>
 					<!-- Country Selection -->
                     <div class="form-group row">
-                        <label for="country" class="col-md-12"><?php echo get_phrase('Country'); ?></label>
+                        <label for="country" class="col-md-12"><?php echo $this->lang->line('country'); ?></label>
                         <div class="col-md-6">
                             <select name="country" id="country" class="form-control">
                                 <option value="">Select Country</option>
@@ -75,12 +75,12 @@ foreach ( $edit_teacher as $key => $student):
 
                    <!-- Part B: Father's Info -->
                    <div class="alert alert-success text-center mt-4">
-                       <strong><?php echo get_phrase('Admission Form'); ?> - PART B</strong>
+                       <strong><?php echo $this->lang->line('admission_form'); ?></strong>
                    </div>
 
                    <!-- Father's Name -->
                    <div class="form-group row">
-                       <label class="col-md-12" for="father_name"><?php echo get_phrase("Father's Name"); ?></label>
+                       <label class="col-md-12" for="father_name"><?php echo $this->lang->line('father_name'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="father_name" value="<?php echo $student['father_name'];?>" required>
                        </div>
@@ -88,7 +88,7 @@ foreach ( $edit_teacher as $key => $student):
 
                    <!-- Father's Date of Birth -->
                    <div class="form-group row">
-                       <label class="col-md-12" for="father_dob"><?php echo get_phrase("Father's Date of Birth"); ?></label>
+                       <label class="col-md-12" for="father_dob"><?php echo $this->lang->line('father_date_of_birth'); ?></label>
                        <div class="col-sm-12">
                            <input type="date" class="form-control" name="father_dob" value="<?php echo $student['father_dob'];?>" required>
                        </div>
@@ -96,7 +96,7 @@ foreach ( $edit_teacher as $key => $student):
 
                    <!-- Father's Address -->
                    <div class="form-group row">
-                       <label class="col-md-12" for="father_address"><?php echo get_phrase("Father's Address"); ?></label>
+                       <label class="col-md-12" for="father_address"><?php echo $this->lang->line('father_address'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="father_aaddress" value="<?php echo $student['father_aaddress'];?>" required>
                        </div>
@@ -104,7 +104,7 @@ foreach ( $edit_teacher as $key => $student):
                    
                    <!-- Father's Address -->
                    <div class="form-group row">
-                       <label class="col-md-12" for="father_address"><?php echo get_phrase("father aadhaar Card/National ID"); ?></label>
+                       <label class="col-md-12" for="father_address"><?php echo $this->lang->line('father_aadhaar'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="father_aadhaar" value="<?php echo $student['father_aadhaar'];?>" required>
                        </div>
@@ -112,7 +112,7 @@ foreach ( $edit_teacher as $key => $student):
                    
                    <!-- Father's Address -->
                    <div class="form-group row">
-                       <label class="col-md-12" for="father_address"><?php echo get_phrase("father profession"); ?></label>
+                       <label class="col-md-12" for="father_address"><?php echo $this->lang->line('father_profession'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="father_profession" value="<?php echo $student['father_profession'];?>" required>
                        </div>
@@ -120,7 +120,7 @@ foreach ( $edit_teacher as $key => $student):
 
                    <!-- Father's Phone -->
                    <div class="form-group row">
-                       <label class="col-md-12" for="father_phone"><?php echo get_phrase("Father's Mobile Number"); ?></label>
+                       <label class="col-md-12" for="father_phone"><?php echo $this->lang->line('father_mobile_number'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="father_mobile_number" value="<?php echo $student['father_mobile_number'];?>" required>
                        </div>
@@ -128,7 +128,7 @@ foreach ( $edit_teacher as $key => $student):
 
                     <!-- mother's Address -->
                     <div class="form-group row">
-                       <label class="col-md-12" for="father_gotra"><?php echo get_phrase("father gotra"); ?></label>
+                       <label class="col-md-12" for="father_gotra"><?php echo $this->lang->line('father_gotra'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="father_gotra" value="<?php echo $student['father_gotra'];?>" required>
                        </div>
@@ -136,7 +136,7 @@ foreach ( $edit_teacher as $key => $student):
 
                    <!-- Mother's Phone -->
                    <div class="form-group row">
-                       <label class="col-md-12" for="father_varna"><?php echo get_phrase("father_varna"); ?></label>
+                       <label class="col-md-12" for="father_varna"><?php echo $this->lang->line('father_varna'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="father_varna" value="<?php echo $student['father_varna'];?>" required>
                        </div>
@@ -144,7 +144,7 @@ foreach ( $edit_teacher as $key => $student):
 
                    <!-- Mother's Name -->
                    <div class="form-group row">
-                       <label class="col-md-12" for="mother_name"><?php echo get_phrase("Mother's Name"); ?></label>
+                       <label class="col-md-12" for="mother_name"><?php echo $this->lang->line('mother_name'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="mother_name" value="<?php echo $student['mother_name'];?>" required>
                        </div>
@@ -152,7 +152,7 @@ foreach ( $edit_teacher as $key => $student):
 
                    <!-- Mother's Date of Birth -->
                    <div class="form-group row">
-                       <label class="col-md-12" for="mother_dob"><?php echo get_phrase("Mother's Date of Birth"); ?></label>
+                       <label class="col-md-12" for="mother_dob"><?php echo $this->lang->line('mother_date_of_birth'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="mother_dob" value="<?php echo $student['mother_dob'];?>" required>
                        </div>
@@ -160,7 +160,7 @@ foreach ( $edit_teacher as $key => $student):
 
                    <!-- Mother's Address -->
                    <div class="form-group row">
-                       <label class="col-md-12" for="mother_address"><?php echo get_phrase("Mother's Address"); ?></label>
+                       <label class="col-md-12" for="mother_address"><?php echo $this->lang->line('mother_address'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="mother_aaddress" value="<?php echo $student['mother_aaddress'];?>" required>
                        </div>
@@ -168,7 +168,7 @@ foreach ( $edit_teacher as $key => $student):
 
                     <!-- mother's Address -->
                     <div class="form-group row">
-                       <label class="col-md-12" for="mother_aadhaar"><?php echo get_phrase("mother aadhaar Card/National ID"); ?></label>
+                       <label class="col-md-12" for="mother_aadhaar"><?php echo $this->lang->line('mother_aadhaar'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="mother_aadhaar" value="<?php echo $student['mother_aadhaar'];?>" required>
                        </div>
@@ -176,7 +176,7 @@ foreach ( $edit_teacher as $key => $student):
                    
                    <!-- mother's Address -->
                    <div class="form-group row">
-                       <label class="col-md-12" for="mother_address"><?php echo get_phrase("mother profession"); ?></label>
+                       <label class="col-md-12" for="mother_address"><?php echo $this->lang->line('mother_profession'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="mother_profession" value="<?php echo $student['mother_profession'];?>" required>
                        </div>
@@ -184,7 +184,7 @@ foreach ( $edit_teacher as $key => $student):
 
                    <!-- Mother's Phone -->
                    <div class="form-group row">
-                       <label class="col-md-12" for="mother_phone"><?php echo get_phrase("Mother's Mobile Number"); ?></label>
+                       <label class="col-md-12" for="mother_phone"><?php echo $this->lang->line('mother_mobile_number'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="mother_mobile_number" value="<?php echo $student['mother_mobile_number'];?>" required>
                        </div>
@@ -192,7 +192,7 @@ foreach ( $edit_teacher as $key => $student):
 
                     <!-- mother's Address -->
                     <div class="form-group row">
-                       <label class="col-md-12" for="mother_gotra"><?php echo get_phrase("mother gotra"); ?></label>
+                       <label class="col-md-12" for="mother_gotra"><?php echo $this->lang->line('mother_gotra'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="mother_gotra" value="<?php echo $student['mother_gotra'];?>" required>
                        </div>
@@ -200,14 +200,14 @@ foreach ( $edit_teacher as $key => $student):
 
                    <!-- Mother's Phone -->
                    <div class="form-group row">
-                       <label class="col-md-12" for="mother_varna"><?php echo get_phrase("mother_varna"); ?></label>
+                       <label class="col-md-12" for="mother_varna"><?php echo $this->lang->line('mother_varna'); ?></label>
                        <div class="col-sm-12">
                            <input type="text" class="form-control" name="mother_varna" value="<?php echo $student['mother_varna'];?>" required>
                        </div>
                    </div>
   
 <div class="form-group">
-<button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;<?php echo get_phrase('update_teacher');?></button>
+<button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;<?php echo $this->lang->line('update_student'); ?></button>
 </div>
                 <?php echo form_close();?>
 </div>

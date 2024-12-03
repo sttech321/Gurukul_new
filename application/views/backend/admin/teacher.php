@@ -2,8 +2,8 @@
   <div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-info">
-                            <div class="panel-heading"><?php echo get_phrase('new_teacher');?>
-                                <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="fa fa-plus"></i>&nbsp;&nbsp;ADD NEW TEACHER HERE<i class="btn btn-info btn-xs"></i></a> <a href="#" data-perform="panel-dismiss"></a> </div>
+                            <div class="panel-heading"><?php echo $this->lang->line('new_teacher'); ?>
+                                <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo $this->lang->line('add_new_teacher_here'); ?><i class="btn btn-info btn-xs"></i></a> <a href="#" data-perform="panel-dismiss"></a> </div>
                             </div>
                             <div class="panel-wrapper collapse out" aria-expanded="true">
                                 <div class="panel-body">
@@ -42,14 +42,14 @@
 					</div>
 					
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('Date Of Birth');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('date_of_birth'); ?></label>
                     <div class="col-sm-12">
 		            <input class="form-control m-r-10" name="birthday" type="date" value="2018-08-19" id="date_of_birth" required>
                     <span class="text-danger" id="date_of_birth_error"></span>
 						</div> 
 					</div>
                     <div class="form-group row">
-                    <label for="country" class="col-md-12"><?php echo get_phrase('Country'); ?></label>
+                    <label for="country" class="col-md-12"><?php echo $this->lang->line('country'); ?></label>
                     <div class="col-md-6">
                         <select name="country" id="countrys" class="form-control">
                             <option value="">Select Country</option>
@@ -75,7 +75,7 @@
 					</div>	
                     
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('email');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('email'); ?></label>
                     <div class="col-sm-12">
 							<input type="email" class="form-control" id="email" name="email" value="">
                             <span class="text-danger" id="email_error"></span>
@@ -83,7 +83,7 @@
 					</div>
 
                     <div class="form-group">
-                        <label class="col-md-12" for="example-text"><?php echo get_phrase('password');?></label>
+                        <label class="col-md-12" for="example-text"><?php echo $this->lang->line('password'); ?></label>
                         <div class="col-sm-12">
                         <input type="password" class="form-control" id="password" name="password" value="" onkeyup="CheckPasswordStrength(this.value)" required>
                         <span class="text-danger" id="password_error"></span>
@@ -92,21 +92,21 @@
                     </div>
 					
                     <div class="form-group">
-                        <label class="col-sm-12"><?php echo get_phrase('father_name'); ?></label>
+                        <label class="col-sm-12"><?php echo $this->lang->line('father_name'); ?></label>
 
                         <div class="col-sm-12">
                             <input type="text" class="form-control" name="father_name" value="" required />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-12"><?php echo get_phrase('mother_name'); ?></label>
+                        <label class="col-sm-12"><?php echo $this->lang->line('mother_name'); ?></label>
 
                         <div class="col-sm-12">
                             <input type="text" class="form-control" name="mother_name" value="" required />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-12"><?php echo get_phrase('surname'); ?></label>
+                        <label class="col-sm-12"><?php echo $this->lang->line('surname'); ?></label>
 
                         <div class="col-sm-12">
                             <input type="text" class="form-control" name="surname" value="" required>
@@ -114,7 +114,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="col-sm-12"><?php echo get_phrase('gotra'); ?></label>
+                        <label class="col-sm-12"><?php echo $this->lang->line('gotra'); ?></label>
 
                         <div class="col-sm-12">
                             <input type="text" class="form-control" name="gotra" value="" >
@@ -124,14 +124,14 @@
 					 <div class="col-sm-6">
 
                     <div class="form-group">
-                        <label class="col-sm-12"><?php echo get_phrase('varna'); ?></label>
+                        <label class="col-sm-12"><?php echo $this->lang->line('varna'); ?></label>
 
                         <div class="col-sm-12">
                             <input type="text" class="form-control" name="varna" value="" required />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-12"><?php echo get_phrase('aadhaar'); ?></label>
+                        <label class="col-sm-12"><?php echo $this->lang->line('aadhaar_card'); ?></label>
 
                         <div class="col-sm-12">
                             <input type="text" class="form-control" id="aadhaar" name="aadhaar" value="" required>
@@ -143,7 +143,7 @@
                         <hr>
 
                     <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('address');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('address'); ?></label>
                         <div class="col-sm-12">
                             <input type="text" class="form-control" id="address" name="address" value="" required>
                             <span class="text-danger" id="address_error"></span>
@@ -151,48 +151,48 @@
 					</div>
 
 				    <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('phone');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('phone'); ?></label>
                         <div class="col-sm-12">
 							<input type="text" class="form-control" id="mobile_number" name="phone" value="" required >
                             <span class="text-danger" id="mobile_number_error"></span>
 						</div> 
 					</div>
 
-                    <div class="alert alert-primary">Spiritual Details</div>
+                    <div class="alert alert-primary"><?php echo $this->lang->line('spiritual_details'); ?></div>
                     <hr>
                     <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('ved_shakha');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('ved_shakha'); ?></label>
                     <div class="col-sm-12">
 							<input type="text" class="form-control" name="ved_shakha" value="">
 						</div>
 					</div>
 					
                     <div class="form-group">
-                        <label class="col-sm-12"><?php echo get_phrase('guru_name'); ?></label>
+                        <label class="col-sm-12"><?php echo $this->lang->line('guru_name'); ?></label>
 
                         <div class="col-sm-12">
                             <input type="text" class="form-control" name="guru_name" value="" >
                         </div> 
                     </div>
                     
-                    <div class="alert alert-primary">Skills & Education</div>
+                    <div class="alert alert-primary"><?php echo $this->lang->line('skills_education'); ?></div>
                     <hr>
 				<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('extra_ordinary_skills');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('extra_ordinary_skills'); ?></label>
                     <div class="col-sm-12">
 							<input type="text" class="form-control" name="extra_ordinary_skills" value="">
 						</div>
 					</div>
 					
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('exceptional_abilities');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('exceptional_abilities'); ?></label>
                     <div class="col-sm-12">
 							<input type="text" class="form-control" name="exceptional_abilities" value="">
 						</div>
 					</div>
 					
 						<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('modern_education_qualifications');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('modern_education_qualifications'); ?></label>
                     <div class="col-sm-12">
 							<input type="text" class="form-control" name="modern_education_qualifications" value="">
 						</div>
@@ -204,7 +204,7 @@
 					
 
 <div class="form-group">			
-<button type="submit" class="btn btn-primary btn-rounded btn-block btn-sm"> <i class="fa fa-plus"></i>&nbsp;<?php echo get_phrase('add_teacher');?></button>
+<button type="submit" class="btn btn-primary btn-rounded btn-block btn-sm"> <i class="fa fa-plus"></i>&nbsp;<?php echo $this->lang->line('add_teacher'); ?></button>
 <img id="install_progress" src="<?php echo base_url() ?>assets/images/loader-2.gif" style="margin-left: 20px; display: none"/>					
 </div>			
                     
@@ -221,20 +221,20 @@
             <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('list_teachers');?></div>
+                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo $this->lang->line('list_teacher'); ?></div>
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body table-responsive">
 			
                                 <table id="example23" class="display nowrap" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th width="80"><div><?php echo get_phrase('photo');?></div></th>
-                            <th><div><?php echo get_phrase('name');?></div></th>
-                            <th><div><?php echo get_phrase('role');?></div></th>
-                            <th><div><?php echo get_phrase('email');?></div></th>
-                            <th><div><?php echo get_phrase('gurukul id');?></div></th>
-                            <th><div><?php echo get_phrase('address');?></div></th>
-                            <th><div><?php echo get_phrase('options');?></div></th>
+                            <th width="80"><div><?php echo $this->lang->line('photo'); ?></div></th>
+                            <th><div><?php echo $this->lang->line('name'); ?></div></th>
+                            <th><div><?php echo $this->lang->line('role'); ?></div></th>
+                            <th><div><?php echo $this->lang->line('email'); ?></div></th>
+                            <th><div><?php echo $this->lang->line('teacher_id'); ?></div></th>
+                            <th><div><?php echo $this->lang->line('address'); ?></div></th>
+                            <th><div><?php echo $this->lang->line('option'); ?></div></th>
                         </tr>
                     </thead>
                     <tbody>

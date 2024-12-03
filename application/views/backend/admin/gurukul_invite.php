@@ -69,20 +69,20 @@
                             <!-- <input type="hidden" class="form-control" id="gurukul_id" name="gurukul_id" value=""> -->
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label required">Gurukul Name</label>
-                                    <input type="text" class="form-control" id="gurukul_name" name="gurukul_name" placeholder="Gurukul Name" required="">
+                                    <label class="form-label required"><?php echo $this->lang->line('gurukul_name');?></label>
+                                    <input type="text" class="form-control" id="gurukul_name" name="gurukul_name" placeholder="<?php echo $this->lang->line('gurukul_name');?>" required="">
                                     <span class="text-danger" id="gurukul_name_error"></span>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label required">Mobile Number</label>
-                                    <input type="text" class="form-control" id="mobile_number" name="mobile_number" placeholder="Mobile Number" required="">
+                                    <label class="form-label required"><?php echo $this->lang->line('mobile_number');?></label>
+                                    <input type="text" class="form-control" id="mobile_number" name="mobile_number" placeholder="<?php echo $this->lang->line('mobile_number');?>" required="">
                                     <span class="text-danger" id="mobile_number_error"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="country" class="col-md-12"><?php echo get_phrase('Country'); ?></label>
+                                <label for="country" class="col-md-12"><?php echo  $this->lang->line('country'); ?></label>
                                 <div class="col-md-6">
                                     <select name="country" id="countrys" class="form-control">
                                         <option value="">Select Country</option>
@@ -102,15 +102,15 @@
                                         
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label required">Address</label>
-                                    <textarea id="address" class="form-control" name="address" placeholder="Address" rows="3" required=""></textarea>
+                                    <label class="form-label required"><?php echo  $this->lang->line('address'); ?></label>
+                                    <textarea id="address" class="form-control" name="address" placeholder="<?php echo  $this->lang->line('address'); ?>" rows="3" required=""></textarea>
                                     <span class="text-danger" id="address_error"></span>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6 full-col-upload">
                                 <div class="mb-3 center imageUploadWrapper">
-                                    <label class="form-label">Upload File</label>
+                                    <label class="form-label"><?php echo  $this->lang->line('browse_image'); ?></label>
                                     <!-- <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm"> -->
                                     <input type='file' class="form-control" name="userfile"/>
                       
@@ -118,16 +118,16 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label required">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required="">
+                                    <label class="form-label required"><?php echo $this->lang->line('email');?></label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="<?php echo $this->lang->line('email');?>" required="">
                                     <span class="text-danger" id="email_error"></span>
                                     <div class="" id="emailMessage"></div>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label required">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password " required="">
+                                    <label class="form-label required"><?php echo $this->lang->line('password');?></label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="<?php echo $this->lang->line('password');?> " required="">
                                     <span class="text-danger" id="password_error"></span>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                             <input type="hidden" class="form-control" id="role" name="role" placeholder="role " required="">
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
-                                    <input type="text" id="trust_name" class="form-control" name="trust_name" placeholder="Trust Name" required="">
+                                    <input type="text" id="trust_name" class="form-control" name="trust_name" placeholder="T<?php echo  $this->lang->line('trust_name'); ?>" required="">
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
@@ -150,26 +150,26 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" id="trust_president_name" name="trust_president_name" placeholder="Trust President Name" required="">
+                                    <input type="text" class="form-control" id="trust_president_name" name="trust_president_name" placeholder="<?php echo  $this->lang->line('trust_president_name'); ?>" required="">
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" id="secretary_name" name="secretary_name" placeholder="Secretary Name" required="">
+                                    <input type="text" class="form-control" id="secretary_name" name="secretary_name" placeholder="<?php echo  $this->lang->line('secretary_name'); ?>" required="">
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" id="treasurer_name" name="treasurer_name" placeholder="Treasurer Name" required="">
+                                    <input type="text" class="form-control" id="treasurer_name" name="treasurer_name" placeholder="<?php echo  $this->lang->line('treasurer_name'); ?>" required="">
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div>
-                                    <input type="text" class="form-control" id="principal_name" name="principal_name" placeholder="Principal Name" required="">
+                                    <input type="text" class="form-control" id="principal_name" name="principal_name" placeholder="<?php echo  $this->lang->line('principal_name'); ?>" required="">
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <h5 class="my-3">Fund Resources</h5>
+                                <h5 class="my-3"><?php echo  $this->lang->line('fund_resource'); ?></h5>
                                 <div class="mb-3">
                                     <select id="fund_resource" class="form-control" name="fund_resource">
                                         <option value="education_board_support">education_board_support</option>
@@ -180,7 +180,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <h5 class="my-3">Type of Setup</h5>
+                                <h5 class="my-3"><?php echo  $this->lang->line('type_of_setup'); ?></h5>
                                 <div class="mb-3">
                                     <select id="type_of_setup" class="form-control" name="setup_type">
                                         <option value="Pathshala">Pathshala</option>
@@ -193,90 +193,90 @@
                             </div>
                             <div class="text-line-box-content">
                                 <!-- <h5 class="my-3">Trust Information</h5> -->
-                                <h5 class="my-3">Focus Area of Gurukul</h5>
+                                <h5 class="my-3"><?php echo  $this->lang->line('focus_area'); ?></h5>
                                 <div class="line"></div>
                             </div>
                             <div class="col-12 col-md-12">
                                 <div class="mb-3">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-inputs" type="checkbox" id="Ved" name="focus_area[]" value="Ved">
-                                        <label class="form-check-label" for="Ved">Ved</label>
+                                        <label class="form-check-label" for="Ved"><?php echo  $this->lang->line('ved'); ?></label>
                                     </div>
 
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-inputs" type="checkbox" id="Shastra_Gurukul" name="focus_area[]" value="Shastra Gurukul">
-                                        <label class="form-check-label" for="Shastra_Gurukul">Shastra Gurukul</label>
+                                        <label class="form-check-label" for="Shastra_Gurukul"><?php echo  $this->lang->line('shastra_gurukul'); ?></label>
                                     </div>
 
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-inputs" type="checkbox" id="Kala" name="focus_area[]" value="Kala">
-                                        <label class="form-check-label" for="Kala">Kala</label>
+                                        <label class="form-check-label" for="Kala"><?php echo  $this->lang->line('kala'); ?></label>
                                     </div>
 
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-inputs" type="checkbox" id="Krishi" name="focus_area[]" value="Krishi">
-                                        <label class="form-check-label" for="Krishi">Krishi</label>
+                                        <label class="form-check-label" for="Krishi"><?php echo  $this->lang->line('krishi'); ?></label>
                                     </div>
 
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-inputs" type="checkbox" id="Yog_Darshan" name="focus_area[]" value="Yog-Darshan">
-                                        <label class="form-check-label" for="Yog_Darshan">Yog-Darshan</label>
+                                        <label class="form-check-label" for="Yog_Darshan"><?php echo  $this->lang->line('yog_darshan'); ?></label>
                                     </div>
 
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-inputs" type="checkbox" id="Tantra" name="focus_area[]" value="Tantra">
-                                        <label class="form-check-label" for="Tantra">Tantra</label>
+                                        <label class="form-check-label" for="Tantra"><?php echo  $this->lang->line('tantra'); ?></label>
                                     </div>
 
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-inputs" type="checkbox" id="Yudh_Kala" name="focus_area[]" value="Yudh Kala">
-                                        <label class="form-check-label" for="Yudh_Kala">Yudh Kala</label>
+                                        <label class="form-check-label" for="Yudh_Kala"><?php echo  $this->lang->line('yudh_kala'); ?></label>
                                     </div>
 
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-inputs" type="checkbox" id="Bhasha" name="focus_area[]" value="Bhasha">
-                                        <label class="form-check-label" for="Bhasha">Bhasha</label>
+                                        <label class="form-check-label" for="Bhasha"><?php echo  $this->lang->line('bhasha'); ?></label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <h5 class="my-3">Facilities Available</h5>
+                                <h5 class="my-3"><?php echo  $this->lang->line('facilities_available'); ?></h5>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="School_Building" name="facilities[]" value="School Building">
-                                    <label class="form-check-label" for="School_Building">School Building</label><br>
+                                    <label class="form-check-label" for="School_Building"><?php echo  $this->lang->line('school_building'); ?></label><br>
                                     <input class="form-check-input" type="checkbox" id="Classrooms" name="facilities[]" value="Classrooms">
-                                    <label class="form-check-label" for="Classrooms">Classrooms</label><br>
+                                    <label class="form-check-label" for="Classrooms"><?php echo  $this->lang->line('classrooms'); ?></label><br>
                                     <input class="form-check-input" type="checkbox" id="Library" name="facilities[]" value="Library">
-                                    <label class="form-check-label" for="Library">Library</label><br>
+                                    <label class="form-check-label" for="Library"><?php echo  $this->lang->line('library'); ?></label><br>
                                     <input class="form-check-input" type="checkbox" id="ComputerRoom" name="facilities[]" value="Computer Room">
-                                    <label class="form-check-label" for="ComputerRoom">Computer Room</label><br>
+                                    <label class="form-check-label" for="ComputerRoom"><?php echo  $this->lang->line('computer_room'); ?></label><br>
                                     <input class="form-check-input" type="checkbox" id="Kala_Room" name="facilities[]" value="Kala Room">
-                                    <label class="form-check-label" for="Kala_Room">Kala Room</label><br>
+                                    <label class="form-check-label" for="Kala_Room"><?php echo  $this->lang->line('kala_room'); ?></label><br>
                                     <input class="form-check-input" type="checkbox" id="Vyam_Kasha" name="facilities[]" value="Vyam Kasha">
-                                    <label class="form-check-label" for="Vyam_Kasha">Vyam Kasha</label><br>
+                                    <label class="form-check-label" for="Vyam_Kasha"><?php echo  $this->lang->line('vyam_kasha'); ?></label><br>
                                     <input class="form-check-input" type="checkbox" id="Farms" name="facilities[]" value="Farms">
-                                    <label class="form-check-label" for="Farms">Farms</label><br>
+                                    <label class="form-check-label" for="Farms"><?php echo  $this->lang->line('farms'); ?></label><br>
                                     <input class="form-check-input" type="checkbox" id="Kitchen" name="facilities[]" value="Kitchen">
-                                    <label class="form-check-label" for="Kitchen">Kitchen</label><br>
+                                    <label class="form-check-label" for="Kitchen"><?php echo  $this->lang->line('kitchen'); ?></label><br>
                                     <input class="form-check-input" type="checkbox" id="Ashwashala" name="facilities[]" value="Ashwashala">
-                                    <label class="form-check-label" for="Ashwashala">Ashwashala</label><br>
+                                    <label class="form-check-label" for="Ashwashala"><?php echo  $this->lang->line('ashwashala'); ?></label><br>
                                     <input class="form-check-input" type="checkbox" id="Workshop" name="facilities[]" value="Workshop">
-                                    <label class="form-check-label" for="Workshop">Workshop</label><br>
+                                    <label class="form-check-label" for="Workshop"><?php echo  $this->lang->line('workshop'); ?></label><br>
                                     <input class="form-check-input" type="checkbox" id="Yagna_Shala" name="facilities[]" value="Yagna Shala">
-                                    <label class="form-check-label" for="Yagna_Shala">Yagna Shala</label><br>
+                                    <label class="form-check-label" for="Yagna_Shala"><?php echo  $this->lang->line('yagna_shala'); ?></label><br>
                                     <input class="form-check-input" type="checkbox" id="Gaushala" name="facilities[]" value="Gaushala">
-                                    <label class="form-check-label" for="Gaushala">Gaushala</label><br>
+                                    <label class="form-check-label" for="Gaushala"><?php echo  $this->lang->line('gaushala'); ?></label><br>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <h5 class="my-3">Registered with Education Board</h5>
+                                <h5 class="my-3"><?php echo  $this->lang->line('registered_with_education_board'); ?></h5>
                                 <div class="mb-3 radioBtnWrap">
                                     <input type="radio" id="registered_yes" name="registered_with_education_board" value="Yes" required="">
-                                    <label for="registered_yes">Yes</label><br>
+                                    <label for="registered_yes"><?php echo  $this->lang->line('yes'); ?></label><br>
                                     <input type="radio" id="registered_no" name="registered_with_education_board" value="No" required="">
-                                    <label for="registered_no">No</label>
+                                    <label for="registered_no"><?php echo  $this->lang->line('no'); ?></label>
                                     <div class="mb-3 mt-3">
-                                        <label for="education_board_name" class="form-label">If Yes, Name of the Education Board</label>
+                                        <label for="education_board_name" class="form-label"><?php echo  $this->lang->line('if_yes_education_board'); ?></label>
                                         <br>
                                         <input type="text" class="form-control" id="education_board_name" name="education_board_name">
                                     </div>
@@ -285,7 +285,7 @@
 
                             <div class="col-12 col-md-12 text-center">
                                 <div class="submitBtnWrap mt-3 mb-2">
-                                    <button type="submit" id="submit-button" class="btn btn-primary btn-md px-4">Submit</button>
+                                    <button type="submit" id="submit-button" class="btn btn-primary btn-md px-4"><?php echo  $this->lang->line('submit'); ?></button>
                                 </div>
                             </div>
                             <?php echo form_close(); ?>

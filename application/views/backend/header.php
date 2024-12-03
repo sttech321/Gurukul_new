@@ -1,19 +1,18 @@
  <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top m-b-0">
             <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
-                <div class="top-left-part"><a class="logo" href="#"><b><img src="<?php echo base_url();?>uploads/logo.png" width="50" height="50" alt="home" /></b><span class="hidden-xs"><strong>OPEN</strong> SOURCE</span></a></div>
+                <div class="top-left-part"><a class="logo" href="#"><b><img src="<?php echo base_url();?>uploads/gurukul_logo.svg" width="50" height="50" alt="home" /></b><span class="hidden-xs"><strong></strong> GURUKUL</span></a></div>
                     <ul class="nav navbar-top-links navbar-left hidden-xs">
                         <li><a href="javascript:void(0)" class="open-close hidden-xs "><i class="icon-arrow-left-circle ti-menu"></i></a></li>
                         <li>
                             <form role="search" class="app-search hidden-xs">
                             <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
+                        <?php $current_lang = $this->session->userdata('site_lang') ?? 'english';?>
+                        <li><a href="<?php echo site_url('language/switch_language?lang=english'); ?>">English</a></li>
+                        <li><a href="<?php echo site_url('language/switch_language?lang=hindi'); ?>">हिंदी</a></li>
                         </li>
                     </ul>
-                    <ul>
-                    <?php $current_lang = $this->session->userdata('site_lang') ?? 'english';?>
-                    <a href="<?php echo site_url('language/switch_language?lang=english'); ?>">English</a> | 
-                    <a href="<?php echo site_url('language/switch_language?lang=hindi'); ?>">हिंदी</a>
-                    </ul>   
+
                     <ul class="nav navbar-top-links navbar-right pull-right">
                 <!--<li class="dropdown"> 
                     <a class="dropdown-toggle " data-toggle="dropdown" href="#"><i class="icon-envelope"></i>
