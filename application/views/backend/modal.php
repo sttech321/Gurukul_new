@@ -64,3 +64,38 @@
             </div>
         </div>
     </div>
+
+
+	<script type="text/javascript">
+	function confirm_modals(delete_url)
+	{
+		jQuery('#modal-5').modal('show', {backdrop: 'static'});
+		document.getElementById('delete_links').setAttribute('href' , delete_url);
+	}
+	</script>
+    
+    <!-- (Normal Modal)-->
+    <div class="modal fade" id="modal-5">
+        <div class="modal-dialog">
+            <div class="modal-content" style="margin-top:100px;">
+                
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" style="text-align:left;"><strong style="color:#FFFFFF">CONFIRMATION&nbsp;!!!</strong></h4>
+                </div>
+                
+
+                <div class="modal-footer" align="center">
+				<div class="row">
+				 <div class="col-sm-7">	
+				ARE YOU SURE YOU WANT TO APPROVED THIS INFORMATION ?
+				</div>
+				 <div class="col-sm-5">	
+                    <a href="#" class="btn btn-success btn-rounded btn-sm" id="delete_links"><i class="fa fa-check">&nbsp;</i>APPROVE</a>
+                    <button type="button" class="btn btn-info btn-rounded btn-sm" data-dismiss="modal"><i class="fa fa-times">&nbsp;</i>Cancel</button>
+					</div>
+				</div>
+				</div>
+            </div>
+        </div>
+    </div>

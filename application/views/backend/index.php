@@ -7,7 +7,11 @@ $loginType      = $this->session->userdata('login_type');
 $running_year   = $this->db->get_where('settings', array('type' => 'session'))->row()->description;
 ?>
 <?php include 'css.php'; ?>
-
+<style>
+.text-danger{
+    color:red !important;
+}
+</style>
     <!-- Preloader -->
     <div class="preloader">
         <div class="cssload-speeding-wheel"></div>
@@ -19,7 +23,7 @@ $running_year   = $this->db->get_where('settings', array('type' => 'session'))->
 	<?php include $loginType.'/navigation.php';?>
 	<?php include 'page_info.php';?>
 	<?php include $loginType.'/'.$page_name.'.php';?>
-		
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
        			
 	<?php // include 'dashboard.php'; ?>
 				

@@ -12,220 +12,230 @@
                                  
                                  ?>
                                  
-					<div class="row">
-                        <div class="col-sm-6">
-                            <div class="alert alert-primary"><?php echo get_phrase('Personal information');?></div>
-                            <hr>
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('student name');?></label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="name" required>
-                                    <input type="text" class="form-control" value="<?php echo substr(md5(uniqid(rand(), true)), 0, 7); ?>" name="student_number" readonly="true">
-
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="alert alert-primary"><?php echo get_phrase('Personal information');?></div>
+                                <hr>
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('student name');?></label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="name" name="name" required>
+                                        <input type="text" class="form-control" value="<?php echo substr(md5(uniqid(rand(), true)), 0, 7); ?>" name="student_number" readonly="true">
+                                        <span class="text-danger" id="name_error"></span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('Date Of Birth(DOB)');?></label>
-                                <div class="col-sm-12">
-                                <input class="form-control m-r-10" name="dob" type="date" value="2018-08-19" id="example-date-input" required>
-                                </div> 
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('Date Of Birth(DOB)');?></label>
+                                    <div class="col-sm-12">
+                                    <input class="form-control m-r-10" id="dob" name="dob" type="date" value="2018-08-19" id="example-date-input" required>
+                                    <span class="text-danger" id="dob_error"></span>
+                                    </div> 
+                                </div>
 
-                            <div class="form-group row">
-                            <label for="country" class="col-md-12"><?php echo get_phrase('Country'); ?></label>
-                            <div class="col-md-6">
-                                <select name="country" id="countrys" class="form-control">
-                                    <option value="">Select Country</option>
-                                    <?php foreach ($countries as $country): ?>
-                                        <option value="<?php echo $country['id']; ?>" <?php echo ($students[0]['country'] == $country['id']) ? 'selected' : ''; ?>>
-                                            <?php echo $country['name']; ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
+                                <div class="form-group row">
+                                <label for="country" class="col-md-12"><?php echo get_phrase('Country'); ?></label>
                                 <div class="col-md-6">
-                                    <select name="state" id="states" class="form-control" disabled>
-                                        <option value="">Select State</option>
+                                    <select name="country" id="countrys" class="form-control">
+                                        <option value="">Select Country</option>
+                                        <?php foreach ($countries as $country): ?>
+                                            <option value="<?php echo $country['id']; ?>" <?php echo ($students[0]['country'] == $country['id']) ? 'selected' : ''; ?>>
+                                                <?php echo $country['name']; ?>
+                                            </option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('home address');?></label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="address" value="" required>
-                                </div> 
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('phone');?></label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="phone" value="" required >
-                                </div> 
-                            </div>
-
-                            <div class="form-group"> 
-                                <label class="col-sm-12"><?php echo get_phrase('browse_image');?>*</label>        
-                                <div class="col-sm-12">
-                                <input type='file' name="userfile" class="dropify" onChange="readURL(this);" / required>
+                                    <div class="col-md-6">
+                                        <select name="state" id="states" class="form-control" disabled>
+                                            <option value="">Select State</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>	
-                            
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('email');?></label>
-                                <div class="col-sm-12">
-                                    <input type="email" class="form-control" name="email" value="">
-                                </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('password');?></label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="password" value="" required >
-                                </div> 
-                            </div>
-                            
-
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('aadhaar Card/National ID');?></label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="aadhaar" value="" required>
-                                </div> 
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('add class');?></label>
-                                <div class="col-sm-12">
-                                        <input type="text" class="form-control" name="class" value="" required >
-                                    </div> 
-                            </div>
-
-                            <hr>
-                            <div class="alert alert-primary"><?php echo get_phrase('father information');?></div>
-                            <hr>
-                            
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('father_name');?></label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="father_name" value="">
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('Father Date Of Birth(DOB)');?></label>
-                                <div class="col-sm-12">
-                                <input class="form-control m-r-10" name="father_dob" type="date" value="2018-08-19" id="example-date-input" required>
-                                </div> 
-                            </div>
-
-
-                        </div>
-
-                        <div class="col-sm-6">
                                 <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('father aadhaar Card/National ID');?></label>
-                                <div class="col-sm-12">
-                                    <input type="number" class="form-control" name="father_aadhaar" value="" required>
-                                </div> 
-                            </div>
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('home address');?></label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="address" name="address" value="" required>
+                                        <span class="text-danger" id="address_error"></span>
+                                    </div> 
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('phone');?></label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="phone" name="phone" value="" required >
+                                        <span class="text-danger" id="phone_error"></span>
+                                    </div> 
+                                </div>
 
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('father address');?></label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="father_aaddress" value="" required>
-                                </div> 
-                            </div>
+                                <div class="form-group"> 
+                                    <label class="col-sm-12"><?php echo get_phrase('browse_image');?>*</label>        
+                                    <div class="col-sm-12">
+                                    <input type='file' name="userfile" class="dropify" onChange="readURL(this);" / required>
+                                    </div>
+                                </div>	
+                                
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('email');?></label>
+                                    <div class="col-sm-12">
+                                        <input type="email" class="form-control" id="email" name="email" value="">
+                                        <span class="text-danger" id="email_error"></span>
+                                    </div>
+                                </div>
 
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('father mobile number');?></label>
-                                <div class="col-sm-12">
-                                    <input type="number" class="form-control" name="father_mobile_number" value="" required>
-                                </div> 
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('password');?></label>
+                                    <div class="col-sm-12">
+                                        <input type="password" class="form-control" id="password" name="password" value="" required >
+                                        <span class="text-danger" id="password_error"></span>
+                                    </div> 
+                                </div>
+                                
 
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('father profession');?></label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="father_profession" value="" required>
-                                </div> 
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('aadhaar Card/National ID');?></label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="aadhaar" name="aadhaar" value="" required>
+                                        <span class="text-danger" id="aadhaar_error"></span>
+                                    </div> 
+                                </div>
 
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('father gotra');?></label>
-                                <div class="col-sm-12">
-                                        <input type="text" class="form-control" name="father_gotra" value="" required>
-                                </div> 
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('add class');?></label>
+                                    <div class="col-sm-12">
+                                            <input type="text" class="form-control" name="class" value="" required >
+                                        </div> 
+                                </div>
 
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('father varna');?></label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="father_varna" value="" required>
-                                </div> 
-                            </div>
-
-                            <hr>
-                            <div class="alert alert-primary"><?php echo get_phrase('mother information');?></div>
-                            <hr>
-                            
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother_name');?></label>
-                                <div class="col-sm-12">
-                                        <input type="text" class="form-control" name="mother_name" value="">
+                                <hr>
+                                <div class="alert alert-primary"><?php echo get_phrase('father information');?></div>
+                                <hr>
+                                
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('father_name');?></label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" name="father_name" value="">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('Father Date Of Birth(DOB)');?></label>
+                                    <div class="col-sm-12">
+                                    <input class="form-control m-r-10" name="father_dob" id="father_dob" type="date" value="2018-08-19" id="example-date-input" required>
+                                    <span class="text-danger" id="father_dob_error"></span>
+                                    </div> 
                                 </div>
                             </div>
-                            
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother Date Of Birth(DOB)');?></label>
-                                <div class="col-sm-12">
-                                <input class="form-control m-r-10" name="mother_dob" type="date" value="2018-08-19" id="example-date-input" required>
-                                </div> 
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother aadhaar Card/National ID');?></label>
-                                <div class="col-sm-12">
-                                        <input type="number" class="form-control" name="mother_aadhaar" value="" required>
-                                </div> 
-                            </div>
 
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother address');?></label>
-                                <div class="col-sm-12">
-                                        <input type="text" class="form-control" name="mother_aaddress" value="" required>
-                                </div> 
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother mobile number');?></label>
-                                <div class="col-sm-12">
-                                        <input type="number" class="form-control" name="mother_mobile_number" value="" required>
-                                </div> 
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother profession');?></label>
-                                <div class="col-sm-12">
-                                        <input type="text" class="form-control" name="mother_profession" value="" required>
-                                </div> 
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother gotra');?></label>
-                                <div class="col-sm-12">
-                                        <input type="text" class="form-control" name="mother_gotra" value="" required>
+                            <div class="col-sm-6">
+                                    <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('father aadhaar Card/National ID');?></label>
+                                    <div class="col-sm-12">
+                                        <input type="number" class="form-control" id="father_aadhaar" name="father_aadhaar" value="" required>
+                                        <span class="text-danger" id="father_aadhaar_error"></span>
                                     </div> 
-                            </div>
+                                </div>
 
-                            <div class="form-group">
-                                <label class="col-md-12" for="example-text"><?php echo get_phrase('mother varna');?></label>
-                                <div class="col-sm-12">
-                                        <input type="text" class="form-control" name="mother_varna" value="" required>
-                                </div> 
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('father address');?></label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" name="father_aaddress" value="" required>
+                                    </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('father mobile number');?></label>
+                                    <div class="col-sm-12">
+                                        <input type="number" class="form-control" id="father_mobile_number" name="father_mobile_number" value="" required>
+                                        <span class="text-danger" id="father_mobile_number_error"></span>
+                                    </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('father profession');?></label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" name="father_profession" value="" required>
+                                    </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('father gotra');?></label>
+                                    <div class="col-sm-12">
+                                            <input type="text" class="form-control" name="father_gotra" value="" required>
+                                    </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('father varna');?></label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" name="father_varna" value="" required>
+                                    </div> 
+                                </div>
+
+                                <hr>
+                                <div class="alert alert-primary"><?php echo get_phrase('mother information');?></div>
+                                <hr>
+                                
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('mother_name');?></label>
+                                    <div class="col-sm-12">
+                                            <input type="text" class="form-control" name="mother_name" value="">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('mother Date Of Birth(DOB)');?></label>
+                                    <div class="col-sm-12">
+                                    <input class="form-control m-r-10" name="mother_dob" id="mother_dob" type="date" value="2018-08-19" id="example-date-input" required>
+                                    <span class="text-danger" id="mother_dob_error"></span>
+                                    </div> 
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('mother aadhaar Card/National ID');?></label>
+                                    <div class="col-sm-12">
+                                            <input type="number" class="form-control" id="mother_aadhaar" name="mother_aadhaar" value="" required>
+                                            <span class="text-danger" id="mother_aadhaar_error"></span>
+                                    </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('mother address');?></label>
+                                    <div class="col-sm-12">
+                                            <input type="text" class="form-control" name="mother_aaddress" value="" required>
+                                    </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('mother mobile number');?></label>
+                                    <div class="col-sm-12">
+                                            <input type="number" class="form-control" id="mother_mobile_number" name="mother_mobile_number" value="" required>
+                                            <span class="text-danger" id="mother_mobile_number_error"></span>
+                                    </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('mother profession');?></label>
+                                    <div class="col-sm-12">
+                                            <input type="text" class="form-control" name="mother_profession" value="" required>
+                                    </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('mother gotra');?></label>
+                                    <div class="col-sm-12">
+                                            <input type="text" class="form-control" name="mother_gotra" value="" required>
+                                        </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('mother varna');?></label>
+                                    <div class="col-sm-12">
+                                            <input type="text" class="form-control" name="mother_varna" value="" required>
+                                    </div> 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
 <div class="form-group">			
 <button type="submit" class="btn btn-primary btn-rounded btn-block btn-sm"> <i class="fa fa-plus"></i>&nbsp;<?php echo get_phrase('add_student');?></button>
@@ -341,4 +351,112 @@ document.getElementById('countrys').addEventListener('change', function () {
             .catch(error => console.error('Error fetching states:', error));
     }
 });
+// form validation start for every page
+jQuery(document).ready(function($) {
+    // Real-time validation for each field
+    function validateField(fieldId, errorId, errorMessage, validatorFunction) {
+        let value = $(fieldId).val().trim();
+        if (!validatorFunction(value)) {
+            $(errorId).text(errorMessage);
+        } else {
+            $(errorId).text('');
+        }
+    }
+
+    function validateRequiredField(fieldId, errorId, errorMessage) {
+        let value = $(fieldId).val().trim();
+        if (value === '') {
+            $(errorId).text(errorMessage);
+        } else {
+            $(errorId).text('');
+        }
+    }
+
+    $('#aadhaar').on('input', function() {
+        validateField('#aadhaar', '#aadhaar_error', 'Aadhaar must be 12 digits.', function(value) {
+            return /^\d{12}$/.test(value);
+        });
+    });
+
+    $('#father_aadhaar').on('input', function() {
+        validateField('#father_aadhaar', '#father_aadhaar_error', 'Father\'s Aadhaar must be 12 digits.', function(value) {
+            return /^\d{12}$/.test(value);
+        });
+    });
+
+    $('#father_mobile_number').on('input', function() {
+        validateField('#father_mobile_number', '#father_mobile_number_error', 'Father\'s Mobile must be 10 digits.', function(value) {
+            return /^\d{10}$/.test(value);
+        });
+    });
+
+    $('#mother_aadhaar').on('input', function() {
+        validateField('#mother_aadhaar', '#mother_aadhaar_error', 'Mother\'s Aadhaar must be 12 digits.', function(value) {
+            return /^\d{12}$/.test(value);
+        });
+    });
+
+    $('#mother_mobile_number').on('input', function() {
+        validateField('#mother_mobile_number', '#mother_mobile_number_error', 'Father\'s Mobile must be 10 digits.', function(value) {
+            return /^\d{10}$/.test(value);
+        });
+    });
+
+    $('#phone').on('input', function() {
+        validateField('#phone', '#phone_error', 'Mobile must be 10 digits.', function(value) {
+            return /^\d{10}$/.test(value);
+        });
+    });    
+
+    $('#name').on('input', function() {
+        validateField('#name', '#name_error', 'Name is required.', function(value) {
+            return value.length > 0;
+        });
+    });
+
+    $('#address').on('input', function() {
+        let value = $(this).val();
+        if (value.length === 0) {
+            $('#address_error').text('Address is required.');
+        } else {
+            $('#address_error').text('');
+        }
+    });
+
+    $('#mobile_number').on('input', function() {
+        validateField('#mobile_number', '#mobile_number_error', 'Mobile must be 10 digits.', function(value) {
+            return /^\d{10}$/.test(value);
+        });
+    });
+
+    $('#password').on('input', function() {
+        validateField('#password', '#password_error', 'Password must be at least 8 characters.', function(value) {
+            return value.length >= 8;
+        });
+    });
+
+    $('#email').on('input', function() {
+        validateField('#email', '#email_error', 'Email is required and must be valid.', function(value) {
+            return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
+        });
+    });
+
+    $('#dob').on('input', function() {
+        validateRequiredField('#dob', '#dob_error', 'Date of Birth is required.', function(value) {
+            return value !== '';
+        });
+    });
+
+    $('#father_dob').on('input', function() {
+        validateRequiredField('#father_dob', '#father_dob_error', 'Father\'s Date of Birth is required.');
+    });
+
+    $('#mother_dob').on('input', function() {
+        validateRequiredField('#mother_dob', '#mother_dob_error', 'Mother\'s Date of Birth is required.', function(value) {
+            return value !== '';
+        });
+    });
+
+});
+
 </script>

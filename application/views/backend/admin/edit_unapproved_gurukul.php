@@ -4,8 +4,8 @@ $countries = $this->db->get('countries')->result_array();
 $edit_principal = $this->db->get_where('gurukul_form' , array('principal_id' => $param2) )->result_array();
 $focus_area = json_decode($edit_principal[0]['focus_area']);
 $selected_facilities = json_decode($edit_principal[0]['facilities']);
-$focus_options = ['Ved', 'Shastra Gurukul', 'Kala', 'Krishi', 'Yog-Darshan', 'Tantra', 'Yudh Kala', 'Bhasha'];
 $facilities = ["School Building", "Classrooms", "Library", "Computer Room", "Kala Room", "Vyam Kasha", "Farms", "Kitchen", "Ashwashala", "Workshop", "Yagna Shala", "Gaushala"];
+$focus_options = ['Ved', 'Shastra Gurukul', 'Kala', 'Krishi', 'Yog-Darshan', 'Tantra', 'Yudh Kala', 'Bhasha'];
 $selected_fund_resource = $edit_principal[0]['fund_resource'] ?? '';
 $setup_types = ["Pathshala", "Gurukul", "Tapovan", "Gruh Gurukul", "Adhunik Gurukul"];
 $selected_setup_type = $edit_principal[0]['setup_type'] ?? '';
@@ -78,7 +78,7 @@ foreach ( $edit_principal as $key => $principal):
 
                         </div>
 					</div>	
-                </div>
+                
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
                         <label class="form-label required">Address</label>
@@ -144,7 +144,6 @@ foreach ( $edit_principal as $key => $principal):
                     <div class="mb-3">
                     <select id="type_of_setup" class="form-control" name="setup_type">
                         <?php
-                        
                         foreach ($setup_types as $setup_type) {
                             $selected = ($setup_type === $selected_setup_type) ? 'selected' : '';
                             echo '<option value="' . $setup_type . '" ' . $selected . '>' . $setup_type . '</option>';
@@ -164,7 +163,6 @@ foreach ( $edit_principal as $key => $principal):
                         <?php 
                         foreach ($focus_options as $focus) {
                             $checked = (is_array($focus_area) && in_array($focus, $focus_area)) ? 'checked' : '';
-
                             echo '
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="' . $focus . '" name="focus_area[]" value="' . $focus . '" ' . $checked . '>
@@ -176,10 +174,10 @@ foreach ( $edit_principal as $key => $principal):
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <h5 class="my-3">Facilities Available</h5>
-                    <?php
+                <h5 class="my-3">Facilities Available</h5>
+                <?php
                     foreach ($facilities as $facility) {
-                        $checked = in_array($facility, $selected_facilities) ? 'checked' : '';
+                        $checked = (is_array($selected_facilities) && in_array($facility, $selected_facilities)) ? 'checked' : '';
                         echo '
                             <input class="form-check-input" type="checkbox" id="' . str_replace(' ', '_', $facility) . '" 
                                 name="facilities[]" value="' . $facility . '" ' . $checked . '>
@@ -188,6 +186,7 @@ foreach ( $edit_principal as $key => $principal):
                     }
                     ?>
                 </div>
+
                 <div class="col-12 col-md-6">
                     <h5 class="my-3">Registered with Education Board</h5>
                     <div class="mb-3 radioBtnWrap">
@@ -215,6 +214,7 @@ foreach ( $edit_principal as $key => $principal):
                                 name="education_board_name">
                         </div>
                     </div>
+ 
                 </div>
                 
 <div class="form-group">

@@ -56,4 +56,4 @@ $route['sendbioEmail'] = 'admin/sendbioEmail';
 $route['principal/get-states/(:num)'] = 'principal/get_states/$1';
 $route['admin/gurukul_invite/'] = 'admin/gurukul_invite';
 $route['thankyou'] = 'admin/thankyou_gurukul';
-
+$route['admin/fetch_teachers/(:num)'] = 'admin/get_teacher/$1';

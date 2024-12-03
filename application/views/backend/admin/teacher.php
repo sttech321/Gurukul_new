@@ -7,95 +7,176 @@
                             </div>
                             <div class="panel-wrapper collapse out" aria-expanded="true">
                                 <div class="panel-body">
-                                    
-									
 								 <?php echo form_open(base_url() . 'admin/teacher/insert/' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));?>
 					<div class="row">
                     <div class="col-sm-6">
+                        <div class="alert alert-primary">Personal DETAILS</div>
+                        <hr>
+
+                    <div class="form-group row">
+                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('gurukul name');?></label>
+                    <div class="col-sm-12">
+                    <?php if ($this->session->userdata('login_type') == 'admin'): ?>
+                        <select name="principal_id" id="principal_id" class="form-control">
+                            <option value="">Select Gurukul</option>
+                            <?php foreach ($principal as $principal_item): ?>
+                                <option value="<?php echo $principal_item['principal_id']; ?>">
+                                    <?php echo $principal_item['name']; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    <?php else: ?>
+                        <!-- Show Principal's Gurukul ID -->
+                        <input type="hidden" name="principal_id" value="<?php echo $this->session->userdata('principal_id'); ?>">
+                    <?php endif; ?>
+						</div>
+					</div>
 	
 					<div class="form-group">
                  	<label class="col-md-12" for="example-text"><?php echo get_phrase('teacher name');?></label>
                     <div class="col-sm-12">
-							<input type="text" class="form-control" name="name" required>
+							<input type="text" class="form-control" id="name" name="name" required>
 							<input type="text" class="form-control" value="<?php echo substr(md5(uniqid(rand(), true)), 0, 7); ?>" name="teacher_number" readonly="true">
-
+                            <span class="text-danger" id="name_error"></span>
 						</div>
 					</div>
-					
 					
 					<div class="form-group">
                  	<label class="col-md-12" for="example-text"><?php echo get_phrase('Date Of Birth');?></label>
                     <div class="col-sm-12">
-		            <input class="form-control m-r-10" name="birthday" type="date" value="2018-08-19" id="example-date-input" required>
+		            <input class="form-control m-r-10" name="birthday" type="date" value="2018-08-19" id="date_of_birth" required>
+                    <span class="text-danger" id="date_of_birth_error"></span>
 						</div> 
 					</div>
                     <div class="form-group row">
-                            <label for="country" class="col-md-12"><?php echo get_phrase('Country'); ?></label>
-                            <div class="col-md-6">
-                                <select name="country" id="countrys" class="form-control">
-                                    <option value="">Select Country</option>
-                                    <?php foreach ($countries as $country): ?>
-                                        <option value="<?php echo $country['id']; ?>" <?php echo ($country[0]['country'] == $country['id']) ? 'selected' : ''; ?>>
-                                            <?php echo $country['name']; ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                                <div class="col-md-6">
-                                    <select name="state" id="states" class="form-control" disabled>
-                                        <option value="">Select State</option>
-                                    </select>
-                                </div>
-                            </div>
-					
-					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('address');?></label>
-                    <div class="col-sm-12">
-							<input type="text" class="form-control" name="address" value="" required>
-						</div> 
-					</div>
-				<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('phone');?></label>
-                    <div class="col-sm-12">
-							<input type="text" class="form-control" name="phone" value="" required >
-						</div> 
-					</div>
+                    <label for="country" class="col-md-12"><?php echo get_phrase('Country'); ?></label>
+                    <div class="col-md-6">
+                        <select name="country" id="countrys" class="form-control">
+                            <option value="">Select Country</option>
+                            <?php foreach ($countries as $country): ?>
+                                <option value="<?php echo $country['id']; ?>" <?php echo ($students[0]['country'] == $country['id']) ? 'selected' : ''; ?>>
+                                    <?php echo $country['name']; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                        <div class="col-md-6">
+                            <select name="state" id="states" class="form-control" disabled>
+                                <option value="">Select State</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group"> 
+					 <label class="col-sm-12"><?php echo get_phrase('browse_image');?>*</label>        
+                        <div class="col-sm-12">
+                        <input type='file' name="userfile" class="dropify" onChange="readURL(this);" / required>
+                        </div>
+					</div>	
                     
 					<div class="form-group">
                  	<label class="col-md-12" for="example-text"><?php echo get_phrase('email');?></label>
                     <div class="col-sm-12">
-							<input type="email" class="form-control" name="email" value="">
+							<input type="email" class="form-control" id="email" name="email" value="">
+                            <span class="text-danger" id="email_error"></span>
 						</div>
 					</div>
+
+                    <div class="form-group">
+                        <label class="col-md-12" for="example-text"><?php echo get_phrase('password');?></label>
+                        <div class="col-sm-12">
+                        <input type="password" class="form-control" id="password" name="password" value="" onkeyup="CheckPasswordStrength(this.value)" required>
+                        <span class="text-danger" id="password_error"></span>
+                        <strong id="password_strength"></strong>
+                        </div> 
+                    </div>
 					
-					
-					<div class="form-group">
+                    <div class="form-group">
+                        <label class="col-sm-12"><?php echo get_phrase('father_name'); ?></label>
+
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" name="father_name" value="" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12"><?php echo get_phrase('mother_name'); ?></label>
+
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" name="mother_name" value="" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12"><?php echo get_phrase('surname'); ?></label>
+
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" name="surname" value="" required>
+                        </div> 
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-12"><?php echo get_phrase('gotra'); ?></label>
+
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" name="gotra" value="" >
+                        </div> 
+                    </div>
+					</div>	
+					 <div class="col-sm-6">
+
+                    <div class="form-group">
+                        <label class="col-sm-12"><?php echo get_phrase('varna'); ?></label>
+
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" name="varna" value="" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12"><?php echo get_phrase('aadhaar'); ?></label>
+
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="aadhaar" name="aadhaar" value="" required>
+                            <span class="text-danger" id="aadhaar_error"></span>
+                        </div> 
+                    </div>
+
+					 <div class="alert alert-primary">CONTACT INFORMATION</div>
+                        <hr>
+
+                    <div class="form-group">
+                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('address');?></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="address" name="address" value="" required>
+                            <span class="text-danger" id="address_error"></span>
+                        </div> 
+					</div>
+
+				    <div class="form-group">
+                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('phone');?></label>
+                        <div class="col-sm-12">
+							<input type="text" class="form-control" id="mobile_number" name="phone" value="" required >
+                            <span class="text-danger" id="mobile_number_error"></span>
+						</div> 
+					</div>
+
+                    <div class="alert alert-primary">Spiritual Details</div>
+                    <hr>
+                    <div class="form-group">
                  	<label class="col-md-12" for="example-text"><?php echo get_phrase('ved_shakha');?></label>
                     <div class="col-sm-12">
 							<input type="text" class="form-control" name="ved_shakha" value="">
 						</div>
 					</div>
 					
-					<div class="form-group">
-                        <label class="col-sm-12"><?php echo get_phrase('country');?>*</label>
-                        <div class="col-sm-12">
-                            <select class=" form-control select2" name="country" style="width:100%">
-                                <option data-tokens="">India</option>
-                        </select>
-                        </div>
-                    </div>
-					
                     <div class="form-group">
-                        <label class="col-sm-12"><?php echo get_phrase('state'); ?></label>
+                        <label class="col-sm-12"><?php echo get_phrase('guru_name'); ?></label>
 
                         <div class="col-sm-12">
-                            <select name="state" class="form-control select2" >
-                                <option value="">Punjab</option>
-
-                            </select>
+                            <input type="text" class="form-control" name="guru_name" value="" >
                         </div> 
                     </div>
-
+                    
+                    <div class="alert alert-primary">Skills & Education</div>
+                    <hr>
 				<div class="form-group">
                  	<label class="col-md-12" for="example-text"><?php echo get_phrase('extra_ordinary_skills');?></label>
                     <div class="col-sm-12">
@@ -116,80 +197,6 @@
 							<input type="text" class="form-control" name="modern_education_qualifications" value="">
 						</div>
 					</div>
-					</div>	
-					
-					 <div class="col-sm-6">
-					 
-						<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('password');?></label>
-                    <div class="col-sm-12">
-						<input type="password" class="form-control" name="password" value="" onkeyup="CheckPasswordStrength(this.value)" required>
-					<strong id="password_strength"></strong>
-						</div> 
-						</div>
-
-					<div class="form-group"> 
-					 <label class="col-sm-12"><?php echo get_phrase('browse_image');?>*</label>        
-					 <div class="col-sm-12">
-  		  			  <input type='file' name="userfile" class="dropify" onChange="readURL(this);" / required>
-					 
-					</div>
-					</div>	
-
-<hr>
-<div class="alert alert-primary">Personal DETAILS</div>
-<hr>
-
-<div class="form-group">
-     <label class="col-sm-12"><?php echo get_phrase('father_name'); ?></label>
-
-    <div class="col-sm-12">
-        <input type="text" class="form-control" name="father_name" value="" required />
-    </div>
-</div>
-<div class="form-group">
-     <label class="col-sm-12"><?php echo get_phrase('mother_name'); ?></label>
-
-    <div class="col-sm-12">
-        <input type="text" class="form-control" name="mother_name" value="" required />
-    </div>
-</div>
-<div class="form-group">
-     <label class="col-sm-12"><?php echo get_phrase('surname'); ?></label>
-
-    <div class="col-sm-12">
-        <input type="text" class="form-control" name="surname" value="" required>
-    </div> 
-</div>
-<div class="form-group">
-     <label class="col-sm-12"><?php echo get_phrase('gotra'); ?></label>
-
-    <div class="col-sm-12">
-        <input type="text" class="form-control" name="gotra" value="" >
-    </div> 
-</div>
-
-<div class="form-group">
-     <label class="col-sm-12"><?php echo get_phrase('varna'); ?></label>
-
-    <div class="col-sm-12">
-        <input type="text" class="form-control" name="varna" value="" required />
-    </div>
-</div>
-<div class="form-group">
-     <label class="col-sm-12"><?php echo get_phrase('aadhaar'); ?></label>
-
-    <div class="col-sm-12">
-        <input type="text" class="form-control" name="aadhaar" value="" required>
-    </div> 
-</div>
-<div class="form-group">
-     <label class="col-sm-12"><?php echo get_phrase('guru_name'); ?></label>
-
-    <div class="col-sm-12">
-        <input type="text" class="form-control" name="guru_name" value="" >
-    </div> 
-</div>
 
 </div>
 </div>
@@ -315,5 +322,72 @@ document.getElementById('countrys').addEventListener('change', function () {
             })
             .catch(error => console.error('Error fetching states:', error));
     }
+});
+
+
+// / form validation start for every page
+jQuery(document).ready(function($) {
+    // Real-time validation for each field
+    function validateField(fieldId, errorId, errorMessage, validatorFunction) {
+        let value = $(fieldId).val().trim();
+        if (!validatorFunction(value)) {
+            $(errorId).text(errorMessage);
+        } else {
+            $(errorId).text('');
+        }
+    }
+
+    function validateRequiredField(fieldId, errorId, errorMessage) {
+        let value = $(fieldId).val().trim();
+        if (value === '') {
+            $(errorId).text(errorMessage);
+        } else {
+            $(errorId).text('');
+        }
+    }
+
+    $('#date_of_birth').on('input', function() {
+        validateRequiredField('#date_of_birth', '#date_of_birth_error', 'Date of Birth is required.', function(value) {
+            return value !== '';
+        });
+    });
+
+    $('#name').on('input', function() {
+        validateField('#name', '#name_error', 'Teacher name is required.', function(value) {
+            return value.length > 0;
+        });
+    });
+
+    $('#address').on('input', function() {
+        validateField('#address', '#address_error', 'Address is required.', function(value) {
+            return value.length > 0;
+        });
+    });
+
+    $('#aadhaar').on('input', function() {
+        validateField('#aadhaar', '#aadhaar_error', 'Aadhaar must be 12 digits.', function(value) {
+            return /^\d{12}$/.test(value);
+        });
+    });
+
+    $('#mobile_number').on('input', function() {
+        validateField('#mobile_number', '#mobile_number_error', 'Mobile must be 10 digits.', function(value) {
+            return /^\d{10}$/.test(value);
+        });
+    });
+
+    $('#password').on('input', function() {
+        validateField('#password', '#password_error', 'Password must be at least 8 characters.', function(value) {
+            return value.length >= 8;
+        });
+    });
+
+    $('#email').on('input', function() {
+        validateField('#email', '#email_error', 'Email is required and must be valid.', function(value) {
+            return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
+        });
+    });
+
+
 });
 </script>

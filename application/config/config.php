@@ -32,6 +32,7 @@ $config["base_url"] = $root;
 |
 */
 $config['index_page'] = '';
+$config['csrf_protection'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

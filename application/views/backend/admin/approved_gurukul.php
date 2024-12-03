@@ -1,5 +1,4 @@
-				
-  <div class="row">
+<div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-info">
                             <div class="panel-heading"><?php echo get_phrase('new_school');?>
@@ -9,14 +8,7 @@
                                 <div class="panel-body">
 
                                 <?php echo form_open(base_url('admin/gurukul_registration/create'), ['class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data']); ?>
-<!-- <div class="row">
-    <div class="col-sm-6">
 
-    </div>
-    <div class="col-sm-6">
-
-    </div>
-</div> -->
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
                         <label class="form-label required">Gurukul Name</label>
@@ -238,7 +230,7 @@
             <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('list_students');?>
+                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('gurukul_list');?>
 
                           <button onclick="showAjaxModal('<?php echo base_url();?>modal/popup/gurukul_invite_link');" 
                             class="btn btn-info btn-xs pull-right">
@@ -277,7 +269,7 @@
 														
                             <a onclick="showAjaxModal('<?php echo base_url();?>modal/popup/edit_approved_gurukul/<?php echo $principal['principal_id'];?>')" class="btn btn-info btn-circle btn-xs"><i class="fa fa-edit"></i></a>
 							
-                            <a href="#" onclick="confirm_modal('<?php echo base_url();?>admin/student/delete/<?php echo $principal['principal_id'];?>');"><button type="button" class="btn btn-danger btn-circle btn-xs"><i class="fa fa-times"></i></button></a>
+                            <a href="#" onclick="confirm_modal('<?php echo base_url();?>admin/gurukul_registration/delete/<?php echo $principal['principal_id'];?>');"><button type="button" class="btn btn-danger btn-circle btn-xs"><i class="fa fa-times"></i></button></a>
 
 
                             <a href="<?php echo base_url().'uploads/student_image/'.  $principal['file_name'];?>"><button type="button" class="btn btn-warning btn-circle btn-xs"><i class="fa fa-download"></i></button></a>
@@ -343,5 +335,54 @@ document.getElementById('countrys').addEventListener('change', function () {
             })
             .catch(error => console.error('Error fetching states:', error));
     }
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+// form validation start for every page
+jQuery(document).ready(function($) {
+    // Real-time validation for each field
+    function validateField(fieldId, errorId, errorMessage, validatorFunction) {
+        let value = $(fieldId).val().trim();
+        if (!validatorFunction(value)) {
+            $(errorId).text(errorMessage);
+        } else {
+            $(errorId).text('');
+        }
+    }
+
+    $('#gurukul_name').on('input', function() {
+        validateField('#gurukul_name', '#gurukul_name_error', 'Gurukul name is required.', function(value) {
+            return value.length > 0;
+        });
+    });
+
+    $('#address').on('input', function() {
+        let value = $(this).val();
+        if (value.length === 0) {
+            $('#address_error').text('Address is required.');
+        } else {
+            $('#address_error').text('');
+        }
+    });
+
+    $('#mobile_number').on('input', function() {
+        validateField('#mobile_number', '#mobile_number_error', 'Mobile must be 10 digits.', function(value) {
+            return /^\d{10}$/.test(value);
+        });
+    });
+
+    $('#password').on('input', function() {
+        validateField('#password', '#password_error', 'Password must be at least 8 characters.', function(value) {
+            return value.length >= 8;
+        });
+    });
+
+    $('#emailid').on('input', function() {
+        validateField('#emailid', '#email_error', 'Email is required and must be valid.', function(value) {
+            return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
+        });
+    });
+
 });
 </script>

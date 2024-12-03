@@ -67,8 +67,9 @@ class Student_model extends CI_Model {
 
     //  the function below insert into student table
     function createNewStudent(){
-        $principal_id = $this->session->userdata('principal_id');
-        $teacher_id = $this->session->userdata('teacher_id');
+        $principal_id = $this->input->post('gurukul_id') ? html_escape($this->input->post('gurukul_id')) : $this->session->userdata('principal_id');
+        $teacher_id = $this->input->post('teacherid') ? html_escape($this->input->post('teacherid')) : $this->session->userdata('teacher_id');
+        
         $page_data = array(
             'name'          => html_escape($this->input->post('name')),
             'birthday'      => html_escape($this->input->post('dob')),
@@ -77,7 +78,7 @@ class Student_model extends CI_Model {
             'state'         => html_escape($this->input->post('state')),
             'phone'         => html_escape($this->input->post('phone')),
             'email'         => html_escape($this->input->post('email')),
-            'password'   => html_escape($this->input->post('password')),
+            'password'   => sha1(html_escape($this->input->post('password'))),
             'aadhaar'   => html_escape($this->input->post('aadhaar')),
             'class' => html_escape($this->input->post('class')),
             'father_name'         => html_escape($this->input->post('father_name')),
@@ -95,7 +96,7 @@ class Student_model extends CI_Model {
             'mother_mobile_number'        => html_escape($this->input->post('mother_mobile_number')),
             'mother_profession' => html_escape($this->input->post('mother_profession')),
             'mother_gotra'             => html_escape($this->input->post('father_varna')),
-            'mother_varna'             => html_escape($this->input->post('mother_varna'))
+            'mother_varna'             => html_escape($this->input->post('mother_varna')),
         );
         $page_data['gurukul_id'] = $principal_id;
         $page_data['teacher_id'] = $teacher_id;
@@ -115,7 +116,6 @@ class Student_model extends CI_Model {
             'state'                 => html_escape($this->input->post('state')),
             'phone'                 => html_escape($this->input->post('phone')),
             'email'                 => html_escape($this->input->post('email')),
-            'password'              => html_escape($this->input->post('password')),
             'aadhaar'               => html_escape($this->input->post('aadhaar')),
             'class'                 => html_escape($this->input->post('class')),
             'father_name'           => html_escape($this->input->post('father_name')),

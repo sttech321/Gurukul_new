@@ -71,8 +71,6 @@ class Student extends CI_Controller {
         }
 
         function teacher (){
-
-
             $student_profile = $this->db->get_where('student', array('student_id' => $this->session->userdata('student_id')))->row();
             $select_student_class_id = $student_profile->class_id;
 

@@ -9,57 +9,76 @@ class Principal_model extends CI_Model {
     }
 
     /**************************** The function below insert into bank and teacher tables   **************************** */
-    function insert_gurukul(){
+    function insert_gurukul() {
         $principal_array = array(
-            'name'              => $this->input->post('gurukul_name'),
-            'address'                   => $this->input->post('address'),
-            'phone'             => $this->input->post('mobile_number'),
-            'email'                     => $this->input->post('email'),
-            'password'                  => sha1($this->input->post('password')),
-            'role'                      => $this->input->post('role') ?? 'principal',
-            'fund_resource'             => $this->input->post('fund_resource'),
-            'trust_name'                => $this->input->post('trust_name'),
-            'trust_registration_date'   => $this->input->post('trust_registration_date'),
-            'trust_president_name'      => $this->input->post('trust_president_name'),
-            'secretary_name'            => $this->input->post('secretary_name'),
-            'treasurer_name'            => $this->input->post('treasurer_name'),
-            'principal_name'            => $this->input->post('principal_name'),
-            'setup_type'                => $this->input->post('setup_type'),
-            'focus_area'                => json_encode($this->input->post('focus_area')), // encode as JSON
-            'facilities'                => json_encode($this->input->post('facilities')),
+            'name' => $this->input->post('gurukul_name'),
+            'address' => $this->input->post('address'),
+            'phone' => $this->input->post('mobile_number'),
+            'email' => $this->input->post('email'),
+            'password' => sha1($this->input->post('password')),
+            'role' => $this->input->post('role') ?? 'principal',
+            'fund_resource' => $this->input->post('fund_resource'),
+            'trust_name' => $this->input->post('trust_name'),
+            'trust_registration_date' => $this->input->post('trust_registration_date'),
+            'trust_president_name' => $this->input->post('trust_president_name'),
+            'secretary_name' => $this->input->post('secretary_name'),
+            'treasurer_name' => $this->input->post('treasurer_name'),
+            'principal_name' => $this->input->post('principal_name'),
+            'setup_type' => $this->input->post('setup_type'),
+            'focus_area' => json_encode($this->input->post('focus_area')),
+            'facilities' => json_encode($this->input->post('facilities')),
             'registered_with_education_board' => $this->input->post('registered_with_education_board'),
-            'education_board_name'      => $this->input->post('education_board_name'),
-            'state'                     => $this->input->post('state'),
-            'country'                   => $this->input->post('country'),
+            'education_board_name' => $this->input->post('education_board_name'),
+            'state' => $this->input->post('state'),
+            'country' => $this->input->post('country'),
         );
-
-        $principal_array['file_name'] = $_FILES["file_name"]["name"];
-        $principal_array['email'] = $this->input->post('email');
-        $check_email = $this->db->get_where('principal', array('email' => $principal_array['email']))->row()->email;	// checking if email exists in database
-        if($check_email != null) 
-        {
-        $this->session->set_flashdata('error_message', get_phrase('email_already_exist'));
-        redirect(base_url() . 'admin/teacher/', 'refresh');
+   
+        // File handling
+        $upload_path = "uploads/principal_image/";
+        if (!is_dir($upload_path)) {
+            mkdir($upload_path, 0777, true);
         }
-        else
-        {
-        $this->db->insert('principal', $principal_array);
-        $principal_id = $this->db->insert_id();
-        
-            move_uploaded_file($_FILES["file_name"]["tmp_name"], "uploads/teacher_image/" . $_FILES["file_name"]["name"]);	// upload files
-            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/teacher_image/' . $principal_id . '.jpg');			// image with user ID
+   
+        if (isset($_FILES["file_name"]) && $_FILES["file_name"]["error"] === UPLOAD_ERR_OK) {
+            $principal_array['file_name'] = $_FILES["file_name"]["name"];
+        } else {
+            $principal_array['file_name'] = null;
         }
-
+   
+        // Check email existence
+        $check_email = $this->db->get_where('principal', array('email' => $principal_array['email']))->row();
+        if ($check_email) {
+            $this->session->set_flashdata('error_message', get_phrase('email_already_exist'));
+            redirect(base_url() . 'admin/principal/', 'refresh');
+        } else {
+            $this->db->insert('principal', $principal_array);
+            $principal_id = $this->db->insert_id();
+   
+            if (isset($_FILES["file_name"]) && $_FILES["file_name"]["error"] === UPLOAD_ERR_OK) {
+                if (!move_uploaded_file($_FILES["file_name"]["tmp_name"], $upload_path . $_FILES["file_name"]["name"])) {
+                    log_message('error', 'Failed to move uploaded file: ' . $_FILES["file_name"]["name"]);
+                }
+            }
+   
+            if (isset($_FILES['userfile']) && $_FILES['userfile']['error'] === UPLOAD_ERR_OK) {
+                move_uploaded_file($_FILES['userfile']['tmp_name'], $upload_path . $principal_id . '.jpg');
+            }
+        }
     }
 
-    function update_gurukul($param2){
+    function update_gurukul($principal_id) {
+        // Validate that ID is passed
+        if (!$principal_id) {
+            show_error('Invalid Principal ID');
+            return false;
+        }
+    
         // Gather updated data from POST
         $principal_array = array(
             'name'                        => $this->input->post('gurukul_name'),
             'address'                     => $this->input->post('address'),
             'phone'                       => $this->input->post('mobile_number'),
             'email'                       => $this->input->post('email'),
-            // 'password'                    => sha1($this->input->post('password')),
             'role'                        => $this->input->post('role') ?? 'principal',
             'fund_resource'               => $this->input->post('fund_resource'),
             'trust_name'                  => $this->input->post('trust_name'),
@@ -69,7 +88,7 @@ class Principal_model extends CI_Model {
             'treasurer_name'              => $this->input->post('treasurer_name'),
             'principal_name'              => $this->input->post('principal_name'),
             'setup_type'                  => $this->input->post('setup_type'),
-            'focus_area'                  => json_encode($this->input->post('focus_area')), // encode as JSON
+            'focus_area'                  => json_encode($this->input->post('focus_area')),
             'facilities'                  => json_encode($this->input->post('facilities')),
             'registered_with_education_board' => $this->input->post('registered_with_education_board'),
             'education_board_name'        => $this->input->post('education_board_name'),
@@ -77,28 +96,28 @@ class Principal_model extends CI_Model {
             'country'                     => $this->input->post('country'),
         );
     
-        // Debugging: log the data before updating
-        log_message('debug', 'Principal Data: ' . print_r($principal_array, true));
-    
         // Update the principal data in the database
-        $this->db->where('principal_id', $param2);
-        $this->db->update('principal', $principal_array);
-    
-        // Upload the image if file is provided
+        $this->db->where('principal_id', $principal_id);
+        $result = $this->db->update('principal', $principal_array);
+
         if (!empty($_FILES['userfile']['tmp_name'])) {
-            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/teacher_image/' . $param2 . '.jpg');
+            // Move the uploaded file to the 'uploads/teacher_image/' directory
+            $upload_success = move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/principal_image/' . $principal_id . '.jpg');
+            
+            if ($upload_success) {
+                // Update the file name in the database
+                $principal_array['file_name'] = $upload_success;
+            } else {
+                $this->session->set_flashdata('error_message', get_phrase('Failed to upload the image.'));
+            }
         }
-    
-        // Set flash message and redirect
-        $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
-        redirect(base_url() . 'admin/gurukul_registration', 'refresh');
+        
     }
     
-    function delete_gurukul($param3){
-
+    function delete_gurukul($param2) {
         $this->db->where('principal_id', $param2);
         $this->db->delete('principal');
-    }
+    }    
 
     function insert_invite_gurukul(){
         $principal_array = array(
@@ -124,56 +143,92 @@ class Principal_model extends CI_Model {
             'country'                   => $this->input->post('country'),
         );
 
-        $principal_array['file_name'] = $_FILES["file_name"]["name"];
-        $principal_array['email'] = $this->input->post('email');
-        $check_email = $this->db->get_where('gurukul_form', array('email' => $principal_array['email']))->row()->email;	// checking if email exists in database
-        if($check_email != null) 
-        {
-        $this->session->set_flashdata('error_message', get_phrase('email_already_exist'));
-        redirect(base_url() . 'admin/teacher/', 'refresh');
+        // File handling
+        $upload_path = "uploads/principal_image/";
+        if (!is_dir($upload_path)) {
+            mkdir($upload_path, 0777, true);
         }
-        else
-        {
-        $this->db->insert('gurukul_form', $principal_array);
-        $principal_id = $this->db->insert_id();
-        
-            move_uploaded_file($_FILES["file_name"]["tmp_name"], "uploads/teacher_image/" . $_FILES["file_name"]["name"]);	// upload files
-            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/teacher_image/' . $principal_id . '.jpg');			// image with user ID
+   
+        if (isset($_FILES["file_name"]) && $_FILES["file_name"]["error"] === UPLOAD_ERR_OK) {
+            $principal_array['file_name'] = $_FILES["file_name"]["name"];
+        } else {
+            $principal_array['file_name'] = null;
+        }
+   
+        // Check email existence
+        $check_email = $this->db->get_where('gurukul_form', array('email' => $principal_array['email']))->row();
+        if ($check_email) {
+            $this->session->set_flashdata('error_message', get_phrase('email_already_exist'));
+            redirect(base_url() . 'admin/principal/', 'refresh');
+        } else {
+            $this->db->insert('gurukul_form', $principal_array);
+            $principal_id = $this->db->insert_id();
+   
+            if (isset($_FILES["file_name"]) && $_FILES["file_name"]["error"] === UPLOAD_ERR_OK) {
+                if (!move_uploaded_file($_FILES["file_name"]["tmp_name"], $upload_path . $_FILES["file_name"]["name"])) {
+                    log_message('error', 'Failed to move uploaded file: ' . $_FILES["file_name"]["name"]);
+                }
+            }
+   
+            if (isset($_FILES['userfile']) && $_FILES['userfile']['error'] === UPLOAD_ERR_OK) {
+                move_uploaded_file($_FILES['userfile']['tmp_name'], $upload_path . $principal_id . '.jpg');
+            }
         }
 
     }
 
-    function update_invite_gurukul($param2){
+    function update_invite_gurukul($principal_id) { 
+        // Validate that ID is passed
+        if (!$principal_id) {
+            show_error('Invalid Principal ID');
+            return false;
+        }
+    
+        // Gather updated data from POST
         $principal_array = array(
-            'name'              => $this->input->post('gurukul_name'),
-            'address'                   => $this->input->post('address'),
-            'phone'             => $this->input->post('mobile_number'),
-            'email'                     => $this->input->post('email'),
-            'password'                  => sha1($this->input->post('password')),
-            'role'                      => $this->input->post('role') ?? 'principal',
-            'fund_resource'             => $this->input->post('fund_resource'),
-            'trust_name'                => $this->input->post('trust_name'),
-            'trust_registration_date'   => $this->input->post('trust_registration_date'),
-            'trust_president_name'      => $this->input->post('trust_president_name'),
-            'secretary_name'            => $this->input->post('secretary_name'),
-            'treasurer_name'            => $this->input->post('treasurer_name'),
-            'principal_name'            => $this->input->post('principal_name'),
-            'setup_type'                => $this->input->post('setup_type'),
-            'focus_area'                => json_encode($this->input->post('focus_area')), // encode as JSON
-            'facilities'                => json_encode($this->input->post('facilities')),
+            'name'                        => $this->input->post('gurukul_name'),
+            'address'                     => $this->input->post('address'),
+            'phone'                       => $this->input->post('mobile_number'),
+            'email'                       => $this->input->post('email'),
+            'role'                        => $this->input->post('role') ?? 'principal',
+            'fund_resource'               => $this->input->post('fund_resource'),
+            'trust_name'                  => $this->input->post('trust_name'),
+            'trust_registration_date'     => $this->input->post('trust_registration_date'),
+            'trust_president_name'        => $this->input->post('trust_president_name'),
+            'secretary_name'              => $this->input->post('secretary_name'),
+            'treasurer_name'              => $this->input->post('treasurer_name'),
+            'principal_name'              => $this->input->post('principal_name'),
+            'setup_type'                  => $this->input->post('setup_type'),
+            'focus_area'                  => json_encode($this->input->post('focus_area')),
+            'facilities'                  => json_encode($this->input->post('facilities')),
             'registered_with_education_board' => $this->input->post('registered_with_education_board'),
-            'education_board_name'      => $this->input->post('education_board_name'),
-            'state'                     => $this->input->post('state'),
-            'country'                   => $this->input->post('country'),
+            'education_board_name'        => $this->input->post('education_board_name'),
+            'state'                       => $this->input->post('state'),
+            'country'                     => $this->input->post('country'),
         );
-        $this->db->where('principal_id', $param2);
-        $this->db->update('gurukul_form', $teacher_data);
-        move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/teacher_image/' . $param2 . '.jpg'); 
+    
+        // Update the principal data in the database
+        $this->db->where('principal_id', $principal_id);
+        $result = $this->db->update('gurukul_form', $principal_array);
+
+        if (!empty($_FILES['userfile']['tmp_name'])) {
+            // Move the uploaded file to the 'uploads/teacher_image/' directory
+            $upload_success = move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/principal_image/' . $principal_id . '.jpg');
+            
+            if ($upload_success) {
+                // Update the file name in the database
+                $principal_array['file_name'] =  $upload_success;
+            } else {
+                $this->session->set_flashdata('error_message', get_phrase('Failed to upload the image.'));
+            }
+        }
+    
+        // Flash message for success or error
+        if ($result) {
+            $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
+        } else {
+            $this->session->set_flashdata('error_message', get_phrase('Failed to update data'));
+        }
     }
 
-    function delete_invite_gurukul(){
-
-        $this->db->where('principal_id', $param2);
-        $this->db->delete('gurukul_form');
-    }
 }

@@ -276,7 +276,7 @@ class Teacher extends CI_Controller {
     /***********  The function that manages school marks ends here ***********************/    
 
 
-    function student ($param1 = null, $param2 = null, $param3 = null)
+    function student($param1 = null, $param2 = null, $param3 = null)
     {
         $countries = $this->db->get('countries')->result_array(); // Returns all countries as an array
 

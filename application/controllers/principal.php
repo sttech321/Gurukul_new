@@ -88,7 +88,7 @@ class Principal extends CI_Controller {
 
     }
 
-    function teacher ($param1 = null, $param2 = null, $param3 = null)
+    function teacher($param1 = null, $param2 = null, $param3 = null)
     {
         $countries = $this->db->get('countries')->result_array(); 
         if ($this->session->userdata('principal_login') != 1) redirect(base_url(), 'refresh');
@@ -122,7 +122,7 @@ class Principal extends CI_Controller {
         $this->load->view('backend/index', $page_data);
     }
 
-    function student ($param1 = null, $param2 = null, $param3 = null)
+    function student($param1 = null, $param2 = null, $param3 = null)
     {
         $countries = $this->db->get('countries')->result_array(); // Returns all countries as an array
 

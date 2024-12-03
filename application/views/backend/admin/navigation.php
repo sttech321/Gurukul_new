@@ -164,11 +164,6 @@
    	 </li>
     <?php endif;?> <!---  Permission for Admin Manage Employee ends here ------>
 
-
-
-
-
-
     <!---  Permission for Admin Manage Student starts here ------>
     <?php $check_admin_permission = $this->db->get_where('admin_role', array('admin_id' => $this->session->userdata('login_user_id')))->row()->manage_student;?>
     <?php if($check_admin_permission == '1'):?>          
