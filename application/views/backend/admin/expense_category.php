@@ -1,13 +1,13 @@
 <div class="row">
                     <div class="col-sm-5">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo get_phrase('expense_category'); ?></div>
+                            <div class="panel-heading"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo $this->lang->line('expense_category'); ?></div>
 
 <?php echo form_open(base_url() . 'expense/expense_category/insert', array('class' => 'form-horizontal form-goups-bordered validate'));?>
 					<div class="panel-body table-responsive">
 					
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('Title');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('title');?></label>
                     <div class="col-sm-12">
 					
                             
@@ -17,7 +17,7 @@
 							
 		
                            <div class="form-group">
-                                  <button type="submit" class="btn btn-block btn-info btn-rounded btn-sm "><i class="fa fa-plus"></i>&nbsp;<?php echo get_phrase('add_category');?></button>
+                                  <button type="submit" class="btn btn-block btn-info btn-rounded btn-sm "><i class="fa fa-plus"></i>&nbsp;<?php echo $this->lang->line('add_category');?></button>
 							</div>
                 <?php echo form_close();?>
                 </div>                
@@ -27,7 +27,7 @@
 	
  <div class="col-sm-7">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('expense_category'); ?></div>
+                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo $this->lang->line('expense_category'); ?></div>
 							
 
 
@@ -40,8 +40,8 @@
                 
                 		<tr>
                     		<th><div>#</div></th>
-                    		<th><div><?php echo get_phrase('Expense Title');?></div></th>
-                            <th><div><?php echo get_phrase('options');?></div></th>
+                    		<th><div><?php echo $this->lang->line('expense_title');?></div></th>
+                            <th><div><?php echo $this->lang->line('option');?></div></th>
 						</tr>
                   
 					</thead>

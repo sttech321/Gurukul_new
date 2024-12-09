@@ -3,7 +3,7 @@
 	<div class="col-sm-7">
 		<div class="panel panel-info">
 
-			<div class="panel-heading"><i class="fa fa-gear"></i>  <?php echo get_phrase('System Settings');?></div>
+			<div class="panel-heading"><i class="fa fa-gear"></i>  <?php echo $this->lang->line('system_setting');?></div>
 			<div class="panel-body table-responsive">
 
 				<?php echo form_open(base_url(). 'systemsetting/system_settings/do_update', array('class' => 'form-horizontal form-groups-bordered', 'enctype'=> 'multipart/form-data'));?>
@@ -11,7 +11,7 @@
 
 
 				<div class="form-group">
-					<label class="col-md-12" for="example-text"><?php echo get_phrase('System Name');?></label>
+					<label class="col-md-12" for="example-text"><?php echo $this->lang->line('system_name');?></label>
 					<div class="col-sm-12">
 						<input type="text" class="form-control" name="system_name" value="<?php echo $this->db->get_where('settings', array('type' => 'system_name'))->row()->description;?>">
 					</div>
@@ -19,7 +19,7 @@
 
 
 				<div class="form-group">
-					<label class="col-md-12" for="example-text"><?php echo get_phrase('System Title');?></label>
+					<label class="col-md-12" for="example-text"><?php echo $this->lang->line('system_title');?></label>
 					<div class="col-sm-12">
 						<input type="text" class="form-control" name="system_title" value="<?php echo $this->db->get_where('settings', array('type' => 'system_title'))->row()->description;?>">
 					</div>
@@ -27,7 +27,7 @@
 
 
 				<div class="form-group">
-					<label class="col-md-12" for="example-text"><?php echo get_phrase('System Address');?></label>
+					<label class="col-md-12" for="example-text"><?php echo $this->lang->line('system_address');?></label>
 					<div class="col-sm-12">
 						<input type="text" class="form-control" name="address" value="<?php echo $this->db->get_where('settings', array('type' => 'address'))->row()->description;?>">
 					</div>
@@ -35,28 +35,28 @@
 
 
 				<div class="form-group">
-					<label class="col-md-12" for="example-text"><?php echo get_phrase('System Phone');?></label>
+					<label class="col-md-12" for="example-text"><?php echo $this->lang->line('system_phone');?></label>
 					<div class="col-sm-12">
 						<input type="text" class="form-control" name="phone" value="<?php echo $this->db->get_where('settings', array('type' => 'phone'))->row()->description;?>">
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-12" for="example-text"><?php echo get_phrase('Paypal Email');?></label>
+					<label class="col-md-12" for="example-text"><?php echo $this->lang->line('paypal_email');?></label>
 					<div class="col-sm-12">
 						<input type="text" class="form-control" name="paypal_email" value="<?php echo $this->db->get_where('settings', array('type' => 'paypal_email'))->row()->description;?>">
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-12" for="example-text"><?php echo get_phrase('Currency');?></label>
+					<label class="col-md-12" for="example-text"><?php echo $this->lang->line('currency');?></label>
 					<div class="col-sm-12">
 						<input type="text" class="form-control" name="currency" value="<?php echo $this->db->get_where('settings', array('type' => 'currency'))->row()->description;?>">
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-12" for="example-text"><?php echo get_phrase('System Email');?></label>
+					<label class="col-md-12" for="example-text"><?php echo $this->lang->line('system_email');?></label>
 					<div class="col-sm-12">
 						<input type="text" class="form-control" name="system_email" value="<?php echo $this->db->get_where('settings', array('type' => 'system_email'))->row()->description;?>">
 					</div>
@@ -64,7 +64,7 @@
 
 		
 				<div class="form-group">
-					<label class="col-md-12" for="example-text"><?php echo get_phrase('Text Alignment');?></label>
+					<label class="col-md-12" for="example-text"><?php echo $this->lang->line('text_alignment');?></label>
 					<div class="col-sm-12">
 						
 						<select name="text_align" class="form-control">
@@ -76,7 +76,7 @@
 				</div>
 				
 				<div class="form-group">
-                   <label class="col-md-12" for="example-text"><?php echo get_phrase('language'); ?></label>
+                   <label class="col-md-12" for="example-text"><?php echo $this->lang->line('language'); ?></label>
                     <div class="col-sm-12">
                         <select name="language" class="form-control select2">
                             <?php
@@ -99,7 +99,7 @@
 
 
 				<div class="form-group">
-					<label class="col-md-12" for="example-text"><?php echo get_phrase('Running Session');?></label>
+					<label class="col-md-12" for="example-text"><?php echo $this->lang->line('running_session');?></label>
 					<div class="col-sm-12">
 						
 
@@ -121,7 +121,7 @@
 
 
 				<div class="form-group">
-					<label class="col-md-12" for="example-text"><?php echo get_phrase('System Footer');?></label>
+					<label class="col-md-12" for="example-text"><?php echo $this->lang->line('system_footer');?></label>
 					<div class="col-sm-12">
 						<input type="text" class="form-control" name="footer" value="<?php echo $this->db->get_where('settings', array('type' => 'footer'))->row()->description;?>">
 					</div>
@@ -129,7 +129,7 @@
 
 
 				<div class="form-group">
-					<button type="submit" class="btn btn-success btn-rounded btn-block btn-sm"><i class="fa fa-save"></i>  <?php echo get_phrase('save');?></button>
+					<button type="submit" class="btn btn-success btn-rounded btn-block btn-sm"><i class="fa fa-save"></i>  <?php echo $this->lang->line('save');?></button>
 				</div>
 
 
@@ -151,14 +151,14 @@
 
 <div class="col-sm-5">
 <div class="panel panel-info">
-<div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('System Logo'); ?></div>
+<div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo $this->lang->line('system_logo'); ?></div>
 <div class="panel-wrapper collapse in" aria-expanded="true">
 <div class="panel-body table-responsive">
 
 <?php echo form_open(base_url() . 'systemsetting/system_settings/upload_logo', array('class' => 'form-horizontal form-groups-bordered validate', 'target' => '_top', 'enctype' => 'multipart/form-data'));
         ?>			
 					<div class="form-group"> 
-					 <label class="col-sm-12"><?php echo get_phrase('browse_image');?>*</label>        
+					 <label class="col-sm-12"><?php echo $this->lang->line('browse_image');?>*</label>        
 					 <div class="col-sm-12">
   		  			 <input type='file' class="form-control" name="userfile" onChange="readURL(this);" /required>
        				 <img id="blah" src="<?php echo base_url(); ?>uploads/logo.png" alt="" height="200" width="200"/>
@@ -166,7 +166,7 @@
 					</div>	
 					
 				<div class="form-group">
-                     <button class="btn btn-block btn-info btn-rounded btn-sm"><i class="fa fa-save"></i>&nbsp;<?php echo get_phrase('Update Logo');?></button>
+                     <button class="btn btn-block btn-info btn-rounded btn-sm"><i class="fa fa-save"></i>&nbsp;<?php echo $this->lang->line('update_logo');?></button>
                 
                 </div>
 		
@@ -174,8 +174,8 @@
 
 
 
+                <?php echo $this->lang->line('theme_setting');?>
 
-				THEME SETTINGS
 				<hr>
 				
 				<?php echo form_open(base_url() . 'systemsetting/system_settings/themeSettings', array('class' => 'form-horizontal form-groups-bordered validate', 'target' => '_top', 'enctype' => 'multipart/form-data'));
@@ -217,7 +217,7 @@
 		<br>		
 				
                 <div class="form-group">
-                          <button type="submit" class="btn btn-block btn-info btn-rounded btn-sm"><i class="fa fa-plus"></i>&nbsp;<?php echo get_phrase('change_theme');?></button>
+                          <button type="submit" class="btn btn-block btn-info btn-rounded btn-sm"><i class="fa fa-plus"></i>&nbsp;<?php echo $this->lang->line('change_theme');?></button>
                     </div>
                     <?php echo form_close();?>
 

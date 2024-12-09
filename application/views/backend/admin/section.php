@@ -1,7 +1,7 @@
 <div class="row">
                     <div class="col-sm-5">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo get_phrase('add_section');?></div>
+                            <div class="panel-heading"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo $this->lang->line('add_section'); ?></div>
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body table-responsive">
 			
@@ -9,14 +9,14 @@
 
                 	<?php echo form_open(base_url() . 'admin/section/create' , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
                             <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('name');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('name'); ?></label>
                     <div class="col-sm-12">
                                     <input type="text" class="form-control" name="name" / required>
                                 </div>
                             </div>
 
 								<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('nick_name');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('nick_name'); ?></label>
                     <div class="col-sm-12">
                                     <input type="text" class="form-control" name="nick_name"/ required>
                                 </div>
@@ -24,10 +24,10 @@
 
                     
                     <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('class');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('class'); ?></label>
                     <div class="col-sm-12">
                     <select name="class_id" class="form-control select2" required>
-                    <option value=""><?php echo get_phrase('select_class');?></option>
+                    <option value=""><?php echo $this->lang->line('select_section'); ?></option>
 
                     <?php $class =  $this->db->get('class')->result_array();
                     foreach($class as $key => $class):?>
@@ -40,10 +40,10 @@
 
 								
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('teacher');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('teacher'); ?></label>
                     <div class="col-sm-12">
                     <select name="teacher_id" class="form-control select2" required>
-                    <option value=""><?php echo get_phrase('select_teacher');?></option>
+                    <option value=""><?php echo $this->lang->line('select_teacher'); ?></option>
 
                     <?php $teacher =  $this->db->get('teacher')->result_array();
                     foreach($teacher as $key => $teacher):?>
@@ -54,7 +54,7 @@
                   </div>
                  </div>
                     <div class="form-group">
-                    <button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-book"></i>&nbsp;<?php echo get_phrase('add_section');?></button>
+                    <button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-book"></i>&nbsp;<?php echo $this->lang->line('add_section'); ?></button>
 					</div>
 							
                     </form>                
@@ -66,7 +66,7 @@
 
                     <div class="col-sm-7">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo get_phrase('list_section');?></div>
+                            <div class="panel-heading"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo $this->lang->line('list_section'); ?></div>
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body table-responsive">
                     
@@ -92,10 +92,10 @@
                 	<thead>
                 		<tr>
                     		<th><div>#</div></th>
-                    		<th><div><?php echo get_phrase('class_name');?></div></th>
-                    		<th><div><?php echo get_phrase('nick_name');?></div></th>
-                    		<th><div><?php echo get_phrase('teacher');?></div></th>
-                    		<th><div><?php echo get_phrase('options');?></div></th>
+                    		<th><div><?php echo $this->lang->line('class_name'); ?></div></th>
+                    		<th><div><?php echo $this->lang->line('nick_name'); ?></div></th>
+                    		<th><div><?php echo $this->lang->line('teacher'); ?></div></th>
+                    		<th><div><?php echo $this->lang->line('options'); ?></div></th>
 						</tr>
 					</thead>
                     <tbody>

@@ -1,7 +1,7 @@
 <div class="row">
                     <div class="col-sm-5">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo get_phrase('add');?></div>
+                            <div class="panel-heading"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo $this->lang->line('add');?></div>
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body table-responsive">
 			
@@ -9,14 +9,14 @@
 
                 	<?php echo form_open(base_url() . 'admin/hostel_room/create' , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
                             <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('name');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('name');?></label>
                     <div class="col-sm-12">
                                     <input type="text" class="form-control" name="name" / required>
                                 </div>
                             </div>
 
 								<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('room_type');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('room_type');?></label>
                     <div class="col-sm-12">
                                     <input type="text" class="form-control" name="room_type"/ required>
                                 </div>
@@ -24,7 +24,7 @@
 
                     
 				<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('num_of_bed');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('num_of_bed');?></label>
                     <div class="col-sm-12">
                         <input type="number" class="form-control" name="num_bed"/ required>
                     </div>
@@ -32,7 +32,7 @@
 
 
                 <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('cost_bed');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('cost_bed');?></label>
                     <div class="col-sm-12">
                         <input type="number" class="form-control" name="cost_bed"/ required>
                     </div>
@@ -40,7 +40,7 @@
 
 
                 <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('description');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('description');?></label>
                     <div class="col-sm-12">
                         <textarea class="form-control" name="description"></textarea>
                     </div>
@@ -50,7 +50,7 @@
 								
 							
                     <div class="form-group">
-                    <button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-plus"></i>&nbsp;<?php echo get_phrase('save');?></button>
+                    <button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-plus"></i>&nbsp;<?php echo $this->lang->line('save');?></button>
 					</div>
 							
                     </form>                
@@ -62,7 +62,7 @@
 
                     <div class="col-sm-7">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('list');?></div>
+                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo $this->lang->line('list');?></div>
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body table-responsive">
 				
@@ -70,12 +70,12 @@
                 	<thead>
                 		<tr>
                     		<th><div>#</div></th>
-                    		<th><div><?php echo get_phrase('name');?></div></th>
-                    		<th><div><?php echo get_phrase('room_type');?></div></th>
-                    		<th><div><?php echo get_phrase('num_of_bed');?></div></th>
-                    		<th><div><?php echo get_phrase('cost_bed');?></div></th>
-                    		<th><div><?php echo get_phrase('description');?></div></th>
-                    		<th><div><?php echo get_phrase('actions');?></div></th>
+                    		<th><div><?php echo $this->lang->line('name');?></div></th>
+                    		<th><div><?php echo $this->lang->line('room_type');?></div></th>
+                    		<th><div><?php echo $this->lang->line('num_of_bed');?></div></th>
+                    		<th><div><?php echo $this->lang->line('cost_bed');?></div></th>
+                    		<th><div><?php echo $this->lang->line('description');?></div></th>
+                    		<th><div><?php echo $this->lang->line('action');?></div></th>
 						</tr>
 					</thead>
                     <tbody>

@@ -3,20 +3,15 @@
 				  	<div class="panel panel-info">
                                 <div class="panel-body table-responsive">
                                 <?php echo form_open(base_url().'payment/paymentSetting/update', array('class' => 'form-horizontal form-groups-bordered validate', 'enctype'=>'multipart/form-data'));?>
-
-
-
-
-                                <strong>STRIP PAYMENT SETTINGS</strong>&nbsp;<i class="fa fa-angle-double-right"></i> <a href="https://dashboard.stripe.com/register">Register Here</a>
-				<hr>
-
+                                <strong><?php echo $this->lang->line('stripe_payment_settings'); ?></strong>&nbsp;<i class="fa fa-angle-double-right"></i> <a href="https://dashboard.stripe.com/register"><?php echo $this->lang->line('register_here'); ?></a>
+				                <hr>
 								<?php
                                 $stripe_settings = $this->crud_model->get_settings('stripe_setting');
                                 $stripe = json_decode($stripe_settings);
                             	?>	
 				 
 				 <div class="form-group">
-                    <label class="col-md-12" for="example-text"><?php echo get_phrase('active'); ?></label>
+                    <label class="col-md-12" for="example-text"><?php echo $this->lang->line('active'); ?></label>
                     <div class="col-sm-12">
                       <select name="stripe_active" class="form-control">
                                                 <option value="0"
@@ -30,7 +25,7 @@
                 </div>
 				
 				 <div class="form-group">
-                   <label class="col-md-12" for="example-text"><?php echo get_phrase('test_mode') ?></label>
+                   <label class="col-md-12" for="example-text"><?php echo $this->lang->line('test_mode') ?></label>
                     <div class="col-sm-12">
                         <select name="testmode" class="form-control">
                                             <option value="on"
@@ -44,7 +39,7 @@
                 </div>
 				
 				<div class="form-group">
-                   <label class="col-md-12" for="example-text"><?php echo get_phrase('test_secret_key') ?></label>
+                   <label class="col-md-12" for="example-text"><?php echo $this->lang->line('test_secret_key') ?></label>
                     <div class="col-sm-12">
                          <input type="text" class="form-control"
                                                 name="secret_key"
@@ -53,7 +48,7 @@
                 </div>
 				
 				<div class="form-group">
-                   <label class="col-md-12" for="example-text"><?php echo get_phrase('test_public_key') ?></label>
+                   <label class="col-md-12" for="example-text"><?php echo $this->lang->line('test_public_key') ?></label>
                     <div class="col-sm-12">
                      <input type="text" class="form-control"
                                                 name="public_key"
@@ -62,7 +57,7 @@
                 </div>
 				
 				<div class="form-group">
-                   <label class="col-md-12" for="example-text"> <?php echo get_phrase('live_secret_key') ?></label>
+                   <label class="col-md-12" for="example-text"> <?php echo $this->lang->line('live_secret_key') ?></label>
                     <div class="col-sm-12">
                     <input type="text" class="form-control"
                                                 name="secret_live_key"
@@ -72,19 +67,17 @@
 				
 				
 				<div class="form-group">
-                   <label class="col-md-12" for="example-text"><?php echo get_phrase('live_public_key') ?></label>
+                   <label class="col-md-12" for="example-text"><?php echo $this->lang->line('live_public_key') ?></label>
                     <div class="col-sm-12">
                     <input type="text" class="form-control"
                                                 name="public_live_key"
                                                     value="<?php echo $stripe[0]->public_live_key;?>" required />
                     </div>
                 </div>
-
-
              
 				 
 				  <hr>
-				<strong>PAYPAL PAYMENT SETTINGS</strong>&nbsp;<i class="fa fa-angle-double-right"></i> <a href="https://paypal.com/welcome/signup/#/email_password" target="_blank">Register Here</a>
+				<strong><?php echo $this->lang->line('paypal_payment_settings'); ?></strong>&nbsp;<i class="fa fa-angle-double-right"></i> <a href="https://paypal.com/welcome/signup/#/email_password" target="_blank"><?php echo $this->lang->line('register_here'); ?></a>
 				<hr>
 								 <?php
                                 $paypal_settings = $this->crud_model->get_settings('paypal_setting');
@@ -93,7 +86,7 @@
 	
 				 
 				 <div class="form-group">
-                    <label class="col-md-12" for="example-text"><?php echo get_phrase('active'); ?></label>
+                    <label class="col-md-12" for="example-text"><?php echo $this->lang->line('active'); ?></label>
                     <div class="col-sm-12">
                        <select name="paypal_active" class="form-control">
                                                 <option value="0"
@@ -107,7 +100,7 @@
                 </div>
 				
 				 <div class="form-group">
-                   <label class="col-md-12" for="example-text"> <?php echo get_phrase('mode') ?></label>
+                   <label class="col-md-12" for="example-text"> <?php echo $this->lang->line('mode') ?></label>
                     <div class="col-sm-12">
                       <select name="paypal_mode" class="form-control">
                        <option value="sandbox"
@@ -121,14 +114,14 @@
                 </div>
 				
 				<div class="form-group">
-                   <label class="col-md-12" for="example-text"> <?php echo get_phrase('client_id').' ('.get_phrase('sandbox').')'; ?></label>
+                   <label class="col-md-12" for="example-text"> <?php echo get_phrase('client_id').' ('.$this->lang->line('sandbox').')'; ?></label>
                     <div class="col-sm-12">
                         <input type="text" class="form-control" name="sandbox_client_id" value="<?php echo $paypal[0]->sandbox_client_id;?>" required />
                     </div>
                 </div>
 				
 				<div class="form-group">
-                   <label class="col-md-12" for="example-text"><?php echo get_phrase('client_id').' ('.get_phrase('production').')'; ?></label>
+                   <label class="col-md-12" for="example-text"><?php echo get_phrase('client_id').' ('.$this->lang->line('production').')'; ?></label>
                     <div class="col-sm-12">
                       <input type="text" class="form-control"  name="production_client_id" value="<?php echo $paypal[0]->production_client_id;?>" required />
                     </div>
@@ -136,7 +129,7 @@
 
 
                 <div class="form-group">
-							<button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Save</button>
+							<button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo $this->lang->line('save'); ?></button>
 					</div>
 
 <?php echo form_close();?>

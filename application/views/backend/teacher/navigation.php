@@ -51,35 +51,37 @@
                             class="hide-menu"><?php echo $this->lang->line('Dashboard'); ?></span></a> </li>
 
 
-                <li> <a href="#" class="waves-effect"><i data-icon="&#xe006;" class="fa fa-download p-r-10"></i> <span
-                            class="hide-menu"><?php echo $this->lang->line('download_page'); ?><span
-                                class="fa arrow"></span></span></a>
-                    <ul class=" nav nav-second-level<?php
-            if ($page_name == 'assignment' ||
-                    $page_name == 'study_material')
-                echo 'opened active';
-            ?> ">
+                <!--<li> <a href="#" class="waves-effect"><i data-icon="&#xe006;" class="fa fa-download p-r-10"></i> <span-->
+                <!--            class="hide-menu"><?php //echo $this->lang->line('download_page'); ?><span-->
+                <!--                class="fa arrow"></span></span></a>-->
+                    <!--<ul class=" nav nav-second-level-->
+                    <?php
+            // if ($page_name == 'assignment' ||
+            //         $page_name == 'study_material')
+            //     echo 'opened active';
+            ?> 
+            <!--">-->
 
 
-                        <li class="<?php if ($page_name == 'assignment') echo 'active'; ?>">
-                            <a href="<?php echo base_url(); ?>assignment/assignment">
-                                <i class="fa fa-angle-double-right p-r-10"></i>
-                                <span class="hide-menu"><?php echo $this->lang->line('assignment'); ?></span>
-                            </a>
-                        </li>
+                <!--        <li class="<?php //if ($page_name == 'assignment') echo 'active'; ?>">-->
+                <!--            <a href="<?php //echo base_url(); ?>assignment/assignment">-->
+                <!--                <i class="fa fa-angle-double-right p-r-10"></i>-->
+                <!--                <span class="hide-menu"><?php //echo $this->lang->line('assignment'); ?></span>-->
+                <!--            </a>-->
+                <!--        </li>-->
 
 
 
-                        <li class="<?php if ($page_name == 'study_material') echo 'active'; ?> ">
-                            <a href="<?php echo base_url(); ?>studymaterial/study_material">
-                                <i class="fa fa-angle-double-right p-r-10"></i>
-                                <span class="hide-menu"><?php echo $this->lang->line('study_materials'); ?></span>
-                            </a>
-                        </li>
+                <!--        <li class="<?php //if ($page_name == 'study_material') echo 'active'; ?> ">-->
+                <!--            <a href="<?php //echo base_url(); ?>studymaterial/study_material">-->
+                <!--                <i class="fa fa-angle-double-right p-r-10"></i>-->
+                <!--                <span class="hide-menu"><?php //echo $this->lang->line('study_materials'); ?></span>-->
+                <!--            </a>-->
+                <!--        </li>-->
 
 
-                    </ul>
-                </li>
+                <!--    </ul>-->
+                <!--</li>-->
 
                 <!-- <li class="attendance"> <a href="#" class="waves-effect"><i data-icon="&#xe006;"
                             class="fa fa-hospital-o p-r-10"></i> <span

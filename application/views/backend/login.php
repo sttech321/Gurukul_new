@@ -30,6 +30,16 @@ $system_title = $this->db->get_where('settings', array('type' => 'system_title')
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 	
+<style>
+	.white-box.align-center-div {
+		height: 100%;
+		display: flex;
+		align-items: center;
+	}
+	.w-100{
+		width: 100%;
+	}
+</style>
 	
 </head>
 <body>
@@ -39,63 +49,72 @@ $system_title = $this->db->get_where('settings', array('type' => 'system_title')
 </div>
 <section id="wrapper" class="login-register">
   <div class="login-box login-sidebar">
-  <br><br><br>
-    <div class="white-box">
-	 <h4 class="box-title m-b-20" align="center">
-					<img src="<?php echo base_url() ?>uploads/gurukul_logo.svg" class="" width="100" height="100"/></h4>
-					<h5 align="center"><a href="" style="color:black !important; font-size:16px;!important"><?php echo $system_name;?></a></h5>
-					
-					<br><br>
-					
-	<form method="post" role="form" id="loginform" class="form-horizontal form-material" action="<?php echo base_url();?>login/validate_login">
+	<div class="white-box align-center-div">
+	<div class="w-100">
+	 	<h4 class="box-title m-b-20" align="center">
+		<img src="<?php echo base_url() ?>uploads/gurukul_logo.svg" class="" width="150" height="100"/></h4>
+		<h5 align="center"><a href="" style="color:black !important; font-size:16px;!important"><?php //echo $system_name;?></a></h5>	
+		<form method="post" role="form" id="loginform" class="form-horizontal form-material" action="<?php echo base_url();?>login/validate_login">
 
-       <div class="form-group ">
-                        <div class="col-xs-12">
-                            <input class="form-control" type="email" name="email" required="" placeholder="<?php echo get_phrase('email');?>" style="width:100%">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12" >
-                            <input class="form-control" type="password" name="password" required="" placeholder="<?php echo get_phrase('passord');?>" style="width:100%">
-                        </div>
-                    </div>
+			<div class="form-group ">
+				<div class="col-xs-12">
+						<input class="form-control" type="email" name="email" required="" placeholder="<?php echo get_phrase('email');?>" style="width:100%">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-12" >
+						<input class="form-control" type="password" name="password" required="" placeholder="<?php echo get_phrase('password');?>" style="width:100%">
+				</div>
+			</div>
 					
         <div class="form-group">
-          <div class="col-md-12">
-            <div class="checkbox checkbox-primary pull-left p-t-0">
-              <input id="checkbox-signup" type="checkbox">
-              <label for="checkbox-signup"> <?php echo get_phrase('remember_me');?> </label>
-
-            </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> <?php echo get_phrase('forgot_password?');?></a> </div>
-        </div>
-       <div class="form-group text-center m-t-20">
-        <div class="col-xs-12">
-		
-		  
-<button class="btn btn-info btn-rounded btn-sm btn-block text-uppercase waves-effect waves-light" type="submit" style="width:100%; color:white">
-<?php echo get_phrase('log_in');?>
-</button>
-                    <div align="center"><img id="install_progress" src="<?php echo base_url() ?>assets/images/preloader.gif" style="margin-left: 20px; display: none"/></div>
-
-                        </div>
-                    </div>
-					<br><br><br><br><br><br><br><br><br><br>
-                 <?php echo form_close();?>
-        			
-            	<form method="post" role="form" id="recoverform" class="form-horizontal form-material"  action="<?php echo base_url();?>login/reset_password">
-                <input type="email" name="email" class="form-control" placeholder="<?php echo get_phrase('email');?>" style="width:100%" required>
-
-<div class="form-group text-center m-t-20">
+          	<div class="col-md-12">
+					<div class="checkbox checkbox-primary pull-left p-t-0">
+						<input id="checkbox-signup" type="checkbox">
+						<label for="checkbox-signup"> <?php echo get_phrase('remember_me');?> </label>
+					</div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i>
+						<?php echo get_phrase('forgot_password?');?>
+					</a> 
+				</div>
+        	</div>
+       	<div class="form-group text-center m-t-20">
+        		<div class="col-xs-12">
+					<button class="btn btn-info btn-rounded btn-sm btn-block text-uppercase waves-effect waves-light" type="submit" style="width:100%; color:white">
+						<?php echo get_phrase('log_in');?>
+					</button>
+					<div align="center">
+						<img id="install_progress" src="<?php echo base_url() ?>assets/images/preloader.gif" style="margin-left: 20px; display: none"/>
+					</div>
+				</div>
+			</div>
+			<?php echo form_close();?>
+            <?php echo form_open(base_url().'auth/send_reset_password_link', array('class' => 'form-horizontal form-groups-bordered validate', 'id' => 'recoverform', 'enctype'=>'multipart/form-data'));?>
+                    <input type="email" name="email" class="form-control" placeholder="Enter your email"
+                        style="width:100%" required>
+                    <div class="form-group text-center m-t-20">
                         <div class="col-xs-6">
-		<a href="<?php echo base_url();?>"><button class="btn btn-info btn-rounded btn-sm text-uppercase" type="button" style="color:white"><i class="fa fa-mail-reply-all"></i>&nbsp;<?php echo get_phrase('back_to_login');?></button></a>
-		<button class="btn btn-success btn-rounded btn-sm  text-uppercase" type="submit" style="color:white"><i class="fa fa-key"></i>&nbsp;<?php echo get_phrase('reset_password');?></button>
+                            <a href="<?php echo base_url(); ?>">
+                                <button class="btn btn-info btn-rounded btn-sm text-uppercase" type="button"
+                                    style="color:white">
+                                    <i class="fa fa-mail-reply-all"></i>&nbsp;Back to Login
+                                </button>
+                            </a>
+                            <button class="btn btn-success btn-rounded btn-sm text-uppercase" type="submit"
+                                style="color:white">
+                                <i class="fa fa-key"></i>&nbsp;Reset Password
+                            </button>
                         </div>
                     </div>
-					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <?php echo form_close();?>
-            </div>
-        </div>
+                    <div id="thankYouMessage" style="display:none; margin-top: 20px; text-align: center; color: green;">
+                        <p>Thank you! Your password reset link has been sent successfully.</p>
+                    </div>
+                    <?php echo form_close();?>
+		</div>
+	</div>
+  </div>
+
 	
     </section>
 <script src="js/index.js"></script>	

@@ -2,7 +2,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Socialcategory extends CI_Controller { 
+class Socialcategory extends MY_Controller { 
 
     function __construct() {
         parent::__construct();

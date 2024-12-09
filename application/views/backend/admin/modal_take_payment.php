@@ -3,7 +3,7 @@
 <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('list_invoices');?></div>
+                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo $this->lang->line('list_invoices'); ?></div>
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body table-responsive">
                 
@@ -11,9 +11,9 @@
                 	<thead>
                 		<tr>
                 			<td>#</td>
-                			<td><?php echo get_phrase('amount');?></td>
-                			<td><?php echo get_phrase('method');?></td>
-                			<td><?php echo get_phrase('date');?></td>
+                			<td><?php echo $this->lang->line('amount'); ?></td>
+                			<td><?php echo $this->lang->line('method'); ?></td>
+                			<td><?php echo $this->lang->line('date'); ?></td>
                 		</tr>
                 	</thead>
                 	<tbody>
@@ -52,54 +52,54 @@
   <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('accept_payment');?></div>
+                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo $this->lang->line('accept_payment'); ?></div>
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body table-responsive">
 <?php echo form_open(base_url() . 'admin/student_payment/take_payment/'.$row['invoice_id'], array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
 
 				<div class="form-group"> 
-					 <label class="col-sm-12"><?php echo get_phrase('total_amount');?>*</label>        
+					 <label class="col-sm-12"><?php echo $this->lang->line('total_amount'); ?>*</label>        
 					 <div class="col-sm-12">
 		                    <input type="text" class="form-control" value="<?php echo $row['amount'];?>" readonly/>
 		                </div>
 		            </div>
 
 		           <div class="form-group"> 
-					 <label class="col-sm-12"><?php echo get_phrase('amount_you_have_paid');?>*</label>        
+					 <label class="col-sm-12"><?php echo $this->lang->line('amount_you_have_paid'); ?>*</label>        
 					 <div class="col-sm-12">
 		                    <input type="text" class="form-control" name="amount_paid" value="<?php echo $row['amount_paid'];?>" readonly/>
 		                </div>
 		            </div>
 
 		            <div class="form-group"> 
-					 <label class="col-sm-12"><?php echo get_phrase('remaining_balance');?>*</label>        
+					 <label class="col-sm-12"><?php echo $this->lang->line('remaining_balance'); ?>*</label>        
 					 <div class="col-sm-12">
 		                    <input type="text" class="form-control" value="<?php echo $row['due'];?>" readonly/>
 		                </div>
 		            </div>
 
 		           <div class="form-group"> 
-					 <label class="col-sm-12"><?php echo get_phrase('amount_you_want_to_pay_now');?>*</label>        
+					 <label class="col-sm-12"><?php echo $this->lang->line('amount_you_want_to_pay_now'); ?>*</label>        
 					 <div class="col-sm-12">
-		                    <input type="text" class="form-control" name="amount" value="" placeholder="<?php echo get_phrase('enter_payment_amount');?>"/>
+		                    <input type="text" class="form-control" name="amount" value="" placeholder="<?php echo $this->lang->line('enter_payment_amount'); ?>"/>
 		                </div>
 		            </div>
 
 		           <div class="form-group"> 
-					 <label class="col-sm-12"><?php echo get_phrase('method');?>*</label>        
+					 <label class="col-sm-12"><?php echo $this->lang->line('method'); ?>*</label>        
 					 <div class="col-sm-12">
                             <select name="method" class="form-control select2" style="width:100%">
-                                <option value="1"><?php echo get_phrase('card');?></option>
-                                <option value="2"><?php echo get_phrase('cash');?></option>
-                                <option value="3"><?php echo get_phrase('cheque');?></option>
+                                <option value="1"><?php echo $this->lang->line('card'); ?></option>
+                                <option value="2"><?php echo $this->lang->line('cash'); ?></option>
+                                <option value="3"><?php echo $this->lang->line('cheque'); ?></option>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group"> 
-					 <label class="col-sm-12"><?php echo get_phrase('date');?>*</label>        
+					 <label class="col-sm-12"><?php echo $this->lang->line('date'); ?>*</label>        
 					 <div class="col-sm-12">
-		<input class="form-control m-r-10" name="timestamp" type="date" value="<?php echo date('Y-m-d') ?>" id="example-date-input" required>
+					<input class="form-control m-r-10" name="timestamp" type="date" value="<?php echo date('Y-m-d') ?>" id="example-date-input" required>
 	                    </div>
 					</div>
 
@@ -110,7 +110,7 @@
 
 		            <div class="form-group">
                            
-		                    <button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-plus"></i>&nbsp;<?php echo get_phrase('accept_payment');?></button>
+		                    <button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-plus"></i>&nbsp;<?php echo $this->lang->line('accept_payment'); ?></button>
 		               
 		            </div>
 

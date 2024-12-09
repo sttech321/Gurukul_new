@@ -35,6 +35,7 @@ class Admin extends MY_Controller {
 	/******************* / Admin dashboard code to redirect to admin page if successfull login** */
 
 
+
     function manage_profile($param1 = null, $param2 = null, $param3 = null){
     if ($this->session->userdata('admin_login') != 1) redirect(base_url(), 'refresh');
     if ($param1 == 'update') {
@@ -710,6 +711,8 @@ class Admin extends MY_Controller {
     function examQuestion ($param1 = null, $param2 = null, $param3 = null){
 
         if($param1 == 'create'){
+            // print_r($_POST);
+            // die;
             $this->exam_question_model->createexamQuestion();
             $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
             redirect(base_url(). 'admin/examQuestion', 'refresh');
@@ -1056,17 +1059,54 @@ class Admin extends MY_Controller {
         $this->load->view('backend/index', $page_data);
     } 
 
-    function gurukul_invite($param1 = null){
-        $countries = $this->db->get('countries')->result_array(); 
-        if($param1 == 'create'){
+
+
+    function gurukul_invite($param1 = null)
+    {
+        // Fetch list of countries from the database
+        $countries = $this->db->get('countries')->result_array();
+
+        // If the 'create' parameter is passed, process the invite creation
+        if ($param1 == 'create') {
             $this->Principal_model->insert_invite_gurukul();
             $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
-            redirect(base_url() . 'admin/thankyou_gurukul', 'refresh'); 
+            redirect(base_url() . 'admin/thankyou_gurukul', 'refresh');
         }
 
+        // Check if a token is passed in the URL
+        $encodedToken = $this->input->get('token');  // Assuming token is passed as 'token' parameter
+        if ($encodedToken) {
+            // Decode the token from base64
+            $decodedToken = json_decode(base64_decode($encodedToken), true);
+
+            // Validate the token data
+            if (!$decodedToken || !isset($decodedToken['token']) || !isset($decodedToken['expires_at'])) {
+                // If the token is invalid, show an error message
+                $this->session->set_flashdata('error_message', get_phrase('Invalid token.'));
+                redirect(base_url('admin/gurukul_invite'), 'refresh');
+                return;
+            }
+
+            // Check if the token has expired (1 minute expiration time)
+            if (time() > $decodedToken['expires_at']) {
+                // If expired, show a message and prevent page from opening
+                // $this->session->set_flashdata('error_message', get_phrase('This link has expired.'));
+            // echo'The url is expired';
+             redirect(base_url(), 'refresh');
+                return;
+            }
+
+            // Token is valid, proceed with the invite form or registration process
+            $this->session->set_flashdata('success_message', get_phrase('Token is valid. You can now proceed.'));
+        }
+
+        // Pass the countries list to the view
         $page_data['countries'] = $countries;
+
+        // Load the view
         $this->load->view('backend/admin/gurukul_invite', $page_data);
     }
+
 
     public function gurukul_confirmation($data)
     {
@@ -1200,6 +1240,7 @@ class Admin extends MY_Controller {
         $this->load->view('backend/thankyou_gurukul');
     }
     
+    
     public function sendbioEmail()
     {
         // Load email library
@@ -1208,21 +1249,67 @@ class Admin extends MY_Controller {
         // Fetch the email address from POST data
         $email = $this->input->post('email_invite', true); // Sanitize input
 
-        // Check if email is provided
-        if (empty($email)) {
-            echo "Email address is required.";
+        // Validate email address
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo "Valid email address is required.";
             return;
         }
 
-        // Load the email template
-        $template = file_get_contents(APPPATH . 'views/backend/email/invite.php');
-        if (!$template) {
-            echo "Failed to load email template.";
-            return;
-        }
+        // Generate a unique token and set an expiration time (1 minute)
+        $token = bin2hex(random_bytes(32));
+        $expiresAt = time() + 60*60; // 60 seconds = 1 minute
+        $data = ['token' => $token, 'expires_at' => $expiresAt];
+        $encodedToken = base64_encode(json_encode($data)); // Encode the token and expiration data
+
+        // Generate the invite link with the encoded token
+        $resetLink = base_url('admin/gurukul_invite/?token=' . $encodedToken);
+
+        // Email template with dynamic reset link
+        $template_data = <<<HTML
+        <div style=" width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+            padding: 50px;
+            padding-bottom: 30px;
+            border-radius: 20px;
+            background-color: #fbfbfb;
+            box-shadow: 0 5px 9px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-decoration: none;">
+            <h1 style="text-align: center; color: #333; font-size: 28px;
+            color: #0073e6;
+            margin-bottom: 16px;">You're Invited!</h1>
+            <p style="font-size: 16px;
+            margin: 10px 0;">Hello,</p>
+            <p>You have been invited to fill out a form. Click the link below to access the form:</p>
+            <p style="text-align: center; margin: 20px 0; font-size: 16px;
+            margin: 10px 0;">
+                <a href="{$resetLink}" style="display: inline-block; background-color: #007BFF; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-bottom: 20px; display: inline-block;
+            background-color: #00b78a !important;
+            color: white !important;
+            padding: 10px 20px;
+            /* text-decoration: none; */
+            border-radius: 5px;
+            margin-top: 15px;">Fill Out the Form</a>
+            </p>
+            <p>The Link is valid for 1 hour.</p>
+            <p style="font-size: 16px;
+            margin: 10px 0;">Thank you!</p>
+            <hr style="margin: 20px 0;">
+            <div style="text-align: center; color: #777; font-size: 12px; font-size: 14px;
+            color: #777777;
+            text-align: center;
+            margin-top: 20px;">
+                <p style="font-size: 16px;
+            margin: 10px 0;">If you have any questions, feel free to reach out to us.</p>
+            </div>
+        </div>
+        HTML;
 
         // Email configuration
-        $config = array(
+        $config = [
             'protocol'    => 'smtp',
             'smtp_host'   => 'smtp.gmail.com',
             'smtp_port'   => 587,
@@ -1232,21 +1319,23 @@ class Admin extends MY_Controller {
             'charset'     => 'utf-8',
             'newline'     => "\r\n",
             'smtp_crypto' => 'tls',
-        );
+        ];
         $this->email->initialize($config);
 
         // Prepare email
         $this->email->from('st.manishkatoch01@gmail.com', 'GURUKUL');
-        $this->email->to($email); // Email from form input
-        $this->email->subject('Invitation');
-        $this->email->message($template);
+        $this->email->to($email);
+        $this->email->subject('You’re Invited to Gurukul!');
+        $this->email->message($template_data);
 
-        // Send email
+        // Attempt to send email
         if (!$this->email->send()) {
-            echo "Failed to send email. Debug info:";
+            // Display debug info if email fails
+            echo "Failed to send email. Debug information:";
             echo $this->email->print_debugger(['headers', 'subject', 'body']);
         } else {
-            redirect(base_url(). 'admin/gurukul_registration', 'refresh');
+            // Redirect upon success
+            redirect(base_url('admin/gurukul_registration'), 'refresh');
         }
     }
 

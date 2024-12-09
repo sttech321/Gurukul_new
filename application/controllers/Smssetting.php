@@ -2,7 +2,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Smssetting extends CI_Controller { 
+class Smssetting extends MY_Controller { 
 
     function __construct() {
         parent::__construct();

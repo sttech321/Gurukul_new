@@ -103,6 +103,12 @@ class Student_model extends CI_Model {
         $this->db->insert('student', $page_data);
         $student_id = $this->db->insert_id();
         move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $student_id . '.jpg');			// image with user ID
+        $user_array = array(
+            'user_email' => $page_data['email'],
+            'user_password' => $page_data['password'], // Using hashed password
+            'role' => 'student',
+        );
+        $this->db->insert('user', $user_array);
 
     }
 

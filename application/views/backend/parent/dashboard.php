@@ -22,17 +22,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="white-box">
-                            <div class="r-icon-stats">
-                                <i class="ti-user bg-success"></i>
-                                <div class="bodystate">
-                                    <h4><?php echo $this->db->count_all_results('parent');?></h4>
-                                    <span class="text-muted"><?php echo get_phrase('parents');?></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="col-md-3 col-sm-6">-->
+                    <!--    <div class="white-box">-->
+                    <!--        <div class="r-icon-stats">-->
+                    <!--            <i class="ti-user bg-success"></i>-->
+                    <!--            <div class="bodystate">-->
+                    <!--                <h4><?php //echo $this->db->count_all_results('parent');?></h4>-->
+                    <!--                <span class="text-muted"><?php //echo get_phrase('parents');?></span>-->
+                    <!--            </div>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+                    <!--</div>-->
                     <div class="col-md-3 col-sm-6">
                         <div class="white-box">
                             <div class="r-icon-stats">

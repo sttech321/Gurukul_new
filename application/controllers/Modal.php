@@ -15,8 +15,6 @@ class Modal extends MY_Controller {
 	{
 		
 	}
-	
-	
 
 	function popup($page_name = '' , $param2 = '' , $param3 = '')
 	{

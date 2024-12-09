@@ -3,21 +3,21 @@ foreach($hostel_room as $key => $hostel_room):?>
 <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo get_phrase('update');?></div>
+                            <div class="panel-heading"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo $this->lang->line('update');?></div>
                                 <div class="panel-body table-responsive">
 			
 <!----CREATION FORM STARTS---->
 
                 	<?php echo form_open(base_url() . 'admin/hostel_room/update/' . $param2 , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
                             <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('name');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('name');?></label>
                     <div class="col-sm-12">
                                     <input type="text" class="form-control" name="name" value="<?php echo $hostel_room['name'];?>" / required>
                                 </div>
                             </div>
 
 								<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('room_type');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('room_type');?></label>
                     <div class="col-sm-12">
                                     <input type="text" class="form-control" name="room_type" value="<?php echo $hostel_room['room_type'];?>" / required>
                                 </div>
@@ -25,7 +25,7 @@ foreach($hostel_room as $key => $hostel_room):?>
 
                     
 				<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('num_of_bed');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('num_of_bed');?></label>
                     <div class="col-sm-12">
                         <input type="number" class="form-control" value="<?php echo $hostel_room['num_bed'];?>" name="num_bed"/ required>
                     </div>
@@ -33,7 +33,7 @@ foreach($hostel_room as $key => $hostel_room):?>
 
 
                 <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('cost_bed');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('cost_bed');?></label>
                     <div class="col-sm-12">
                         <input type="number" class="form-control" value="<?php echo $hostel_room['cost_bed'];?>" name="cost_bed"/ required>
                     </div>
@@ -41,7 +41,7 @@ foreach($hostel_room as $key => $hostel_room):?>
 
 
                 <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('description');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('description');?></label>
                     <div class="col-sm-12">
                         <textarea class="form-control" name="description"><?php echo $hostel_room['description'];?></textarea>
                     </div>
@@ -51,7 +51,7 @@ foreach($hostel_room as $key => $hostel_room):?>
 								
 							
                     <div class="form-group">
-                    <button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-plus"></i>&nbsp;<?php echo get_phrase('update');?></button>
+                    <button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-plus"></i>&nbsp;<?php echo $this->lang->line('update');?></button>
 					</div>
 							
                     </form>                

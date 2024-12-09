@@ -32,7 +32,7 @@ foreach ( $edit_teacher as $key => $student):
 					<div class="form-group">
                  	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('email'); ?></label>
                     <div class="col-sm-12">
-							<input type="text" class="form-control" name="email" value="<?php echo $student['email']; ?>" >
+							<input type="email" class="form-control" name="email" value="<?php echo $student['email']; ?>" >
 						</div> 
 					</div>
 					<div class="form-group">
@@ -45,7 +45,7 @@ foreach ( $edit_teacher as $key => $student):
 					<div class="form-group">
                  	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('phone'); ?></label>
                     <div class="col-sm-12">
-							<input type="text" class="form-control" name="phone" value="<?php echo $student['phone']; ?>" >
+							<input type="number" class="form-control" name="phone" value="<?php echo $student['phone']; ?>" >
 						</div> 
 					</div>
 					<!-- Country Selection -->
@@ -106,7 +106,7 @@ foreach ( $edit_teacher as $key => $student):
                    <div class="form-group row">
                        <label class="col-md-12" for="father_address"><?php echo $this->lang->line('father_aadhaar'); ?></label>
                        <div class="col-sm-12">
-                           <input type="text" class="form-control" name="father_aadhaar" value="<?php echo $student['father_aadhaar'];?>" required>
+                           <input type="number" class="form-control" name="father_aadhaar" value="<?php echo $student['father_aadhaar'];?>" required>
                        </div>
                    </div>
                    
@@ -122,7 +122,7 @@ foreach ( $edit_teacher as $key => $student):
                    <div class="form-group row">
                        <label class="col-md-12" for="father_phone"><?php echo $this->lang->line('father_mobile_number'); ?></label>
                        <div class="col-sm-12">
-                           <input type="text" class="form-control" name="father_mobile_number" value="<?php echo $student['father_mobile_number'];?>" required>
+                           <input type="number" class="form-control" name="father_mobile_number" value="<?php echo $student['father_mobile_number'];?>" required>
                        </div>
                    </div>
 
@@ -154,7 +154,7 @@ foreach ( $edit_teacher as $key => $student):
                    <div class="form-group row">
                        <label class="col-md-12" for="mother_dob"><?php echo $this->lang->line('mother_date_of_birth'); ?></label>
                        <div class="col-sm-12">
-                           <input type="text" class="form-control" name="mother_dob" value="<?php echo $student['mother_dob'];?>" required>
+                           <input type="date" class="form-control" name="mother_dob" value="<?php echo $student['mother_dob'];?>" required>
                        </div>
                    </div>
 
@@ -170,7 +170,7 @@ foreach ( $edit_teacher as $key => $student):
                     <div class="form-group row">
                        <label class="col-md-12" for="mother_aadhaar"><?php echo $this->lang->line('mother_aadhaar'); ?></label>
                        <div class="col-sm-12">
-                           <input type="text" class="form-control" name="mother_aadhaar" value="<?php echo $student['mother_aadhaar'];?>" required>
+                           <input type="number" class="form-control" name="mother_aadhaar" value="<?php echo $student['mother_aadhaar'];?>" required>
                        </div>
                    </div>
                    
@@ -186,7 +186,7 @@ foreach ( $edit_teacher as $key => $student):
                    <div class="form-group row">
                        <label class="col-md-12" for="mother_phone"><?php echo $this->lang->line('mother_mobile_number'); ?></label>
                        <div class="col-sm-12">
-                           <input type="text" class="form-control" name="mother_mobile_number" value="<?php echo $student['mother_mobile_number'];?>" required>
+                           <input type="number" class="form-control" name="mother_mobile_number" value="<?php echo $student['mother_mobile_number'];?>" required>
                        </div>
                    </div>
 

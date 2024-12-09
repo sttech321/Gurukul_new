@@ -26,7 +26,7 @@ foreach ( $edit_teacher as $key => $row):
                         <label class="col-md-12"
                             for="example-text"><?php echo $this->lang->line('date_of_birth'); ?></label>
                         <div class="col-sm-12">
-                            <input type="text" class="datepicker form-control" name="birthday"
+                            <input type="date" class="datepicker form-control" name="birthday"
                                 value="<?php echo $row['birthday'];?>" />
                         </div>
                     </div>
@@ -59,7 +59,7 @@ foreach ( $edit_teacher as $key => $row):
                     <div class="form-group">
                         <label class="col-md-12" for="example-text"><?php echo $this->lang->line('email'); ?></label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" name="email" value="<?php echo $row ['email']; ?>">
+                            <input type="email" class="form-control" name="email" value="<?php echo $row ['email']; ?>">
                         </div>
                     </div>
                     <div class="form-group">
@@ -73,7 +73,7 @@ foreach ( $edit_teacher as $key => $row):
                     <div class="form-group">
                         <label class="col-md-12" for="example-text"><?php echo $this->lang->line('phone'); ?></label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" name="phone" value="<?php echo $row ['phone']; ?>">
+                            <input type="number" class="form-control" name="phone" value="<?php echo $row ['phone']; ?>">
                         </div>
                     </div>
                     <div class="form-group">
@@ -119,7 +119,6 @@ foreach ( $edit_teacher as $key => $row):
                                 value="<?php echo $row['exceptional_abilities'];?>">
                         </div>
                     </div>
-                    <input type="hidden" name="principal_id" value="<?php echo $this->session->userdata('principal_id'); ?>">
 
                     <div class="form-group">
                         <label
@@ -131,20 +130,30 @@ foreach ( $edit_teacher as $key => $row):
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-12"><?php echo $this->lang->line('state'); ?>*</label>
-                        <div class="col-sm-12">
-
-                            <input type="text" class="form-control" name="state" value="<?php echo $row['state'];?>">
+                    <div class="form-group row">
+                        <label for="country" class="col-md-12"><?php echo $this->lang->line('Country'); ?></label>
+                        <div class="col-md-6">
+                            <select name="country" id="country" class="form-control">
+                                <option value=""><?php echo $this->lang->line('select_country');?></option>
+                                <?php foreach ($countries as $country): ?>
+                                <option value="<?php echo $country['id']; ?>"
+                                    <?php echo ($row['country'] == $country['id']) ? 'selected' : ''; ?>>
+                                    <?php echo $country['name']; ?>
+                                </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-12"><?php echo $this->lang->line('country'); ?>*</label>
-                        <div class="col-sm-12">
-
-                            <input type="text" class="form-control" name="country"
-                                value="<?php echo $row['country'];?>">
+                        <div class="col-md-6">
+                            <select name="state" id="state" class="form-control"
+                                <?php echo ($row['country']) ? '' : 'disabled'; ?>>
+                                <option value=""><?php echo $this->lang->line('select_state');?></option>
+                                <?php foreach ($states as $state): ?>
+                                <option value="<?php echo $state['id']; ?>"
+                                    <?php echo ($row['state'] == $state['id']) ? 'selected' : ''; ?>>
+                                    <?php echo $state['name']; ?>
+                                </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
 
@@ -193,22 +202,19 @@ foreach ( $edit_teacher as $key => $row):
                                             value="<?php echo $row['surname']; ?>">
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
 
 
                         <div class="col-sm-6">
                             <div class="white-box">
-                                <h3 class="box-title"><?php echo $this->lang->line('aadhaar'); ?></h3>
 
                                 <div class="form-group">
                                     <label class="col-md-12"
                                         for="furl"><?php echo $this->lang->line('aadhaar'); ?>*</span>
                                     </label>
                                     <div class="col-md-12">
-                                        <input type="text" id="furl" name="aadhaar"
+                                        <input type="number" id="furl" name="aadhaar"
                                             value="<?php echo $row['aadhaar']; ?>" class="form-control">
                                     </div>
                                 </div>

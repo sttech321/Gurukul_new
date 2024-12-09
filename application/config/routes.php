@@ -53,7 +53,30 @@ $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['sendbioEmail'] = 'admin/sendbioEmail';
-$route['principal/get-states/(:num)'] = 'principal/get_states/$1';
-$route['admin/gurukul_invite/'] = 'admin/gurukul_invite';
+$route['principal/get-states/(:num)'] = 'login/get_states/$1';
+
+$route['admin/gurukul_invite/(:any)'] = 'admin/gurukul_invite/$1';
+
 $route['thankyou'] = 'admin/thankyou_gurukul';
 $route['admin/fetch_teachers/(:num)'] = 'admin/get_teacher/$1';
+$route['/dashboards'] = 'admin/dashboard_data';
+$route['example'] = 'example/index';
+$route['principal/dashboard'] = 'login/dashboard';
+
+$route['principal/student'] = 'login/student';
+$route['principal/student/insert'] = 'login/student/insert';
+$route['principal/student/update/(:num)'] = 'login/student/update/$1';
+$route['principal/student/delete/(:num)'] = 'login/student/delete/$1';
+
+$route['principal/teacher'] = 'login/teacher';
+$route['principal/teacher/insert'] = 'login/teacher/insert';
+$route['principal/teacher/update/(:num)'] = 'login/teacher/update/$1';
+$route['principal/teacher/delete/(:num)'] = 'login/teacher/delete/$1';
+
+$route['principal/manage_profile'] = 'login/manage_profile';
+$route['principal/manage_profile/update'] = 'login/manage_profile/update';
+$route['principal/manage_profile/change_password'] = 'login/manage_profile/change_password';
+
+$route['reset_password/(:any)'] = 'auth/reset_password/$1';
+$route['auth/send_reset_password_link'] = 'auth/send_reset_password_link';
+$route['update-password'] = 'auth/update_password';

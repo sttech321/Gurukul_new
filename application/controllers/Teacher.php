@@ -299,6 +299,10 @@ class Teacher extends MY_Controller {
             redirect(base_url(). 'teacher/student', 'refresh');
         }
 
+        // Fetch logged-in teacher's data
+        $teacher_id = $this->session->userdata('teacher_id');
+        $teacher_data = $this->db->get_where('teacher', ['teacher_id' => $teacher_id])->row_array();
+
         $page_data['page_name']     = 'student';
         $page_data['page_title']    = get_phrase('student Student');
         $teacher_id = $this->session->userdata('teacher_id'); // Fetch teacher_id from the session
@@ -306,6 +310,7 @@ class Teacher extends MY_Controller {
         $this->db->from('student'); // Main table
         $this->db->join('teacher', 'student.teacher_id = teacher.teacher_id'); // Join condition
         $this->db->where('teacher.teacher_id', $teacher_id); // Filter condition
+        $page_data['teacher'] = $teacher_data; // Pass teacher data
         $page_data['select_student'] = $this->db->get()->result_array(); // Fetch data as an array        
         $page_data['countries'] = $countries;
         $this->load->view('backend/index', $page_data);

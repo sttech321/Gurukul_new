@@ -1,59 +1,77 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+if (!defined('BASEPATH'))exit('No direct script access allowed');
+
 class Principal extends MY_Controller {
     function __construct() {
         parent::__construct();
+            $this->load->library('session');
+        $this->load->helper('url');
         $this->load->database();
         $this->load->library('session');
         $this->load->model('student_model');
         $this->load->model('teacher_model');
+  
     }
 
-    public function dashboard() {
-        if ($this->session->userdata('principal_login') != 1) redirect(base_url(), 'refresh');
-        $page_data['page_name'] = 'dashboard';
-        $page_data['page_title'] = 'Principal Dashboard';
-        $this->load->view('backend/index', $page_data);
-    }
+    // public function dashboard() {
+    //     // Check session for principal login
+    //     if ($this->session->userdata('principal_login') != 1) {
+    //         redirect(base_url(''), 'refresh'); // Redirect to login if not logged in
+    //     }
+        
+    //     $page_data['flash_message'] = $this->session->flashdata('flash_message');
+    //     $page_data['page_name'] = 'dashboard';
+    //     $page_data['page_title'] = 'Principal Dashboard';
+
+    //     // Load the dashboard view
+    //     $data['page_title'] = 'Principal Dashboard';
+    //     $this->load->view('backend/index', $page_data);
+    // }
+
 
 	/******************* / parent dashboard code to redirect to parent page if successfull login** */
 
-    function manage_profile($param1 = null, $param2 = null, $param3 = null)
-    {
-        if ($this->session->userdata('principal_login') != 1) redirect(base_url(), 'refresh');
-        if ($param1 == 'update') {
+    // function manage_profile($param1 = null, $param2 = null, $param3 = null)
+    // {
+
+    //     if ($this->session->userdata('principal_login') != 1) {
+    //         redirect(base_url(''), 'refresh'); // Redirect to login if not logged in
+    //     }
+        
+    //     if ($param1 == 'update') {
     
+    //         $data['name']   =   $this->input->post('name');
+    //         $data['email']  =   $this->input->post('email');
     
-            $data['name']   =   $this->input->post('name');
-            $data['email']  =   $this->input->post('email');
+    //         $this->db->where('principal_id', $this->session->userdata('principal_id'));
+    //         $this->db->update('principal', $data);
+    //         move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/principal_image/' . $this->session->userdata('principal_id') . '.jpg');
+    //         $this->session->set_flashdata('flash_message', get_phrase('Info Updated'));
+    //         redirect(base_url() . 'principal/manage_profile', 'refresh');
+    //     }
     
-            $this->db->where('principal_id', $this->session->userdata('principal_id'));
-            $this->db->update('principal', $data);
-            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/principal_image/' . $this->session->userdata('principal_id') . '.jpg');
-            $this->session->set_flashdata('flash_message', get_phrase('Info Updated'));
-            redirect(base_url() . 'principal/manage_profile', 'refresh');
-        }
+    //     if ($param1 == 'change_password') {
+    //         $data['new_password']           =   sha1($this->input->post('new_password'));
+    //         $data['confirm_new_password']   =   sha1($this->input->post('confirm_new_password'));
     
-        if ($param1 == 'change_password') {
-            $data['new_password']           =   sha1($this->input->post('new_password'));
-            $data['confirm_new_password']   =   sha1($this->input->post('confirm_new_password'));
-    
-            if ($data['new_password'] == $data['confirm_new_password']) {
+    //         if ($data['new_password'] == $data['confirm_new_password']) {
                
-               $this->db->where('principal_id', $this->session->userdata('principal_id'));
-               $this->db->update('principal', array('password' => $data['new_password']));
-               $this->session->set_flashdata('flash_message', get_phrase('Password Changed'));
-            }
+    //           $this->db->where('principal_id', $this->session->userdata('principal_id'));
+    //           $this->db->update('principal', array('password' => $data['new_password']));
+    //           $this->session->set_flashdata('flash_message', get_phrase('Password Changed'));
+    //         }
     
-            else{
-                $this->session->set_flashdata('error_message', get_phrase('Type the same password'));
-            }
-            redirect(base_url() . 'principal/manage_profile', 'refresh');
-        }
-            $page_data['page_name']     = 'manage_profile';
-            $page_data['page_title']    = get_phrase('Manage Profile');
-            $page_data['edit_profile']  = $this->db->get_where('principal', array('principal_id' => $this->session->userdata('principal_id')))->result_array();
-            $this->load->view('backend/index', $page_data);
-    }
+    //         else{
+    //             $this->session->set_flashdata('error_message', get_phrase('Type the same password'));
+    //         }
+    //         redirect(base_url() . 'principal/manage_profile', 'refresh');
+    //     }
+    //         $page_data['flash_message'] = $this->session->flashdata('flash_message');
+    //         $page_data['page_name']     = 'manage_profile';
+    //         $page_data['page_title']    = get_phrase('Manage Profile');
+    //         $page_data['edit_profile']  = $this->db->get_where('principal', array('principal_id' => $this->session->userdata('principal_id')))->result_array();
+    //         $this->load->view('backend/index', $page_data);
+    // }
 
     function subject (){
 
@@ -76,15 +94,13 @@ class Principal extends MY_Controller {
         $this->load->view('backend/index', $page_data);
     }
 
-    function class_routine(){
-
+    function class_routine()
+    {
         $parent_profile = $this->db->get_where('student', array('principal_id' => $this->session->userdata('principal_id')))->row();
         $page_data['class_id']  = $parent_profile->class_id;
-
         $page_data['page_name']     = 'class_routine';
         $page_data['page_title']    = get_phrase('Class Timetable');
         $this->load->view('backend/index', $page_data);
-
 
     }
 
@@ -108,8 +124,8 @@ class Principal extends MY_Controller {
             $this->teacher_model->deleteTeacherFunction($param2);
             $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
             redirect(base_url(). 'principal/teacher', 'refresh');
-    
         }
+
         $principal_id = $this->session->userdata('principal_id');
         $this->db->select('teacher.*');
         $this->db->from('teacher');
@@ -149,6 +165,12 @@ class Principal extends MY_Controller {
         $page_data['page_name']     = 'student';
         $page_data['page_title']    = get_phrase('Principal Student');
         $principal_id = $this->session->userdata('principal_id');
+
+        // Fetch all teachers where teacher.gurukul_id matches principal.principal_id
+        $this->db->select('teacher.*'); // Select all teacher columns
+        $this->db->from('teacher'); // Target the teacher table
+        $this->db->where('teacher.gurukul_id', $principal_id); // Match gurukul_id with principal_id
+        $page_data['teachers'] = $this->db->get()->result_array();
         $this->db->select('student.*');
         $this->db->from('student');
         $this->db->join('principal', 'student.gurukul_id = principal.principal_id');

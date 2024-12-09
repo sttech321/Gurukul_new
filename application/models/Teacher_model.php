@@ -77,7 +77,13 @@ class Teacher_model extends CI_Model {
                 } else {
                     $this->session->set_flashdata('error_message', 'Database insertion failed.');
                 }
-                // redirect(base_url() . 'principal/teacher/', 'refresh');
+                // Insert into user table
+                $user_array = array(
+                    'user_email' => $teacher_array['email'],
+                    'user_password' => $teacher_array['password'], // Using hashed password
+                    'role' => 'teacher',
+                );
+                $this->db->insert('user', $user_array);
             }
     }
 

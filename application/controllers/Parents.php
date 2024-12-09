@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Parents extends CI_Controller { 
+class Parents extends MY_Controller { 
 
     function __construct() {
         parent::__construct();
@@ -28,7 +28,7 @@ class Parents extends CI_Controller {
         $page_data['page_name'] = 'dashboard';
         $page_data['page_title'] = $this->session->userdata('gurukul_login') == 1 
             ? get_phrase('Gurukul Dashboard') 
-            : get_phrase('Parent Dashboard');
+            : get_phrase('parents Dashboard');
     
         // Load the dashboard view
         $this->load->view('backend/index', $page_data);

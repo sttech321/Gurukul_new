@@ -2,7 +2,7 @@
 
 
 
-class Systemsetting extends CI_Controller { 
+class Systemsetting extends MY_Controller { 
 
     function __construct() {
         parent::__construct();

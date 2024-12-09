@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-sm-12">
 		<div class="panel panel-info">
-            <div class="panel-heading"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo get_phrase('Enter Student Score');?></div>
+            <div class="panel-heading"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo $this->lang->line('enter_student_score');?></div>
                 <div class="panel-body table-responsive">
 			
                     <!----CREATION FORM STARTS---->
@@ -10,10 +10,10 @@
                 	<?php echo form_open(base_url() . 'admin/student_marksheet_subject' , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top', 'enctype' => 'multipart/form-data'));?>
                     
                             <div class="form-group">
-                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('Exam');?></label>
+                                    <label class="col-md-12" for="example-text"><?php echo $this->lang->line('Exam');?></label>
                                 <div class="col-sm-12">
                                     <select name="exam_id" class="form-control select2">
-                                        <option value=""><?php echo get_phrase('select_class');?></option>
+                                        <option value=""><?php echo $this->lang->line('select_class');?></option>
 
                                         <?php $exams =  $this->db->get('exam')->result_array();
                                         foreach($exams as $key => $exam):?>
@@ -26,10 +26,10 @@
 
 
                             <div class="form-group">
-                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('class');?></label>
+                                    <label class="col-md-12" for="example-text"><?php echo $this->lang->line('class');?></label>
                                 <div class="col-sm-12">
                                     <select name="class_id"  class="form-control select2" onchange="show_subjects(this.value)">
-                                        <option value=""><?php echo get_phrase('select_class');?></option>
+                                        <option value=""><?php echo $this->lang->line('select_class');?></option>
 
                                         <?php $classes =  $this->db->get('class')->result_array();
                                         foreach($classes as $key => $class):?>
@@ -42,7 +42,7 @@
 
 								
                             <div class="form-group">
-                                    <label class="col-md-12" for="example-text"><?php echo get_phrase('Subject');?></label>
+                                    <label class="col-md-12" for="example-text"><?php echo $this->lang->line('subject');?></label>
                                 <div class="col-sm-12">
 
                                 <?php $classes = $this->crud_model->get_classes();
@@ -63,14 +63,14 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <select name="" id="subject_id_0" style="display:<?php if(isset($subject_id) && $subject_id > 0) echo 'none'; else echo 'block';?>"  class="form-control">
-                                        <option value=""><?php echo get_phrase('Select Class First');?></option>
+                                        <option value=""><?php echo $this->lang->line('select_class_first');?></option>
                                     </select>
                                 </div>
                             </div>
                             
                             <input class="" type="hidden" value="selection" name="operation">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-search"></i>&nbsp;<?php echo get_phrase('Get Details');?></button>
+                            <button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-search"></i>&nbsp;<?php echo $this->lang->line('get_details');?></button>
                         </div>
 		
                     </form>                

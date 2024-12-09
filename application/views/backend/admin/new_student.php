@@ -15,19 +15,19 @@
                                  
 					<div class="row">
                         <div class="col-sm-6">
-                            <div class="alert alert-primary"><h2><?php echo $this->lang->line('personal_information'); ?></h2>
+                            <div class="alert alert-primary"><?php echo $this->lang->line('personal_information'); ?>
                             </div>
                             <hr>
                             <div class="form-group">
                                 <label class="col-md-12" for="example-text"><?php echo $this->lang->line('student_name'); ?></label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" id="name" name="<?php echo $this->lang->line('student_name'); ?>" required>
+                                    <input type="text" class="form-control" id="name" placeholder="<?php echo $this->lang->line('student_name'); ?>" name="name" required>
                                     <input type="text" class="form-control" value="<?php echo substr(md5(uniqid(rand(), true)), 0, 7); ?>" name="student_number" readonly="true">
                                     <span class="text-danger" id="name_error"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="gurukulids" class="col-md-12"><?php echo get_phrase('gurukul'); ?></label>
+                                <label for="gurukulids" class="col-md-12"><?php echo $this->lang->line('gurukul'); ?></label>
                                 <div class="col-md-6">
                                     <select name="gurukul_id" id="gurukulids" class="form-control">
                                         <option value="">Select Gurukul</option>
@@ -60,7 +60,7 @@
                                 <select name="country" id="countrys" class="form-control">
                                     <option value="">Select Country</option>
                                     <?php foreach ($countries as $country): ?>
-                                        <option value="<?php echo $country['id']; ?>" <?php echo ($students[0]['country'] == $country['id']) ? 'selected' : ''; ?>>
+                                        <option value="<?php echo $country['id']; ?>">
                                             <?php echo $country['name']; ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -84,7 +84,7 @@
                             <div class="form-group">
                                 <label class="col-md-12" for="example-text"><?php echo $this->lang->line('phone'); ?></label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" id="phone" name="phone" value="" required >
+                                    <input type="number" class="form-control" id="phone" name="phone" value="" required >
                                     <span class="text-danger" id="phone_error"></span>
                                 </div> 
                             </div>
@@ -116,7 +116,7 @@
                             <div class="form-group">
                                 <label class="col-md-12" for="example-text"><?php echo $this->lang->line('aadhaar_card'); ?></label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" id="aadhaar" name="aadhaar" value="" required>
+                                    <input type="number" class="form-control" id="aadhaar" name="aadhaar" value="" required>
                                     <span class="text-danger" id="aadhaar_error"></span>
                                 </div> 
                             </div>
@@ -273,7 +273,7 @@
             <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('list_students');?></div>
+                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo $this->lang->line('list_students'); ?></div>
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body table-responsive">
 			
@@ -282,7 +282,7 @@
                         <tr>
                             <th width="80"><div><?php echo $this->lang->line('photo'); ?></div></th>
                             <th><div><?php echo $this->lang->line('name'); ?></div></th>
-                            <th><div><?php echo $this->lang->line('role'); ?></div></th>
+                            <th><div><?php echo $this->lang->line('phone'); ?></div></th>
                             <th><div><?php echo $this->lang->line('email'); ?></div></th>
                             <th><div><?php echo $this->lang->line('gurukul_id'); ?></div></th>
                             <th><div><?php echo $this->lang->line('address'); ?></div></th>
@@ -305,10 +305,10 @@
 														
                             <a onclick="showAjaxModal('<?php echo base_url();?>modal/popup/edit_student/<?php echo $student['student_id'];?>')" class="btn btn-info btn-circle btn-xs"><i class="fa fa-edit"></i></a>
 							
-<a href="#" onclick="confirm_modal('<?php echo base_url();?>admin/student/delete/<?php echo $student['student_id'];?>');"><button type="button" class="btn btn-danger btn-circle btn-xs"><i class="fa fa-times"></i></button></a>
+<a href="#" onclick="confirm_modal('<?php echo base_url();?>admin/new_student/delete/<?php echo $student['student_id'];?>');"><button type="button" class="btn btn-danger btn-circle btn-xs"><i class="fa fa-times"></i></button></a>
 
 
-<a href="<?php echo base_url().'uploads/student_image/'.  $student['file_name'];?>"><button type="button" class="btn btn-warning btn-circle btn-xs"><i class="fa fa-download"></i></button></a>
+<!-- <a href="<?php //echo base_url().'uploads/student_image/'.  $student['file_name'];?>"><button type="button" class="btn btn-warning btn-circle btn-xs"><i class="fa fa-download"></i></button></a> -->
 
                             </td>
                         </tr>

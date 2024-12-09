@@ -24,6 +24,7 @@
     <link href="<?php echo base_url(); ?>optimum/plugins/bower_components/morrisjs/morris.css" rel="stylesheet" >
     <!-- animation CSS -->
     <link href="<?php echo base_url(); ?>optimum/css/animate.css" rel="stylesheet" >
+        <link href="<?php echo base_url(); ?>optimum/css/custom-min.css" rel="stylesheet">
     <!-- Custom CSS -->
 <?php if ($text_align == 'right-to-left') { ?>
   <link href="<?php echo base_url(); ?>optimum/css/style-rtl.css" rel="stylesheet" >

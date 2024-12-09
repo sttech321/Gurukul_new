@@ -7,9 +7,13 @@ $loginType      = $this->session->userdata('login_type');
 $running_year   = $this->db->get_where('settings', array('type' => 'session'))->row()->description;
 ?>
 <?php include 'css.php'; ?>
+
 <style>
 .text-danger{
     color:red !important;
+}
+body .logoImageWrap{
+    background: transparent;
 }
 </style>
     <!-- Preloader -->
@@ -39,7 +43,7 @@ $running_year   = $this->db->get_where('settings', array('type' => 'session'))->
                             <ul class="m-t-20 chatonline">
 
                             <?php 
-                            $user_array = ['admin', 'student', 'teacher', 'parent'];
+                            $user_array = ['admin', 'student', 'teacher', 'parent','principal'];
                             for($i= 0; $i < sizeof($user_array); $i++):
                             $user_lists = $this->db->get($user_array[$i])->result_array();
                             ?>

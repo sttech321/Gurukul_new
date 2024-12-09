@@ -4,17 +4,16 @@
                         <div class="panel panel-info">
                             <div class="panel-heading">
 							
-							NEW EXPENSE
+						   <?php echo $this->lang->line('new_expence'); ?>
 						   
-						   
-                                <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="fa fa-plus"></i>&nbsp;&nbsp;ADD NEW EXPENSE HERE<i class="btn btn-info btn-xs"></i></a> <a href="#" data-perform="panel-dismiss"></a> </div>
+                                <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo $this->lang->line('add_new_expense_here'); ?><i class="btn btn-info btn-xs"></i></a> <a href="#" data-perform="panel-dismiss"></a> </div>
                             </div>
                             <div class="panel-wrapper collapse out" aria-expanded="true">
                                 <div class="panel-body">
                 <?php echo form_open(base_url() . 'expense/expense/insert/' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));?>
 	
 						<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('title');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('title');?></label>
                     <div class="col-sm-12">
 
 				<input type="text" class="form-control" name="title" autofocus required>
@@ -23,11 +22,11 @@
                 </div>
 
                <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('category');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('category');?></label>
                     <div class="col-sm-12">
                        
 		<select name="expense_category_id" class="form-control select2" required>
-                                <option value=""><?php echo get_phrase('select_expense_category');?></option>
+                                <option value=""><?php echo $this->lang->line('select_expense_category');?></option>
                                 <?php 
                                 	$categories = $this->db->get('expense_category')->result_array();
                                 	foreach ($categories as $row):
@@ -40,7 +39,7 @@
                 </div>
 				
 				<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('description');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('description');?></label>
                     <div class="col-sm-12">
                        
                 <textarea class="form-control textarea_editor" rows="5" name="description" class="form-control"></textarea>
@@ -49,7 +48,7 @@
                 </div>
 				
 				<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('amount');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('amount');?></label>
                     <div class="col-sm-12">
                                 <input type="text" class="form-control" name="amount" value="" required>
                             </div>
@@ -57,19 +56,19 @@
 				
 	
 							<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('method');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('method');?></label>
                     <div class="col-sm-12">
 							<select name="method" class="form-control select2">
-                                <option value="1"><?php echo get_phrase('cash');?></option>
-                                <option value="2"><?php echo get_phrase('cheque');?></option>
-                                <option value="3"><?php echo get_phrase('card');?></option>
+                                <option value="1"><?php echo $this->lang->line('cash');?></option>
+                                <option value="2"><?php echo $this->lang->line('cheque');?></option>
+                                <option value="3"><?php echo $this->lang->line('card');?></option>
                             </select>
 							</div>
 							</div>
 							
 							
 			<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('date');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('date');?></label>
                     <div class="col-sm-12">
 		<input class="form-control m-r-10" name="timestamp" type="date" value="<?php echo date('Y-m-d'); ?>" id="example-date-input" required>
 				</div>
@@ -77,7 +76,7 @@
 
                     
                     <div class="form-group">
-							<button type="submit" class="btn btn-info btn-rounded btn-block btn-sm"> <i class="fa fa-plus"></i>&nbsp;<?php echo get_phrase('save_expense');?></button>
+							<button type="submit" class="btn btn-info btn-rounded btn-block btn-sm"> <i class="fa fa-plus"></i>&nbsp;<?php echo $this->lang->line('save_expense');?></button>
 					</div>
 					<br>
                 <?php echo form_close();?>	
@@ -92,7 +91,7 @@
  <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('list_expenses');?></div>
+                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo $this->lang->line('list_expenses');?></div>
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body table-responsive">
 								
@@ -100,12 +99,12 @@
     <thead>
         <tr>
             <th><div>#</div></th>
-            <th><div><?php echo get_phrase('title');?></div></th>
-            <th><div><?php echo get_phrase('category');?></div></th>
-            <th><div><?php echo get_phrase('method');?></div></th>
-            <th><div><?php echo get_phrase('amount');?></div></th>
-            <th><div><?php echo get_phrase('date');?></div></th>
-            <th><div><?php echo get_phrase('options');?></div></th>
+            <th><div><?php echo $this->lang->line('title');?></div></th>
+            <th><div><?php echo $this->lang->line('category');?></div></th>
+            <th><div><?php echo $this->lang->line('method');?></div></th>
+            <th><div><?php echo $this->lang->line('amount');?></div></th>
+            <th><div><?php echo $this->lang->line('date');?></div></th>
+            <th><div><?php echo $this->lang->line('option');?></div></th>
         </tr>
     </thead>
     <tbody>

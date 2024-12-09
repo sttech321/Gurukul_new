@@ -5,7 +5,7 @@ foreach ($edit_expense as $key => $row):
 	 <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('edit_alumni');?></div>
+                            <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo $this->lang->line('edit_alumni');?></div>
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body table-responsive">
                     <?php echo form_open(base_url() . 'expense/expense/update/'.$row['payment_id'] , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top', 'enctype' => 'multipart/form-data'));?>
@@ -13,7 +13,7 @@ foreach ($edit_expense as $key => $row):
                                
                             
                 <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('Title');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('title');?></label>
                     <div class="col-sm-12">
 					<input type="text" class="form-control" name="title" value="<?php echo $row['title'];?>" autofocus>
 						</div>
@@ -21,10 +21,10 @@ foreach ($edit_expense as $key => $row):
 
 
                 <div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('category');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('category');?></label>
                     <div class="col-sm-12">
                             <select name="expense_category_id" class="form-control" required>
-                                <option value=""><?php echo get_phrase('select_expense_category');?></option>
+                                <option value=""><?php echo $this->lang->line('select_expense_category');?></option>
                                 <?php 
                                 	$categories = $this->db->get('expense_category')->result_array();
                                 	foreach ($categories as $row2):
@@ -41,7 +41,7 @@ foreach ($edit_expense as $key => $row):
 
                     
                     	<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('phone');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('description');?></label>
                     <div class="col-sm-12">
 					
                     <textarea class="form-control" name="description" rows="5"><?php echo $row['description'];?></textarea>
@@ -52,7 +52,7 @@ foreach ($edit_expense as $key => $row):
 
                     
 						<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('Amount');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('amount');?></label>
                     <div class="col-sm-12">
 							<input type="text" class="form-control" name="amount" value="<?php echo $row['amount'];?>">
 						</div>
@@ -60,7 +60,7 @@ foreach ($edit_expense as $key => $row):
 
 					
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase ('Method');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line ('method');?></label>
                     <div class="col-sm-12">
                     <select class="form-control select2" name="method">
 
@@ -75,14 +75,14 @@ foreach ($edit_expense as $key => $row):
 					
 					
 				<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('graduation_date');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('date');?></label>
                     <div class="col-sm-12">
          			<input type="text" class="datepicker form-control" name="timestamp" value="<?php echo date('d M,Y', $row ['timestamp']); ?>"/>
                  </div>
                 </div>
     
                         <div class="form-group">
-                                <button type="submit" class="btn btn-info btn-rounded btn-block btn-sm"><i class="fa fa-pencil"></i>&nbsp;<?php echo get_phrase('update_expense');?></button>
+                                <button type="submit" class="btn btn-info btn-rounded btn-block btn-sm"><i class="fa fa-pencil"></i>&nbsp;<?php echo $this->lang->line('update_expense');?></button>
                         </div>
                 <?php echo form_close();?>
     </div>

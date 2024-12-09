@@ -10,6 +10,8 @@ class Exam_question_model extends CI_Model {
 	
     // The function below inserts into exam question table //
     function createexamQuestion(){
+        // print_r($_POST);
+        // die;
         $page_data = array(
             'name'                      => html_escape($this->input->post('name')),
             'description'               => html_escape($this->input->post('description')),

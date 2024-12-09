@@ -73,13 +73,13 @@
 </head>
 
 <body>
-
+<?php print_r($data);?>
     <div class="email-container">
         <h1>Thank you for submitting your form <br /> <?php echo $data['name']; ?>!</h1>
         <p>Your form has been successfully submitted.</p>
         <p>Here are some details:</p>
         <ul>
-            <li><strong>Gurukul Id:</strong> <?php echo $data['id']; ?></li>
+           <!-- <li><strong>Gurukul Id:</strong> <?php //echo $data['principal_id']; ?></li>-->
             <li><strong>Gurukul Name:</strong> <?php echo $data['name']; ?></li>
             <li><strong>Mobile Number:</strong> <?php echo $data['phone']; ?></li>
             <li><strong>Email:</strong> <?php echo $data['email']; ?></li>

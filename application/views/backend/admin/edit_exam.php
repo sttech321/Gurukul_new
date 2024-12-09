@@ -6,13 +6,13 @@ foreach ($select_exam as $key => $exam):
 <div class="row">
                     <div class="col-sm-12">
 				  	<div class="panel panel-info">
-                            <div class="panel-heading"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo get_phrase('add_exam'); ?></div>
+                            <div class="panel-heading"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo $this->lang->line('add_exam'); ?></div>
 
 <?php echo form_open(base_url() . 'admin/createExamination/update/' . $param2 , array('class' => 'form-horizontal form-goups-bordered validate'));?>
 					<div class="panel-body table-responsive">
 					
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('exam_name');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('exam_name'); ?></label>
                     <div class="col-sm-12">
 					
                             
@@ -21,7 +21,7 @@ foreach ($select_exam as $key => $exam):
                             </div>
 							
 							<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('description');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('description'); ?></label>
                     <div class="col-sm-12">
 				
                         <textarea rows="3" class="form-control" name="comment"><?php echo $exam ['comment'];?></textarea>
@@ -29,14 +29,14 @@ foreach ($select_exam as $key => $exam):
                             </div>
 							
 					<div class="form-group">
-                 	<label class="col-md-12" for="example-text"><?php echo get_phrase('date');?></label>
+                 	<label class="col-md-12" for="example-text"><?php echo $this->lang->line('date'); ?></label>
                     <div class="col-sm-12">
 					<input class="form-control m-r-10" name="timestamp" type="date" value="<?php echo $exam['timestamp'];?>" id="example-date-input" required>
                                 </div>
                             </div>
                             
                            <div class="form-group">
-                                  <button type="submit" class="btn btn-block btn-info btn-rounded btn-sm "><i class="fa fa-plus"></i>&nbsp;<?php echo get_phrase('update_exam');?></button>
+                                  <button type="submit" class="btn btn-block btn-info btn-rounded btn-sm "><i class="fa fa-plus"></i>&nbsp;<?php echo $this->lang->line('update_exam'); ?></button>
 							</div>
                 <?php echo form_close();?>
                 </div>                

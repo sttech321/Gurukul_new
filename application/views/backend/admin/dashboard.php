@@ -6,7 +6,7 @@
                                 <i class="ti-user bg-megna"></i>
                                 <div class="bodystate">
                                     <h4><?php echo $this->db->count_all_results('student');?></h4>
-                                    <span class="text-muted"><?php echo get_phrase('Students');?></span>
+                                    <span class="text-muted"><?php echo $this->lang->line('student');?></span>
                                 </div>
                             </div>
                         </div>
@@ -17,29 +17,29 @@
                                 <i class="ti-user bg-info"></i>
                                 <div class="bodystate">
                                     <h4><?php echo $this->db->count_all_results('teacher');?></h4>
-                                    <span class="text-muted"><?php echo get_phrase('Teachers');?></span>
+                                    <span class="text-muted"><?php echo $this->lang->line('teacher');?></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="white-box">
-                            <div class="r-icon-stats">
-                                <i class="ti-user bg-success"></i>
-                                <div class="bodystate">
-                                    <h4><?php echo $this->db->count_all_results('parent');?></h4>
-                                    <span class="text-muted"><?php echo get_phrase('parents');?></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="col-md-3 col-sm-6">-->
+                    <!--    <div class="white-box">-->
+                    <!--        <div class="r-icon-stats">-->
+                    <!--            <i class="ti-user bg-success"></i>-->
+                    <!--            <div class="bodystate">-->
+                    <!--                <h4><?php //echo $this->db->count_all_results('parent');?></h4>-->
+                    <!--                <span class="text-muted"><?php //echo $this->lang->line('parent');?></span>-->
+                    <!--            </div>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+                    <!--</div>-->
                     <div class="col-md-3 col-sm-6">
                         <div class="white-box">
                             <div class="r-icon-stats">
                                 <i class="ti-book bg-inverse"></i>
                                 <div class="bodystate">
                                     <h4><?php echo $this->db->count_all_results('assignment');?></h4>
-                                    <span class="text-muted"><?php echo get_phrase('assignment');?></span>
+                                    <span class="text-muted"><?php echo $this->lang->line('assignment');?></span>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 $expense_amount = $query->row()->amount;
                                 ?>
                                     <h4><?php echo $this->db->get_where('settings', array('type' => 'currency'))->row()->description;?> <?php echo $expense_amount;?></h4>
-                                    <span class="text-muted"><?php echo get_phrase('Expense');?></span>
+                                    <span class="text-muted"><?php echo $this->lang->line('expense');?></span>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                                     <h4>
                                     <?php echo $this->db->get_where('settings', array('type' => 'currency'))->row()->description;?> <?php echo $income_amount;?>
                                     </h4>
-                                    <span class="text-muted"><?php echo get_phrase('Income');?></span>
+                                    <span class="text-muted"><?php echo $this->lang->line('income');?></span>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                                 <i class="ti-wallet bg-success"></i>
                                 <div class="bodystate">
                                     <h4><?php echo $this->db->count_all_results('admin');?></h4>
-                                    <span class="text-muted"><?php echo get_phrase('Admin');?></span>
+                                    <span class="text-muted"><?php echo $this->lang->line('admin');?></span>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                                     ?>
                                     
                                     </h4>
-                                    <span class="text-muted"><?php echo get_phrase('Attendance');?></span>
+                                    <span class="text-muted"><?php echo $this->lang->line('attendance');?></span>
                                 </div>
                             </div>
                         </div>
@@ -345,16 +345,15 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="white-box">
-                            <h3 class="box-title m-b-0"><?php echo get_phrase('Recently Added Teachers');?></h3>
+                            <h3 class="box-title m-b-0"><?php echo $this->lang->line('recently_added_teachers');?></h3>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
-
-                                            <th>Image</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
+                                            <th><?php echo $this->lang->line('photo');?></th>
+                                            <th><?php echo $this->lang->line('name');?></th>
+                                            <th><?php echo $this->lang->line('email');?></th>
+                                            <th><?php echo $this->lang->line('phone');?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -376,15 +375,15 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="white-box">
-                            <h3 class="box-title m-b-0"><?php echo get_phrase('Recently Added Students');?></h3>
+                            <h3 class="box-title m-b-0"><?php echo $this->lang->line('recently_added_students');?></h3>
                             <div class="table-responsive">
                             <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Image</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
+                                            <th><?php echo $this->lang->line('photo');?></th>
+                                            <th><?php echo $this->lang->line('name');?></th>
+                                            <th><?php echo $this->lang->line('email');?></th>
+                                            <th><?php echo $this->lang->line('phone');?></th>
                                         </tr>
                                     </thead>
                                     <tbody>

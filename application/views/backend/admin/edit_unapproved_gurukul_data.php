@@ -2,7 +2,7 @@
             <div class="col-sm-12">
                 <div class="panel panel-info">
                     <div class="panel-heading"> <i
-                            class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('list_school');?></div>
+                            class="fa fa-list"></i>&nbsp;&nbsp;<?php echo $this->lang->line('list_school'); ?></div>
                     <div class="panel-wrapper collapse in" aria-expanded="true">
                         <div class="panel-body table-responsive">
 
@@ -10,25 +10,25 @@
                                 <thead>
                                     <tr>
                                         <th width="80">
-                                            <div><?php echo get_phrase('photo');?></div>
+                                            <div><?php echo $this->lang->line('photo');?></div>
                                         </th>
                                         <th>
-                                            <div><?php echo get_phrase('name');?></div>
+                                            <div><?php echo $this->lang->line('name');?></div>
                                         </th>
                                         <th>
-                                            <div><?php echo get_phrase('role');?></div>
+                                            <div><?php echo $this->lang->line('phone');?></div>
                                         </th>
                                         <th>
-                                            <div><?php echo get_phrase('email');?></div>
+                                            <div><?php echo $this->lang->line('email');?></div>
                                         </th>
                                         <th>
-                                            <div><?php echo get_phrase('gurukul id');?></div>
+                                            <div><?php echo $this->lang->line('gurukul_id');?></div>
                                         </th>
                                         <th>
-                                            <div><?php echo get_phrase('address');?></div>
+                                            <div><?php echo $this->lang->line('address');?></div>
                                         </th>
                                         <th>
-                                            <div><?php echo get_phrase('options');?></div>
+                                            <div><?php echo $this->lang->line('action');?></div>
                                         </th>
                                     </tr>
                                 </thead>
@@ -56,10 +56,10 @@
                                                         class="fa fa-times"></i></button></a>
 
 
-                                            <a
-                                                href="<?php echo base_url().'uploads/student_image/'.  $principal['file_name'];?>"><button
+                                            <!-- <a
+                                                href="<?php //echo base_url().'uploads/student_image/'.  $principal['file_name'];?>"><button
                                                     type="button" class="btn btn-warning btn-circle btn-xs"><i
-                                                        class="fa fa-download"></i></button></a>
+                                                        class="fa fa-download"></i></button></a> -->
 
                                         </td>
                                     </tr>

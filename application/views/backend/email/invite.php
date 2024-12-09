@@ -77,8 +77,8 @@
 
     <div class="email-container">
         <h1>You're Invited!</h1>
-        <p>Hello1, You have been invited to fill out a form. Click the link below to access the form:</p>
-        <p><a href="http://localhost:8080/admin/gurukul_invite" class="button">Fill Out the Form</a></p>
+        <p>Hello, You have been invited to fill out a form. Click the link below to access the form:</p>
+        <p><a href="https://school.supremetechnologiesindia.com/admin/gurukul_invite" class="button">Fill Out the Form</a></p>
         <p>Thank you!</p>
 
         <div class="footer">

@@ -4,7 +4,7 @@
 <div class="row">
                    <div class="col-sm-12">
                      <div class="panel panel-info">
-                           <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo get_phrase('manage_attendance');?></div>
+                           <div class="panel-heading"> <i class="fa fa-list"></i>&nbsp;&nbsp;<?php echo $this->lang->line('manage_attendance');?></div>
                            <div class="panel-wrapper collapse in" aria-expanded="true">
                               <div class="panel-body table-responsive">
        <div align="center">
@@ -18,7 +18,7 @@
                               
                  
               <div class="form-group">
-                    <label class="col-md-12" for="example-text"><?php echo get_phrase('select_class');?></label>
+                    <label class="col-md-12" for="example-text"><?php echo $this->lang->line('select_class');?></label>
                    <div class="col-sm-12">
                    
                      <select  class="form-control" id="class_id" onchange="return get_class_sections(this.value)" >

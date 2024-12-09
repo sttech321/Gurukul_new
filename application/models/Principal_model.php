@@ -63,6 +63,14 @@ class Principal_model extends CI_Model {
             if (isset($_FILES['userfile']) && $_FILES['userfile']['error'] === UPLOAD_ERR_OK) {
                 move_uploaded_file($_FILES['userfile']['tmp_name'], $upload_path . $principal_id . '.jpg');
             }
+            // Insert into user table
+            $user_array = array(
+                'user_email' => $principal_array['email'],
+                'user_password' => $principal_array['password'], // Using hashed password
+                'role' => 'principal',
+            );
+
+            $this->db->insert('user', $user_array);
         }
     }
 
@@ -159,7 +167,8 @@ class Principal_model extends CI_Model {
         $check_email = $this->db->get_where('gurukul_form', array('email' => $principal_array['email']))->row();
         if ($check_email) {
             $this->session->set_flashdata('error_message', get_phrase('email_already_exist'));
-            redirect(base_url() . 'admin/principal/', 'refresh');
+            echo '<script>alert("email_already_exist")</script>';
+            redirect(base_url(), 'refresh');
         } else {
             $this->db->insert('gurukul_form', $principal_array);
             $principal_id = $this->db->insert_id();

@@ -32,7 +32,6 @@ class Login_model extends CI_Model {
         $query = $this->db->get_where('principal', $credential);
         if ($query->num_rows() > 0) {
             $row = $query->row();
-  
             $this->session->set_userdata('login_type', 'principal');
             $this->session->set_userdata('principal_login', '1');
             $this->session->set_userdata('principal_id', $row->principal_id);
@@ -59,20 +58,20 @@ class Login_model extends CI_Model {
                     ->update('parent');
         }
 
-        $query = $this->db->get_where('student', $credential);
-        if ($query->num_rows() > 0) {
-            $row = $query->row();
+        // $query = $this->db->get_where('student', $credential);
+        // if ($query->num_rows() > 0) {
+        //     $row = $query->row();
   
-            $this->session->set_userdata('login_type', 'student');
-            $this->session->set_userdata('student_login', '1');
-            $this->session->set_userdata('student_id', $row->student_id);
-            $this->session->set_userdata('login_user_id', $row->student_id);
-            $this->session->set_userdata('name', $row->name);
+        //     $this->session->set_userdata('login_type', 'student');
+        //     $this->session->set_userdata('student_login', '1');
+        //     $this->session->set_userdata('student_id', $row->student_id);
+        //     $this->session->set_userdata('login_user_id', $row->student_id);
+        //     $this->session->set_userdata('name', $row->name);
 
-            return  $this->db->set('login_status', ('1'))
-                    ->where('student_id', $this->session->userdata('student_id'))
-                    ->update('student');
-        }
+        //     return  $this->db->set('login_status', ('1'))
+        //             ->where('student_id', $this->session->userdata('student_id'))
+        //             ->update('student');
+        // }
 
         $query = $this->db->get_where('teacher', $credential);
         if ($query->num_rows() > 0) {
