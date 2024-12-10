@@ -9,10 +9,11 @@
 			</div>
 			<div class="panel-wrapper collapse out" aria-expanded="true">
 				<div class="panel-body">
-
-					<?php echo form_open(base_url() . 'principal/student/insert/' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));
-					
-					?>
+					<?php if($this->session->userdata('admin_login') == 1){
+                            echo form_open(base_url() . 'admin/principal_dashboard/student/insert' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));
+                        }else{
+							echo form_open(base_url() . 'principal/student/insert/' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));
+                        }?>
 
 					<div class="row">
 						<div class="col-sm-6">
@@ -363,33 +364,23 @@
 										class="btn btn-info btn-circle btn-xs"><i class="fa fa-edit"></i></a>
 
 									<a href="#"
-										onclick="confirm_modal('<?php echo base_url();?>principal/student/delete/<?php echo $student['student_id'];?>');"><button
+										onclick="confirm_modal('<?php echo base_url();?>admin/principal_dashboard/student/delete/<?php echo $student['student_id'];?>');"><button
 											type="button" class="btn btn-danger btn-circle btn-xs"><i
 												class="fa fa-times"></i></button></a>
-
-
 									<!-- <a
 										href="<?php //echo base_url().'uploads/student_image/'.  $student['file_name'];?>"><button
 											type="button" class="btn btn-warning btn-circle btn-xs"><i
 												class="fa fa-download"></i></button></a> -->
-
 								</td>
 							</tr>
-
 							<?php } ?>
-
 						</tbody>
 					</table>
-
-
-
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-
 <script type="text/javascript">
 function get_designation_val(department_id) {
     if (department_id != '')
@@ -404,8 +395,8 @@ function get_designation_val(department_id) {
         jQuery('#designation_holder').html(
             '<option value=""><?php echo get_phrase("select_a_department_first"); ?></option>');
 }
-				</script>
-				<script type="text/javascript">
+</script>
+<script type="text/javascript">
 document.getElementById('countrys').addEventListener('change', function() {
     const countryId = this.value;
     const stateDropdown = document.getElementById('states');

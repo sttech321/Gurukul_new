@@ -151,23 +151,6 @@ foreach ( $edit_teacher as $key => $row):
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-12"><?php echo $this->lang->line('state');?>*</label>
-                        <div class="col-sm-12">
-
-                            <input type="text" class="form-control" name="state" value="<?php echo $row['state'];?>">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-12"><?php echo $this->lang->line('country');?>*</label>
-                        <div class="col-sm-12">
-
-                            <input type="text" class="form-control" name="country"
-                                value="<?php echo $row['country'];?>">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <label class="col-sm-12"><?php echo $this->lang->line('browse_image');?>*</label>
                         <div class="col-sm-12">
                             <input type='file' class="form-control" name="userfile" />

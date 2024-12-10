@@ -20,8 +20,8 @@ class Admin extends MY_Controller {
     /**default functin, redirects to login page if no admin logged in yet***/
     public function index() 
 	{
-    if ($this->session->userdata('admin_login') != 1) redirect(base_url() . 'login', 'refresh');
-    if ($this->session->userdata('admin_login') == 1) redirect(base_url() . 'admin/dashboard', 'refresh');
+        if ($this->session->userdata('admin_login') != 1) redirect(base_url() . 'login', 'refresh');
+        if ($this->session->userdata('admin_login') == 1) redirect(base_url() . 'admin/dashboard', 'refresh');
     }
 	  /************* / default functin, redirects to login page if no admin logged in yet***/
 
@@ -34,40 +34,193 @@ class Admin extends MY_Controller {
     }
 	/******************* / Admin dashboard code to redirect to admin page if successfull login** */
 
+    public function principal_dashboard($principal_id = null) {
+        // Ensure the user is logged in as admin
+        if ($this->session->userdata('admin_login') != 1) {
+            redirect(base_url(), 'refresh');
+        }
 
+        // Validate and fetch the principal data
+        if ($principal_id) {
+            $principal_data = $this->db->get_where('principal', ['principal_id' => $principal_id])->row_array();
+            if (!$principal_data) {
+                show_404(); // Principal not found
+            }
+            // Store the principal_id in session
+            $this->session->set_userdata('principal_id_data', $principal_id);
+        } else {
+            $principal_data = null;
+        }
+
+        // Set the page data for rendering the dashboard
+        $page_data['page_name'] = 'dashboard'; // Corresponds to backend/principal/dashboard.php
+        $page_data['page_title'] = 'Principal_Dashboard';
+        $page_data['principal_data'] = $principal_data;
+        $page_data['loginType'] = 'principal';
+
+        // Load the index.php layout with principal's dashboard
+        $this->load->view('backend/index', $page_data);
+    }
+
+    public function teachers($param1 = null, $param2 = null, $param3 = null)
+    {
+        // Ensure the user is logged in as admin
+        if ($this->session->userdata('admin_login') != 1) {
+            redirect(base_url(), 'refresh');
+        }
+    
+        // Handle operations based on $param1
+        if ($param1 == 'insert') {
+            $this->teacher_model->insetTeacherFunction();
+            $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
+            redirect(base_url() . 'admin/principal_dashboard/teacher/', 'refresh');
+        }
+    
+        if ($param1 == 'update') {
+            $this->teacher_model->updateTeacherFunction($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
+            redirect(base_url() . 'admin/principal_dashboard/teacher/', 'refresh');
+        }
+    
+        if ($param1 == 'delete') {
+            $this->teacher_model->deleteTeacherFunction($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
+            redirect(base_url() . 'admin/principal_dashboard/teacher/', 'refresh');
+        }
+    
+        $principal_id = $this->session->userdata('principal_id_data');
+
+        // Fetch teachers associated with the principal
+        $this->db->select('teacher.*');
+        $this->db->from('teacher');
+        $this->db->join('principal', 'teacher.gurukul_id = principal.principal_id');
+        $this->db->where('principal.principal_id', $principal_id);
+        $page_data['select_teacher'] = $this->db->get()->result_array();
+    
+        // Set page data
+        $page_data['page_name'] = 'teacher';
+        $page_data['page_title'] = 'Principal_Dashboard';
+    
+        // Load the view
+        $this->load->view('backend/index', $page_data);
+    }    
+
+    function students($param1 = null, $param2 = null, $param3 = null)
+    {
+        $countries = $this->db->get('countries')->result_array(); // Returns all countries as an array
+        // Ensure the user is logged in as admin
+        if ($this->session->userdata('admin_login') != 1) {
+            redirect(base_url(), 'refresh');
+        }
+        if($param1 == 'insert'){
+            $data = $this->student_model->createNewStudent();
+            $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
+            redirect(base_url(). 'admin/principal_dashboard/student/', 'refresh');
+        }
+
+        if($param1 == 'update'){
+            $this->student_model->updateNewStudent($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
+            redirect(base_url(). 'admin/principal_dashboard/student/', 'refresh');
+        }
+
+        if($param1 == 'delete'){
+            $this->student_model->deleteNewStudent($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
+            redirect(base_url(). 'admin/principal_dashboard/student/', 'refresh');
+
+        }
+
+        $page_data['page_name']     = 'student';
+        $page_data['page_title']    = 'Principal_Dashboard';
+        $principal_id = $this->session->userdata('principal_id_data');
+
+        // Fetch all teachers where teacher.gurukul_id matches principal.principal_id
+        $this->db->select('teacher.*'); // Select all teacher columns
+        $this->db->from('teacher'); // Target the teacher table
+        $this->db->where('teacher.gurukul_id', $principal_id); // Match gurukul_id with principal_id
+        $page_data['teachers'] = $this->db->get()->result_array();
+        $this->db->select('student.*');
+        $this->db->from('student');
+        $this->db->join('principal', 'student.gurukul_id = principal.principal_id');
+        $this->db->where('principal.principal_id', $principal_id); // Match the principal ID
+        $page_data['select_student'] = $this->db->get()->result_array();
+        $page_data['countries'] = $countries;
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function manage_profiles($param1 = null, $param2 = null, $param3 = null)
+    {
+        if ($this->session->userdata('admin_login') != 1) {
+            redirect(base_url(''), 'refresh'); // Redirect to login if not logged in
+        }
+        
+        if ($param1 == 'update') {
+            $data['name']   =   $this->input->post('name');
+            $data['email']  =   $this->input->post('email');
+            $this->db->where('principal_id', $this->session->userdata('principal_id_data'));
+            $this->db->update('principal', $data);
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/principal_image/' . $this->session->userdata('principal_id') . '.jpg');
+            $this->session->set_flashdata('flash_message', get_phrase('Info Updated'));
+            redirect(base_url() . 'admin/principal_dashboard/manage_profile', 'refresh');
+        }
+    
+        if ($param1 == 'change_password') {
+            $data['new_password']           =   sha1($this->input->post('new_password'));
+            $data['confirm_new_password']   =   sha1($this->input->post('confirm_new_password'));
+    
+            if ($data['new_password'] == $data['confirm_new_password']) {
+               
+               $this->db->where('principal_id', $this->session->userdata('principal_id_data'));
+               $this->db->update('principal', array('password' => $data['new_password']));
+               $this->session->set_flashdata('flash_message', get_phrase('Password Changed'));
+            }
+    
+            else{
+                $this->session->set_flashdata('error_message', get_phrase('Type the same password'));
+            }
+            redirect(base_url() . 'admin/principal_dashboard/manage_profile', 'refresh');
+        }
+            $page_data['flash_message'] = $this->session->flashdata('flash_message');
+            $page_data['page_name']     = 'manage_profile';
+            $page_data['page_title']    = 'Principal_Dashboard';
+            $page_data['edit_profile']  = $this->db->get_where('principal', array('principal_id' => $this->session->userdata('principal_id_data')))->result_array();
+            $this->load->view('backend/index', $page_data);
+    }
+    
 
     function manage_profile($param1 = null, $param2 = null, $param3 = null){
-    if ($this->session->userdata('admin_login') != 1) redirect(base_url(), 'refresh');
-    if ($param1 == 'update') {
+        if ($this->session->userdata('admin_login') != 1) redirect(base_url(), 'refresh');
+        if ($param1 == 'update') {
 
 
-        $data['name']   =   $this->input->post('name');
-        $data['email']  =   $this->input->post('email');
+            $data['name']   =   $this->input->post('name');
+            $data['email']  =   $this->input->post('email');
 
-        $this->db->where('admin_id', $this->session->userdata('admin_id'));
-        $this->db->update('admin', $data);
-        move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/admin_image/' . $this->session->userdata('admin_id') . '.jpg');
-        $this->session->set_flashdata('flash_message', get_phrase('Info Updated'));
-        redirect(base_url() . 'admin/manage_profile', 'refresh');
-       
-    }
-
-    if ($param1 == 'change_password') {
-        $data['new_password']           =   sha1($this->input->post('new_password'));
-        $data['confirm_new_password']   =   sha1($this->input->post('confirm_new_password'));
-
-        if ($data['new_password'] == $data['confirm_new_password']) {
-           
-           $this->db->where('admin_id', $this->session->userdata('admin_id'));
-           $this->db->update('admin', array('password' => $data['new_password']));
-           $this->session->set_flashdata('flash_message', get_phrase('Password Changed'));
+            $this->db->where('admin_id', $this->session->userdata('admin_id'));
+            $this->db->update('admin', $data);
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/admin_image/' . $this->session->userdata('admin_id') . '.jpg');
+            $this->session->set_flashdata('flash_message', get_phrase('Info Updated'));
+            redirect(base_url() . 'admin/manage_profile', 'refresh');
+        
         }
 
-        else{
-            $this->session->set_flashdata('error_message', get_phrase('Type the same password'));
+        if ($param1 == 'change_password') {
+            $data['new_password']           =   sha1($this->input->post('new_password'));
+            $data['confirm_new_password']   =   sha1($this->input->post('confirm_new_password'));
+
+            if ($data['new_password'] == $data['confirm_new_password']) {
+            
+            $this->db->where('admin_id', $this->session->userdata('admin_id'));
+            $this->db->update('admin', array('password' => $data['new_password']));
+            $this->session->set_flashdata('flash_message', get_phrase('Password Changed'));
+            }
+
+            else{
+                $this->session->set_flashdata('error_message', get_phrase('Type the same password'));
+            }
+            redirect(base_url() . 'admin/manage_profile', 'refresh');
         }
-        redirect(base_url() . 'admin/manage_profile', 'refresh');
-    }
 
         $page_data['page_name']     = 'manage_profile';
         $page_data['page_title']    = get_phrase('Manage Profile');
@@ -75,45 +228,42 @@ class Admin extends MY_Controller {
         $this->load->view('backend/index', $page_data);
     }
 
-
     function enquiry_category($param1 = null, $param2 = null, $param3 = null){
 
-    if($param1 == 'insert'){
-   
-        $this->crud_model->enquiry_category();
+        if($param1 == 'insert'){
+    
+            $this->crud_model->enquiry_category();
 
-        $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
-        redirect(base_url(). 'admin/enquiry_category', 'refresh');
-    }
-
-    if($param1 == 'update'){
-
-       $this->crud_model->update_category($param2);
-
-
-        $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
-        redirect(base_url(). 'admin/enquiry_category', 'refresh');
-
+            $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
+            redirect(base_url(). 'admin/enquiry_category', 'refresh');
         }
 
-    if($param1 == 'delete'){
+        if($param1 == 'update'){
 
-       $this->crud_model->delete_category($param2);
-        $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
-        redirect(base_url(). 'admin/enquiry_category', 'refresh');
+        $this->crud_model->update_category($param2);
 
-        }
 
-        $page_data['page_name']     = 'enquiry_category';
-        $page_data['page_title']    = get_phrase('Manage Category');
-        $page_data['enquiry_category']  = $this->db->get('enquiry_category')->result_array();
-        $this->load->view('backend/index', $page_data);
+            $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
+            redirect(base_url(). 'admin/enquiry_category', 'refresh');
+
+            }
+
+        if($param1 == 'delete'){
+
+        $this->crud_model->delete_category($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
+            redirect(base_url(). 'admin/enquiry_category', 'refresh');
+
+            }
+
+            $page_data['page_name']     = 'enquiry_category';
+            $page_data['page_title']    = get_phrase('Manage Category');
+            $page_data['enquiry_category']  = $this->db->get('enquiry_category')->result_array();
+            $this->load->view('backend/index', $page_data);
 
     }
-
 
     function list_enquiry ($param1 = null, $param2 = null, $param3 = null){
-
 
         if($param1 == 'delete')
         {
@@ -129,8 +279,6 @@ class Admin extends MY_Controller {
         $this->load->view('backend/index', $page_data);
 
     }
-
-
 
     function club ($param1 = null, $param2 = null, $param3 = null){
 
@@ -161,7 +309,6 @@ class Admin extends MY_Controller {
         $this->load->view('backend/index', $page_data);
 
     }
-
 
     function circular($param1 = null, $param2 = null, $param3 = null){
 
@@ -230,7 +377,7 @@ class Admin extends MY_Controller {
     }
 
 
-    function teacher ($param1 = null, $param2 = null, $param3 = null){
+    function teacher($param1 = null, $param2 = null, $param3 = null){
         $countries = $this->db->get('countries')->result_array(); 
         if($param1 == 'insert'){
             $this->teacher_model->insetTeacherFunction();
@@ -244,12 +391,10 @@ class Admin extends MY_Controller {
             redirect(base_url(). 'admin/teacher', 'refresh');
         }
 
-
         if($param1 == 'delete'){
             $this->teacher_model->deleteTeacherFunction($param2);
             $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
             redirect(base_url(). 'admin/teacher', 'refresh');
-    
         }
 
         $page_data['page_name']     = 'teacher';
@@ -258,7 +403,6 @@ class Admin extends MY_Controller {
         $page_data['principal']  = $this->db->get('principal')->result_array();
         $page_data['countries'] = $countries;
         $this->load->view('backend/index', $page_data);
-
     }
 
     public function get_states_by_country($country_id)

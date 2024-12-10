@@ -18,8 +18,7 @@ foreach ( $edit_principal as $key => $principal):
             <div class="panel-heading"><?php echo $this->lang->line('list_school'); ?></div>
                 <div class="panel-wrapper collapse in" aria-expanded="true">
                     <div class="panel-body">
-                        <?php echo form_open(base_url() . 'admin/gurukul_registration/update/'. $principal['principal_id'] , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top', 'enctype' => 'multipart/form-data'));?>
-
+                        <?php echo form_open(base_url() . 'admin/gurukul_registration/update/'. $principal['principal_id'] , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top', 'id' => 'gurukul_form', 'enctype' => 'multipart/form-data'));?>
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
@@ -245,10 +244,8 @@ foreach ( $edit_principal as $key => $principal):
                             </div>
                         </div>
                         <div class="form-group w-50 mx-auto">
-                            <button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i
-                                    class="fa fa-edit"></i>&nbsp;&nbsp;<?php echo $this->lang->line('update_school'); ?></button>
+                            <button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;<?php echo $this->lang->line('update_school'); ?></button>
                         </div>
-
                         <?php echo form_close();?>
                     </div>
                 </div>

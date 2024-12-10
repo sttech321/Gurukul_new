@@ -61,7 +61,6 @@ $route['thankyou'] = 'admin/thankyou_gurukul';
 $route['admin/fetch_teachers/(:num)'] = 'admin/get_teacher/$1';
 $route['/dashboards'] = 'admin/dashboard_data';
 $route['example'] = 'example/index';
-$route['principal/dashboard'] = 'login/dashboard';
 
 $route['principal/student'] = 'login/student';
 $route['principal/student/insert'] = 'login/student/insert';
@@ -69,6 +68,7 @@ $route['principal/student/update/(:num)'] = 'login/student/update/$1';
 $route['principal/student/delete/(:num)'] = 'login/student/delete/$1';
 
 $route['principal/teacher'] = 'login/teacher';
+$route['principal/dashboard'] = 'login/dashboard';
 $route['principal/teacher/insert'] = 'login/teacher/insert';
 $route['principal/teacher/update/(:num)'] = 'login/teacher/update/$1';
 $route['principal/teacher/delete/(:num)'] = 'login/teacher/delete/$1';
@@ -80,3 +80,20 @@ $route['principal/manage_profile/change_password'] = 'login/manage_profile/chang
 $route['reset_password/(:any)'] = 'auth/reset_password/$1';
 $route['auth/send_reset_password_link'] = 'auth/send_reset_password_link';
 $route['update-password'] = 'auth/update_password';
+
+
+$route['admin/principal_dashboard/teacher'] = 'admin/teachers';
+$route['admin/principal_dashboard/teacher/insert'] = 'admin/teachers/insert';
+$route['admin/principal_dashboard/teacher/update/(:num)'] = 'admin/teachers/update/$1';
+$route['admin/principal_dashboard/teacher/delete/(:num)'] = 'admin/teachers/delete/$1';
+$route['admin/principal_dashboard/(:num)'] = 'admin/principal_dashboard/$1';
+
+$route['admin/principal_dashboard/student'] = 'admin/students';
+$route['admin/principal_dashboard/student/insert'] = 'admin/students/insert';
+$route['admin/principal_dashboard/student/update/(:num)'] = 'admin/students/update/$1';
+$route['admin/principal_dashboard/student/delete/(:num)'] = 'admin/students/delete/$1';
+
+$route['admin/principal_dashboard/manage_profile'] = 'admin/manage_profiles';
+$route['admin/principal_dashboard/manage_profile/update'] = 'admin/manage_profiles/update';
+$route['admin/principal_dashboard/manage_profile/change_password'] = 'admin/manage_profiles/change_password';
+

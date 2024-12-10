@@ -9,8 +9,11 @@
             </div>
             <div class="panel-wrapper collapse out" aria-expanded="true">
                 <div class="panel-body">
-
-                    <?php echo form_open(base_url() . 'principal/teacher/insert/' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));?>
+                        <?php if($this->session->userdata('admin_login') == 1){
+                            echo form_open(base_url() . 'admin/principal_dashboard/teacher/' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));
+                        }else{
+                             echo form_open(base_url() . 'principal/teacher/insert/' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));
+                        }?>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="alert alert-primary"><?php echo $this->lang->line('personal_information'); ?>
@@ -277,7 +280,7 @@
                                         class="btn btn-info btn-circle btn-xs"><i class="fa fa-edit"></i></a>
 
                                     <a href="#"
-                                        onclick="confirm_modal('<?php echo base_url();?>principal/teacher/delete/<?php echo $teacher['teacher_id'];?>');"><button
+                                        onclick="confirm_modal('<?php echo base_url();?>admin/principal_dashboard/teacher/delete/<?php echo $teacher['teacher_id'];?>');"><button
                                             type="button" class="btn btn-danger btn-circle btn-xs"><i
                                                 class="fa fa-times"></i></button></a>
 
@@ -293,9 +296,6 @@
 
                         </tbody>
                     </table>
-
-
-
                 </div>
             </div>
         </div>

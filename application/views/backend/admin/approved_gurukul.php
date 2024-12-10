@@ -332,13 +332,11 @@
                         </thead>
                         <tbody>
                             <?php foreach($principal_student as $key => $principal){ ?>
-                            <tr>
+                            <tr class="clickable-row" data-href="<?php echo base_url('admin/principal_dashboard/' . $principal['principal_id']); ?>">
                                 <td><img src="<?php echo $this->crud_model->get_image_url('principal', $principal['principal_id']);?>"
                                         class="img-circle" width="30px"></td>
                                 <td><?php echo $principal['name'];?></td>
-                                <td>
-                                    <?php echo $principal['phone'];?>
-                                </td>
+                                <td><?php echo $principal['phone'];?></td>
                                 <td><?php echo $principal['email'];?></td>
                                 <td><?php echo $principal['principal_id'];?></td>
                                 <td><?php echo $principal['address'];?></td>
@@ -372,7 +370,13 @@
     </div>
 </div>
 
-
+<script>
+$(document).ready(function() {
+    $('.clickable-row').on('click', function() {
+        window.location = $(this).data('href');
+    });
+});
+</script>
 <script type="text/javascript">
 function get_designation_val(department_id) {
     if (department_id != '')

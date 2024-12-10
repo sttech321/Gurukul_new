@@ -12,9 +12,11 @@ foreach ( $edit_teacher as $key => $student):
 
             <div class="panel-wrapper collapse in" aria-expanded="true">
                 <div class="panel-body">
-                    <?php echo form_open(base_url() . 'principal/student/update/'. $student['student_id'] , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top', 'enctype' => 'multipart/form-data'));?>
-
-
+                    <?php if($this->session->userdata('admin_login') == 1){
+                            echo form_open(base_url() . 'admin/principal_dashboard/student/update/' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));
+                        }else{
+                            echo form_open(base_url() . 'principal/student/update/'. $student['student_id'] , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top', 'enctype' => 'multipart/form-data'));
+                        }?>
                     <div class="form-group">
                         <label class="col-md-12" for="example-text"><?php echo $this->lang->line('name'); ?></label>
                         <div class="col-sm-12">

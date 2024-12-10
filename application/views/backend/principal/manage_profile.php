@@ -13,7 +13,7 @@
 
 				?>
 
-                <?php echo form_open(base_url(). 'principal/manage_profile/update', array('class' => 'form-horizontal form-groups-bordered', 'enctype'=> 'multipart/form-data'));?>
+                <?php echo form_open(base_url(). 'admin/principal_dashboard/manage_profile/update', array('class' => 'form-horizontal form-groups-bordered', 'enctype'=> 'multipart/form-data'));?>
 
                 <div class="form-group">
                     <label class="col-md-12" for="example-text"><?php echo $this->lang->line('name'); ?></label>
@@ -72,7 +72,7 @@
             <div class="panel-wrapper collapse in" aria-expanded="true">
                 <div class="panel-body table-responsive">
 
-                    <?php echo form_open(base_url() . 'principal/manage_profile/change_password', array('class' => 'form-horizontal form-groups-bordered validate', 'target' => '_top', 'enctype' => 'multipart/form-data'));
+                    <?php echo form_open(base_url() . 'admin/principal_dashboard/manage_profile/change_password', array('class' => 'form-horizontal form-groups-bordered validate', 'target' => '_top', 'enctype' => 'multipart/form-data'));
         ?>
                     <div class="form-group">
                         <label class="col-md-12" for="example-text"><?php echo $this->lang->line('password'); ?></label>

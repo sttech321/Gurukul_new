@@ -11,7 +11,6 @@
                         <!-- /input-group -->
                     </li>
                     <li class="user-pro">
-
                         <?php
                             $key = $this->session->userdata('login_type') . '_id';
                             $face_file = 'uploads/' . $this->session->userdata('login_type') . '_image/' . $this->session->userdata($key) . '.jpg';
@@ -19,17 +18,13 @@
                                 $face_file = 'uploads/default.jpg';                                 
                             }
                             ?>
-
                     <a href="#" class="waves-effect"><img src="<?php echo base_url() . $face_file;?>" alt="user-img" class="img-circle"> <span class="hide-menu">
-
                        <?php 
                                 $account_type   =   $this->session->userdata('login_type');
                                 $account_id     =   $account_type.'_id';
                                 $name           =   $this->crud_model->get_type_name_by_id($account_type , $this->session->userdata($account_id), 'name');
                                 echo $name;
                         ?>
-
-
                         <span class="fa arrow"></span></span>
                     
                     </a>

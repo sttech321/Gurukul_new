@@ -5,15 +5,23 @@
             <div class="r-icon-stats">
                 <i class="ti-user bg-megna"></i>
                 <div class="bodystate">
-                    <h4><?php 
+                    <h4>
+                        <?php 
+                        // Set the principal ID correctly
+                        if ($page_title == 'Principal_Dashboard' && isset($principal_data['principal_id'])) {
+                            $principal_id = $principal_data['principal_id'];
+                        } else {
                             $principal_id = $this->session->userdata('principal_id');
-                            $this->db->select('student.gurukul_id');  // Only select teacher_id to improve performance
-                            $this->db->from('student');
-                            $this->db->join('principal', 'student.gurukul_id = principal.principal_id');
-                            $this->db->where('principal.principal_id', $principal_id); // Match the principal ID
-                            $query = $this->db->get();  // Execute the query
-                            echo $query->num_rows();  // Count the number of matching rows
-                            ?>
+                        }
+
+                        // Query to get student count for the principal
+                        $this->db->select('student.gurukul_id');
+                        $this->db->from('student');
+                        $this->db->join('principal', 'student.gurukul_id = principal.principal_id');
+                        $this->db->where('principal.principal_id', $principal_id);
+                        $query = $this->db->get(); // Execute the query
+                        echo $query->num_rows(); // Display the number of students
+                        ?>
                     </h4>
                     <span class="text-muted"><?php echo $this->lang->line('student');?></span>
                 </div>
@@ -27,7 +35,12 @@
                 <div class="bodystate">
                     <h4>
                         <?php
-                            $principal_id = $this->session->userdata('principal_id');
+                        // Set the principal ID correctly
+                            if ($page_title == 'Principal_Dashboard' && isset($principal_data['principal_id'])) {
+                                $principal_id = $principal_data['principal_id'];
+                            } else {
+                                $principal_id = $this->session->userdata('principal_id');
+                            }
                             $this->db->select('teacher.gurukul_id');  // Only select teacher_id to improve performance
                             $this->db->from('teacher');
                             $this->db->join('principal', 'teacher.gurukul_id = principal.principal_id');
@@ -47,9 +60,9 @@
                 <i class="ti-user bg-success"></i>
                 <div class="bodystate">
                     <h4>
-                        <?php echo $this->db->count_all_results('principal');?>
+                        <?php //echo $this->db->count_all_results('principal');?>
                     </h4>
-                    <span class="text-muted"><?php echo $this->lang->line('principal');?></span>
+                    <span class="text-muted"><?php //echo $this->lang->line('principal');?></span>
                 </div>
             </div>
         </div>

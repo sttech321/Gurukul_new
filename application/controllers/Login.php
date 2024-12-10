@@ -1,6 +1,5 @@
 <?php if (!defined('BASEPATH'))exit('No direct script access allowed');
 
-
 class Login extends MY_Controller {
 
     function __construct() {
@@ -34,13 +33,11 @@ class Login extends MY_Controller {
         if ($this->session->userdata('principal_login') != 1) {
             redirect(base_url(''), 'refresh'); // Redirect to login if not logged in
         }
-        
+       
         $page_data['flash_message'] = $this->session->flashdata('flash_message');
         $page_data['page_name'] = 'dashboard';
         $page_data['page_title'] = 'Principal Dashboard';
 
-        // Load the dashboard view
-        $data['page_title'] = 'Principal Dashboard';
         $this->load->view('backend/index', $page_data);
     }
     
@@ -87,13 +84,13 @@ class Login extends MY_Controller {
     
     function subject()
     {
-    $principal_profile = $this->db->get_where('student', array('principal_id' => $this->session->userdata('principal_id')))->row();
-    $select_student_class_id = $principal_profile->class_id;
+      $principal_profile = $this->db->get_where('student', array('principal_id' => $this->session->userdata('principal_id')))->row();
+      $select_student_class_id = $principal_profile->class_id;
 
-    $page_data['page_name']     = 'subject';
-    $page_data['page_title']    = get_phrase('Class Subjects');
-    $page_data['select_subject']  = $this->db->get_where('subject', array('class_id' => $select_student_class_id))->result_array();
-    $this->load->view('backend/index', $page_data);
+      $page_data['page_name']     = 'subject';
+      $page_data['page_title']    = get_phrase('Class Subjects');
+      $page_data['select_subject']  = $this->db->get_where('subject', array('class_id' => $select_student_class_id))->result_array();
+      $this->load->view('backend/index', $page_data);
     }
     
     function class_mate(){
@@ -144,6 +141,7 @@ class Login extends MY_Controller {
         $this->db->where('principal.principal_id', $principal_id); // Match the principal ID
         $page_data['select_teacher'] = $this->db->get()->result_array();
         $page_data['page_name']     = 'teacher';
+        $page_data['page_title1'] = 'Principal_Dashboard';
         $page_data['page_title']    = get_phrase('Principal Teacher');
         $page_data['countries'] = $countries;
         $this->load->view('backend/index', $page_data);
